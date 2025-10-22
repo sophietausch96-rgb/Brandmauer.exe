@@ -1,181 +1,73 @@
 :root {
-  --bg:#000; --red:#ff0000; --green:#00ff00; --amber:#ffcc00;
-  --mono:'Source Code Pro', ui-monospace, monospace;
+  --bg:#000; --red:#ff0000; --green:#00ff00;
+  --mono:'Source Code Pro', monospace;
   --pixel:'Press Start 2P', monospace;
 }
 
-/* BASIC */
-body {
-  margin:0;background:var(--bg);color:#fff;font-family:var(--pixel);
-  overflow:hidden;height:100vh;animation:flicker 3s infinite;
-}
-*{box-sizing:border-box}
+/* === BASIC === */
+body{margin:0;background:var(--bg);color:#fff;font-family:var(--pixel);overflow:hidden;height:100vh;}
+.hidden{display:none!important}
 
-/* TITLE BAR */
-#titleBar {
+/* === HEADER === */
+#titleBar{
   position:fixed;top:0;left:0;right:0;padding:14px;
   color:var(--red);background:#000;border-bottom:2px solid var(--red);
-  text-align:center;letter-spacing:2px;z-index:100;
+  text-align:center;letter-spacing:2px;z-index:10;
 }
 
-/* NOISE OVERLAY */
-#noise {
-  position:fixed;inset:0;z-index:50;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.05'/></svg>");
-  pointer-events:none;
-  animation:noiseMove 2s infinite linear;
-}
-@keyframes noiseMove {0%{transform:translate(0)}100%{transform:translate(-10px,10px)}}
-
-/* START/INTRO/FINISH SCREENS */
-section {
+/* === START SCREEN === */
+#startScreen{
   position:absolute;inset:0;
-  display:flex;justify-content:center;align-items:center;
+  background:#000 url('start.jpg') center/contain no-repeat;
+  display:flex;align-items:center;justify-content:center;
 }
-#startScreen{background:url('start.jpg') center/cover no-repeat;}
-#finishScreen{background:url('finish.jpg') center/cover no-repeat;}
-#introScreen{background:#000}
+.start-container{
+  background:rgba(0,0,0,0.7);
+  padding:40px;border:2px solid var(--red);
+  box-shadow:0 0 25px #ff000055;
+}
+.button{
+  background:var(--red);color:#fff;border:none;padding:14px 30px;
+  font-family:var(--pixel);font-size:.8em;cursor:pointer;
+  box-shadow:0 0 10px var(--red);transition:transform .15s;
+}
+.button:hover{transform:scale(1.05);box-shadow:0 0 20px var(--red);}
+.choice{display:block;width:100%;margin:10px 0;font-size:.65em;background:#1a0000;border:1px solid var(--red);color:#ffcccc;text-align:left;padding:14px;}
+.choice:hover{background:#300;color:#fff;}
 
-/* VIEWPORT */
-.viewport {
-  width:min(800px,70vw);margin-top:110px;padding:32px;background:#000a;
-  border:2px solid var(--red);box-shadow:0 0 20px #ff000055;
-  text-align:left;min-height:420px;position:relative;transition:opacity .6s ease;
+/* === INTRO VIEWPORT === */
+.viewport{
+  width:min(800px,70vw);margin-top:120px;padding:32px;background:#000a;
+  border:2px solid var(--red);box-shadow:0 0 20px #ff000055;text-align:left;min-height:420px;
 }
-.viewport::after {
-  content:"";position:absolute;inset:0;pointer-events:none;
-  opacity:.3;background:repeating-linear-gradient(rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 2px, transparent 4px);
-}
+.introBox{font-size:.62em;line-height:1.6em;white-space:pre-line;text-shadow:0 0 5px var(--red);}
+#beginBtn{margin-top:30px;}
 
-/* CRT SCANLINES */
-body::before {
-  content:"";position:fixed;inset:0;
-  background:repeating-linear-gradient(rgba(255,255,255,.02) 0,rgba(255,255,255,.02) 1px,transparent 2px,transparent 4px);
-  pointer-events:none;mix-blend-mode:overlay;opacity:.3;
-  animation:scan 6s linear infinite;
-}
-@keyframes scan {0%{transform:translateY(0)}100%{transform:translateY(4px)}}
+/* === GAME === */
+.stats{font-size:.6em;margin-bottom:16px;color:#ddd;}
+.bar{width:100%;height:18px;border:2px solid var(--red);background:#111;margin:6px 0;}
+.fill{height:100%;background:var(--green);transition:width .5s;}
+#barRightWrap .fill{background:linear-gradient(90deg,#00ff00,#ffff00,#ff0000);}
+.situation{margin-top:12px;font-size:.74em;line-height:1.65em;color:#ffaaaa;}
 
-/* TERMINAL */
-.terminal {
-  width:28%;max-width:420px;height:540px;margin-top:110px;
+/* === TERMINAL === */
+.terminal{width:28%;max-width:420px;height:540px;margin-top:110px;
   background:#0b0b0b;border:1px solid #2a2a2a;border-radius:8px;
-  box-shadow:0 10px 30px rgba(0,0,0,.6),0 0 20px #ff000055;
-  display:flex;flex-direction:column;
-}
-.term-titlebar {
-  height:34px;display:flex;align-items:center;gap:8px;padding:0 10px;
-  background:linear-gradient(#1b1b1b,#111);border-bottom:1px solid #2a2a2a;
-  position:relative;
-}
-.tl {width:12px;height:12px;border-radius:50%;}
-.tl.red{background:#ff5f57}.tl.yellow{background:#febc2e}.tl.green{background:#28c840}
-.term-title {
-  position:absolute;left:0;right:0;text-align:center;color:#bbb;
-  font-family:var(--mono);font-size:.78em;
-}
-.terminal-output {
-  flex:1;padding:14px;font-family:var(--mono);
-  font-size:.84em;line-height:1.4;color:#a8f7b0;
-  background:radial-gradient(100% 100% at 50% 0%,rgba(255,0,0,.08) 0%,rgba(0,0,0,0) 60%),#0b0b0b;
-  overflow-y:auto;white-space:pre-wrap;scrollbar-width:thin;
-}
-.log-info{color:#a8f7b0}.log-warn{color:#ffd479}
-.log-alert{color:#ff6a6a}.log-success{color:#9be5ff}
+  box-shadow:0 10px 30px rgba(0,0,0,.6);}
+.term-titlebar{height:34px;display:flex;align-items:center;gap:8px;padding:0 10px;background:#111;}
+.tl{width:12px;height:12px;border-radius:50%;}.red{background:#ff5f57;}.yellow{background:#febc2e;}.green{background:#28c840;}
+.term-title{position:absolute;width:100%;text-align:center;color:#bbb;font-family:var(--mono);font-size:.78em;}
+.terminal-output{flex:1;padding:14px;font-family:var(--mono);font-size:.84em;line-height:1.4;color:#a8f7b0;overflow-y:auto;white-space:pre-wrap;}
+.log-info{color:#a8f7b0}.log-warn{color:#ffd479}.log-alert{color:#ff6a6a}.log-success{color:#9be5ff}
 
-/* GAME UI */
-.stats{font-size:.6em;margin-bottom:16px;color:#ddd}
-.bar{width:100%;height:18px;border:2px solid var(--red);
-  background:#111;margin:6px 0;position:relative;overflow:hidden;}
-.fill{height:100%;background:var(--green);transition:width .5s ease}
-#barRightWrap .fill{background:linear-gradient(90deg,#00ff00,#ffff00,#ff0000)}
-#barRightWrap .fill.danger{animation:pulseRed 1.2s infinite alternate}
-@keyframes pulseRed{from{box-shadow:0 0 8px #ff0000}to{box-shadow:0 0 25px #ff0000}}
-.situation{margin-top:12px;font-size:.74em;line-height:1.65em;color:#ffaaaa}
-.choice{display:block;width:100%;margin:10px 0}
+/* === FINISH === */
+.storybox{background:#000a;padding:20px;font-size:.62em;line-height:1.6em;border:2px solid var(--red);}
 
-/* START/INTRO TEXT */
-.introBox{font-size:.62em;line-height:1.6em;white-space:pre-line;text-shadow:0 0 5px var(--red)}
-#startScreen .viewport{text-align:center;animation:introGlow 3s ease-in-out infinite alternate}
-@keyframes introGlow{from{box-shadow:0 0 8px var(--red)}to{box-shadow:0 0 25px var(--red)}}
+/* === TICKER === */
+#ticker{position:fixed;bottom:0;left:0;right:0;height:34px;background:#111;border-top:2px solid var(--red);
+  overflow:hidden;color:#ffaaaa;font-family:var(--mono);font-size:.75em;white-space:nowrap;}
+#tickerContent{display:inline-block;animation:tickerMove 40s linear infinite;padding-left:100%;}
+@keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-100%);}}
 
-/* FINISH */
-.storybox{background:#000a;padding:20px;font-size:.62em;line-height:1.6em;border:2px solid var(--red);box-shadow:0 0 15px #ff000055;text-align:left}
-
-/* NEWS TICKER */
-#ticker{
-  position:fixed;bottom:0;left:0;right:0;height:34px;
-  background:#111;border-top:2px solid var(--red);
-  overflow:hidden;color:#ffaaaa;font-family:var(--mono);
-  font-size:.75em;white-space:nowrap;
-}
-#tickerContent{display:inline-block;animation:tickerMove 40s linear infinite;padding-left:100%}
-@keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
-
-/* EFFECTS */
-@keyframes flicker{0%,18%,22%,25%,53%,57%,100%{opacity:1}20%,24%,55%{opacity:.85}}
-body.warning::after{content:"";position:fixed;inset:0;background:rgba(255,0,0,.25);animation:warnFlash .6s ease-out}
-@keyframes warnFlash{from{opacity:1}to{opacity:0}}
-
-/* === BUTTONS === */
-.button {
-  display: inline-block;
-  background: var(--red);
-  color: #fff;
-  border: none;
-  padding: 14px 26px;
-  font-family: var(--pixel);
-  font-size: 0.8em;
-  cursor: pointer;
-  text-transform: uppercase;
-  box-shadow: 0 0 10px var(--red);
-  transition: all 0.2s ease;
-  letter-spacing: 1px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Hover = Glitch-Effekt */
-.button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px var(--red);
-}
-
-/* Flicker animation (slight neon pulse) */
-@keyframes buttonFlicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-  20%, 24%, 55% { opacity: 0.8; }
-}
-
-.button {
-  animation: buttonFlicker 3s infinite;
-}
-
-/* === CHOICE BUTTONS === */
-.choice {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  font-size: 0.65em;
-  background: #1a0000;
-  border: 1px solid var(--red);
-  color: #ffcccc;
-  text-align: left;
-  padding: 14px;
-  box-shadow: 0 0 8px rgba(255,0,0,0.3);
-}
-
-/* Hover Effekt für Entscheidungsknöpfe */
-.choice:hover {
-  background: #300;
-  color: #fff;
-  box-shadow: 0 0 16px var(--red);
-  transform: translateY(-1px);
-}
-
-/* Active/Click Effekt */
-.choice:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 5px var(--red);
-}
+/* === NOISE === */
+#noise{position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,.02) 0,rgba(255,255,255,.02) 1px,transparent 2px,transparent 4px);opacity:.25;}

@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brandmauer.exe — Director’s Cut</title>
+  <title>Brandmauer.exe — Director’s Cut v4</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header id="titleBar">BRANDMAUER.EXE // SYSTEM FIREWALL SIMULATION</header>
+  <header id="titleBar">BRANDMAUER.EXE</header>
 
-  <!-- START -->
+  <!-- === START SCREEN === -->
   <section id="startScreen">
-    <div class="viewport">
-      <div id="startIntro" class="introBox"></div>
+    <div class="start-container">
       <button class="button" id="startBtn">SYSTEM STARTEN</button>
     </div>
   </section>
 
-  <!-- INTRO -->
+  <!-- === INTRO SCREEN (Erklärung + Loslegen) === -->
   <section id="introScreen" class="hidden">
     <div class="viewport">
       <div class="introBox" id="introText"></div>
+      <button class="button" id="beginBtn" class="hidden">LOSLEGEN</button>
     </div>
   </section>
 
-  <!-- GAME -->
+  <!-- === GAME === -->
   <section id="gameScreen" class="hidden">
     <div class="viewport" id="viewportBox">
       <div class="stats">
@@ -44,19 +44,17 @@
       <div id="choices" class="choices"></div>
     </div>
 
-    <!-- macOS Terminal -->
+    <!-- TERMINAL -->
     <aside id="terminal" class="terminal">
       <div class="term-titlebar">
-        <span class="tl red"></span>
-        <span class="tl yellow"></span>
-        <span class="tl green"></span>
+        <span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span>
         <span class="term-title">Terminal — Brandmauer.log</span>
       </div>
       <div id="terminalOutput" class="terminal-output"></div>
     </aside>
   </section>
 
-  <!-- FINISH -->
+  <!-- === FINISH SCREEN === -->
   <section id="finishScreen" class="hidden">
     <div class="viewport">
       <div class="storybox">
@@ -66,11 +64,8 @@
     </div>
   </section>
 
-  <!-- LIVE NEWS TICKER -->
-  <div id="ticker">
-    <div id="tickerContent"></div>
-  </div>
-
+  <!-- === NEWS TICKER === -->
+  <div id="ticker"><div id="tickerContent"></div></div>
   <div id="noise"></div>
 
   <script src="game.js"></script>
