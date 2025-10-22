@@ -1,46 +1,36 @@
-<!-- /brandmauer/index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brandmauer.exe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandmauer.exe — Diskursdiagnose</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header id="titleBar">BRANDMAUER.EXE // SYSTEM FIREWALL SIMULATION</header>
+  <header id="titleBar">BRANDMAUER.EXE // Diskursdiagnose v7</header>
 
-  <!-- START -->
+  <!-- === START SCREEN === -->
   <section id="startScreen">
-    <div class="start-overlay">
-      <button class="button" id="startBtn">SYSTEM STARTEN</button>
+    <div class="overlay">
+      <p>Du bist BRANDMAUER.EXE — ein politisches Firewall-System.<br>
+      Deine Aufgabe: Sprache analysieren. Wahrheit erkennen. Drift messen.</p>
+      <button id="startBtn" class="button">Analyse starten</button>
     </div>
   </section>
 
-  <!-- INTRO -->
-  <section id="introScreen" class="hidden">
-    <div class="card">
-      <div class="introBox" id="introText"></div>
-      <button class="button hidden" id="beginBtn">LOSLEGEN</button>
-    </div>
-  </section>
-
-  <!-- GAME -->
+  <!-- === GAME SCREEN === -->
   <section id="gameScreen" class="hidden">
-    <div id="viewportBox" class="card">
+    <div id="viewportBox">
       <div class="stats">
         🧱 Brandmauer-Stabilität
         <div class="bar"><div id="barWall" class="fill"></div></div>
-        ⚡ Vertrauen
-        <div class="bar"><div id="barTrust" class="fill"></div></div>
-        🏛️ Macht
-        <div class="bar"><div id="barPower" class="fill"></div></div>
-        ➡️ Rechtsdrift
-        <div class="bar" id="barRightWrap"><div id="barRight" class="fill"></div></div>
-        🧠 Selbstbewusstsein.exe
+        🧠 Bewusstsein
         <div class="bar"><div id="barAwareness" class="fill"></div></div>
+        🔻 Rechtsdrift
+        <div class="bar"><div id="barRight" class="fill"></div></div>
       </div>
+
       <div id="situation" class="situation"></div>
       <div id="choices" class="choices"></div>
     </div>
@@ -54,15 +44,13 @@
     </aside>
   </section>
 
-  <!-- FINISH -->
+  <!-- === FINISH SCREEN === -->
   <section id="finishScreen" class="hidden">
-    <div class="card">
-      <pre id="finishText" class="finishBox"></pre>
-      <button class="button" id="restartBtn">NEUSTART</button>
+    <div class="overlay">
+      <p id="finishText"></p>
+      <button id="restartBtn" class="button">Neustart</button>
     </div>
   </section>
-
-  <div id="crtNoise" aria-hidden="true"></div>
 
   <script src="game.js"></script>
 </body>
