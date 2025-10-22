@@ -1,56 +1,69 @@
+<!-- /index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Brandmauer.exe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
   <header id="titleBar">BRANDMAUER.EXE — Firewall Simulation</header>
 
   <!-- === START SCREEN === -->
-  <section id="startScreen">
+  <section id="startScreen" class="screen screen--start">
     <div class="overlay">
       <h2>Willkommen bei BRANDMAUER.EXE</h2>
-      <p>Du bist eine Firewall im politischen System der CDU.<br>
-      Deine Aufgabe: rechte Narrative erkennen, Stabilität wahren,<br>
-      und verhindern, dass der Rechtsdrift das System übernimmt.</p>
+      <p>Du spielst als linke Brandmauer gegen den Rechtsdrift.<br/>
+      Erkenne rechte Narrative, widersprich gezielt und halte Werte stabil.</p>
       <button id="startBtn" class="button">Start</button>
     </div>
   </section>
 
   <!-- === GAME SCREEN === -->
   <section id="gameScreen" class="hidden">
-    <div id="viewportBox">
-      <div class="stats">
-        🧱 Brandmauer-Stabilität
-        <div class="bar"><div id="barWall" class="fill"></div></div>
-        ⚡ Vertrauen
-        <div class="bar"><div id="barTrust" class="fill"></div></div>
-        🏛 Macht
-        <div class="bar"><div id="barPower" class="fill"></div></div>
-        🔻 Rechtsdrift
-        <div class="bar"><div id="barRight" class="fill"></div></div>
+    <div id="gameWrap">
+      <div id="viewportBox">
+        <div class="hud">
+          <div class="meter">
+            <span class="meter-label">🧱 Brandmauer</span>
+            <div class="bar"><div id="barWall" class="fill"></div></div>
+          </div>
+          <div class="meter">
+            <span class="meter-label">⚡ Vertrauen</span>
+            <div class="bar"><div id="barTrust" class="fill"></div></div>
+          </div>
+          <div class="meter">
+            <span class="meter-label">🏛 Macht</span>
+            <div class="bar"><div id="barPower" class="fill"></div></div>
+          </div>
+          <div class="meter">
+            <span class="meter-label">🔻 Rechtsdrift</span>
+            <div class="bar"><div id="barRight" class="fill"></div></div>
+          </div>
+        </div>
+
+        <div class="situationHeader">
+          <span id="counter">Szenario 1/10</span>
+        </div>
+        <div id="situation" class="situation"></div>
+        <div id="choices" class="choices"></div>
+        <div class="hint">Kurzbefehle: [1] Widersprechen · [2] Neutral · [3] Beifall</div>
       </div>
 
-      <div id="situation" class="situation"></div>
-      <div id="choices" class="choices"></div>
+      <aside class="terminal">
+        <div class="term-titlebar">
+          <span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span>
+          <span class="term-title">Terminal — Firewall.log</span>
+        </div>
+        <div id="terminalOutput" class="terminal-output"></div>
+      </aside>
     </div>
-
-    <aside class="terminal">
-      <div class="term-titlebar">
-        <span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span>
-        <span class="term-title">Terminal — Firewall.log</span>
-      </div>
-      <div id="terminalOutput" class="terminal-output"></div>
-    </aside>
   </section>
 
   <!-- === FINISH SCREEN === -->
-  <section id="finishScreen" class="hidden">
+  <section id="finishScreen" class="screen screen--finish hidden">
     <div class="overlay">
       <p id="finishText"></p>
       <button id="restartBtn" class="button">Neustart</button>
