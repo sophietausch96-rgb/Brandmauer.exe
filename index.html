@@ -5,35 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brandmauer.exe</title>
 
-  <!-- Pixel Font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- Fixierter Titel -->
+  <header id="titleBar">BRANDMAUER.EXE</header>
+
   <!-- === START SCREEN === -->
   <section id="startScreen">
-    <h1>BRANDMAUER.EXE</h1>
-    <div class="storybox">
-      <p>
-        &gt; LOAD MODULE: BRANDMAUER.EXE v2025<br>
-        &gt; INITIALISIERE FIREWALL-PROTOKOLL...<br>
-        &gt; PROTOKOLL: „Keine Kooperation mit der AfD!“ geladen.<br>
-        &gt; PROTOKOLL: „Wir müssen mit allen demokratischen Kräften reden.“ geladen.<br>
-        &gt; STATUS: Widersprüche erkannt.<br><br>
-        DU BIST EIN FIREWALL-PROGRAMM IM POLITISCHEN SYSTEM DER CDU.<br>
-        DEINE AUFGABE: Rechte Narrative abwehren – aber dein CODE IST WIDERSPRÜCHLICH.<br>
-        JEDER SCHRITT VERÄNDERT: STABILITÄT | VERTRAUEN | MACHTBALANCE.<br>
-        ZIEL: Rechte Narrative der CDU aufdecken.
-      </p>
-      <button class="button" onclick="startGame()">START</button>
-    </div>
+    <button class="button" id="startBtn">START</button>
+  </section>
+
+  <!-- === INTRO SCENE (TYPING EFFECT) === -->
+  <section id="introScreen" class="hidden">
+    <div class="introBox" id="introText"></div>
   </section>
 
   <!-- === GAME SCREEN === -->
   <section id="gameScreen" class="hidden">
-    <h1 class="glitch">FIREWALL AKTIV</h1>
     <div class="stats">
       🧱 Brandmauer: <div class="bar"><div id="barWall" class="fill"></div></div>
       ⚡ Vertrauen: <div class="bar"><div id="barTrust" class="fill"></div></div>
@@ -45,18 +37,15 @@
 
   <!-- === FINISH SCREEN === -->
   <section id="finishScreen" class="hidden">
-    <h1>SYSTEMFEHLER: BRANDMAUER KOLLABIERT</h1>
     <div class="storybox">
       <p id="finishText">
         Du hast gesehen, wie die Brandmauer gegen Rechts bröckelte.<br>
         Während rechte Narrative Einzug hielten – von „Härtere Abschiebungen“
         bis „Leitkultur zuerst“ – blieb Demokratie auf der Strecke.<br><br>
-        Deine Mission war klar: Entlarve die rechten Narrative, die im Schatten
-        der sogenannten Mitte wuchern.<br><br>
         <strong>FAZIT:</strong> Freiheit + Vielfalt statt Angst + Abschottung.<br>
         Die Brandmauer darf keine Fassade sein – sie muss Haltung haben.
       </p>
-      <button class="button" onclick="restart()">NEUSTART</button>
+      <button class="button" id="restartBtn">NEUSTART</button>
     </div>
   </section>
 
