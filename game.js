@@ -48,51 +48,90 @@ document.addEventListener("DOMContentLoaded", () => {
     10: { msg: "ANALYSE: Sprache verengt, Exklusion normalisiert. Brandmauer.exe: Neutralität ≠ Wahrheit.", type: "alert" }
   };
 
-  // Scenes (10 realistisch inspirierte, paraphrasierte)
-  const S = (text, a,b,c) => ({ text, options:[a,b,c] });
-  const O = (text, effect, comment, level="info") => ({ text, effect, comment, level });
-  const situations = [
-    S("‘Sauberkeitsinitiative’ mit Fokus auf ‘Integrationsprobleme im Stadtbild’.",
-      O("Rassismus durch die Hintertür benennen.", {wall:+8, trust:+10, power:-6, right:-3, awareness:+5}, "Ästhetik als Ausgrenzungslogik erkannt.", "success"),
-      O("Wording soft: 'Ordnung in Vielfalt'.", {wall:+2, trust:+2, power:+4, right:+1}, "Rebranding statt Reflexion.", "warn"),
-      O("Begrüßen: 'Stadtbild schützen'.", {wall:-8, trust:-7, power:+8, right:+5}, "Kontrolle > Empathie.", "alert")),
-    S("Migrationsobergrenzen pro Bundesland.",
-      O("Verantwortung über Zahlen hinaus betonen.", {wall:+7, trust:+9, power:-6, right:-2, awareness:+4}, "Menschen ≠ Statistiken.", "success"),
-      O("‘Aufnahmefähigkeit prüfen’.", {wall:+1, trust:+1, power:+5, right:+2}, "Bürokratie verschleiert Moral.", "warn"),
-      O("Begrenzen = kontrollieren.", {wall:-8, trust:-8, power:+9, right:+5}, "Brandmauer als Excel-Tabelle.", "alert")),
-    S("EU-Asylzentren in Nordafrika.",
-      O("Outsourcing kritisieren.", {wall:+6, trust:+8, power:-5, right:-2, awareness:+3}, "Verantwortung ausgelagert.", "success"),
-      O("Neutral: ‘europäische Lösung’.", {wall:+1, trust:+2, power:+5, right:+2}, "Humanität per Proxy.", "warn"),
-      O("Zustimmen.", {wall:-7, trust:-6, power:+8, right:+5}, "Distanz schützt Gewissen.", "alert")),
-    S("Kampagne: ‘Elternschaft braucht klare Rollen’.",
-      O("Konservative Muster markieren.", {wall:+6, trust:+7, power:-6, right:-2, awareness:+3}, "Rollback: 1950 lädt neu.", "warn"),
-      O("Weich: ‘Verantwortung braucht Orientierung’.", {wall:+2, trust:+2, power:+4, right:+1}, "PR statt Politik.", "info"),
-      O("Übernehmen.", {wall:-8, trust:-6, power:+8, right:+4}, "Romantik als Politik.", "alert")),
-    S("‘Sicherheitsbündnis Süd’ → Grenzkontrollen.",
-      O("Schengen verteidigen.", {wall:+7, trust:+9, power:-6, right:-3, awareness:+4}, "Nationale Reflexe erkannt.", "success"),
-      O("Rahmen wahren, Sprache anpassen.", {wall:+1, trust:+2, power:+5, right:+1}, "Semantische Tarnung aktiv.", "warn"),
-      O("‘Grenzen zuerst’.", {wall:-9, trust:-7, power:+9, right:+6}, "Nationalismus in Föderalform.", "alert")),
-    S("AfD-‘Sachgespräch’ eines Landesverbands.",
-      O("Blockieren – rote Linie überschritten.", {wall:+8, trust:+8, power:-7, right:-3, awareness:+5}, "Brandmauer-Verletzung erkannt.", "success"),
-      O("‘Nur Gespräch’ tolerieren.", {wall:-5, trust:-6, power:+7, right:+4}, "Spalt geöffnet.", "warn"),
-      O("Verteidigen.", {wall:-8, trust:-8, power:+9, right:+6}, "Normalisierung aktiv.", "alert")),
-    S("‘Deutsche Werte’ verpflichtend in Schulen.",
-      O("Pluralität betonen.", {wall:+7, trust:+8, power:-6, right:-3, awareness:+4}, "Lehrplan schützt Vielfalt.", "success"),
-      O("Nur Grundgesetzwerte nennen.", {wall:+1, trust:+2, power:+5, right:+1}, "Deklaration ohne Praxis.", "info"),
-      O("Zustimmen.", {wall:-8, trust:-6, power:+8, right:+5}, "Assimilation geladen.", "alert")),
-    S("Kopftuchverbot in Behörden debattiert.",
-      O("Religionsfreiheit verteidigen.", {wall:+6, trust:+8, power:-6, right:-2, awareness:+3}, "Gleichheit > Kontrolle.", "success"),
-      O("Prüfen, offen lassen.", {wall:+2, trust:+2, power:+5, right:+1}, "Neutralität auf Probe.", "warn"),
-      O("Verbieten.", {wall:-8, trust:-7, power:+9, right:+5}, "Autoritäres Muster.", "alert")),
-    S("EU-Sanktionen bei Aufnahmeverweigerung.",
-      O("Humanitäre Verantwortung betonen.", {wall:+6, trust:+8, power:-5, right:-2, awareness:+3}, "Solidarität ≠ Druckmittel.", "success"),
-      O("Technokratisch rechtfertigen.", {wall:+1, trust:+2, power:+5, right:+1}, "Kontrolle statt Kooperation.", "warn"),
-      O("Zwang verteidigen.", {wall:-8, trust:-6, power:+8, right:+5}, "Bürokratie ersetzt Empathie.", "alert")),
-    S("Parteitag lehnt gendergerechte Sprache ab.",
-      O("Sprache formt Denken – Hinweis.", {wall:+6, trust:+8, power:-5, right:-2, awareness:+3}, "Inklusive Syntax blockiert.", "success"),
-      O("Einheitssprache fordern.", {wall:-6, trust:-6, power:+8, right:+5}, "Diskurs homogenisiert.", "alert"),
-      O("Ignorieren.", {wall:+1, trust:-2, power:+4, right:+2}, "Passivität = Zustimmung.", "warn")),
-  ];
+// === REALISTISCHE 10 SZENEN, paraphrasiert & satirisch analysierend ===
+const situations = [
+  {
+    text: "Nach einer Reihe von Messerangriffen fordert der Kanzler eine „deutsche Leitkultur“, um Zusammenhalt zu stärken. Die Opposition wirft ihm vor, rechte Narrative zu bedienen.",
+    options: [
+      { text: "Leitkultur? Erinnerung an koloniale Muster.", effect: { wall:+8, trust:+10, power:-6, right:-4, awareness:+6 }, comment: "Firewall erkennt kulturelle Überheblichkeit hinter dem Begriff.", level: "success" },
+      { text: "Leitkultur betonen, aber mit demokratischen Werten füllen.", effect: { wall:+3, trust:+3, power:+4, right:+2 }, comment: "Firewall warnt: Semantik getarnt als Toleranz.", level: "warn" },
+      { text: "Leitkultur verteidigen als nationale Identität.", effect: { wall:-10, trust:-9, power:+10, right:+6 }, comment: "Brandmauer wankt: Diskurs kippt ins Exklusive.", level: "alert" }
+    ]
+  },
+  {
+    text: "Innenministerin kündigt 'schnellere Abschiebungen' an – besonders für Menschen aus Nordafrika. Menschenrechtsorganisationen sprechen von Symbolpolitik.",
+    options: [
+      { text: "Menschrechte betonen, Abschiebungen kritisch prüfen.", effect: { wall:+6, trust:+8, power:-5, right:-3, awareness:+4 }, comment: "Firewall: Effizienz ersetzt Empathie.", level: "success" },
+      { text: "„Schnellere Verfahren“ unterstützen, aber Fairness einfordern.", effect: { wall:+2, trust:+2, power:+5, right:+2 }, comment: "Firewall meldet: Bürokratie als Moralersatz.", level: "warn" },
+      { text: "Härteres Vorgehen fordern.", effect: { wall:-8, trust:-7, power:+9, right:+6 }, comment: "Firewall überlastet: Abschottung als Staatsräson.", level: "alert" }
+    ]
+  },
+  {
+    text: "Die CDU kündigt ein neues 'Sicherheitsgesetz' an, das Polizei mehr Überwachungsrechte gibt. Kritiker warnen vor Eingriffen in die Grundrechte.",
+    options: [
+      { text: "Bürgerrechte priorisieren – Freiheit vor Angst.", effect: { wall:+7, trust:+8, power:-6, right:-3, awareness:+5 }, comment: "Firewall stärkt demokratische Resilienz.", level: "success" },
+      { text: "Zustimmen, aber unabhängige Kontrolle fordern.", effect: { wall:+2, trust:+3, power:+4, right:+2 }, comment: "Firewall registriert: Kontrolle ≠ Vertrauen.", level: "warn" },
+      { text: "Mehr Überwachung befürworten – Sicherheit zuerst.", effect: { wall:-9, trust:-8, power:+9, right:+5 }, comment: "Firewall-Alarm: Autorität ersetzt Freiheit.", level: "alert" }
+    ]
+  },
+  {
+    text: "Auf einem Parteitag ruft ein Landesverband zur 'Kooperation mit allen demokratischen Kräften' auf – einschließlich der AfD.",
+    options: [
+      { text: "Klare Grenze ziehen: AfD ≠ demokratisch.", effect: { wall:+10, trust:+9, power:-8, right:-5, awareness:+5 }, comment: "Brandmauer stabilisiert sich – klare Haltung.", level: "success" },
+      { text: "Gespräche auf Landesebene offen lassen.", effect: { wall:-5, trust:-6, power:+6, right:+4 }, comment: "Firewall: Öffnung unter Vorwand der Vernunft.", level: "warn" },
+      { text: "Kooperation befürworten, um „Pragmatismus zu zeigen“.", effect: { wall:-10, trust:-9, power:+9, right:+7 }, comment: "Brandmauer.exe meldet: Rechtsaustritt erkannt.", level: "alert" }
+    ]
+  },
+  {
+    text: "Der Kanzler bezeichnet in einem Interview Seenotrettung als 'Migrationsmagnet'. NGOs reagieren empört.",
+    options: [
+      { text: "Öffentlich widersprechen – Humanität ist kein Magnet.", effect: { wall:+8, trust:+9, power:-6, right:-4, awareness:+4 }, comment: "Firewall erkennt Zynismus hinter Statistik.", level: "success" },
+      { text: "Thema relativieren – Fokus auf EU-Regelung.", effect: { wall:+1, trust:+2, power:+5, right:+2 }, comment: "Firewall verzeichnet semantische Kühlung.", level: "warn" },
+      { text: "Aussage stützen – Abschreckung schützt.", effect: { wall:-9, trust:-8, power:+9, right:+6 }, comment: "Firewall schmilzt – Empathie deaktiviert.", level: "alert" }
+    ]
+  },
+  {
+    text: "In einer Talkshow nennt ein CDU-Generalsekretär den Begriff 'Gendern' eine 'Verunstaltung der Sprache'.",
+    options: [
+      { text: "Sprache als Spiegel der Realität verteidigen.", effect: { wall:+7, trust:+8, power:-5, right:-3, awareness:+5 }, comment: "Firewall erkennt: Sprache formt Demokratie.", level: "success" },
+      { text: "Neutral bleiben – 'beide Seiten verstehen'.", effect: { wall:+2, trust:+1, power:+4, right:+2 }, comment: "Firewall-Status: Passivität = Akzeptanz.", level: "warn" },
+      { text: "Beifall: 'Endlich Klartext!'", effect: { wall:-9, trust:-7, power:+9, right:+6 }, comment: "Firewall-Kern beschädigt – Rechtsdrift aktiv.", level: "alert" }
+    ]
+  },
+  {
+    text: "Ein CDU-Minister bezeichnet Klimaproteste als 'wohlstandsverwöhnt und antidemokratisch'.",
+    options: [
+      { text: "Demokratische Teilhabe betonen.", effect: { wall:+7, trust:+8, power:-5, right:-3, awareness:+5 }, comment: "Firewall erkennt: Protest = Demokratie.", level: "success" },
+      { text: "Kritik akzeptieren, aber Radikalisierung betonen.", effect: { wall:+2, trust:+2, power:+5, right:+2 }, comment: "Firewall meldet: Diskurs verschoben.", level: "warn" },
+      { text: "Angriff unterstützen: Ordnung vor Freiheit.", effect: { wall:-9, trust:-8, power:+9, right:+6 }, comment: "Firewall: Autoritärer Ton akzeptiert.", level: "alert" }
+    ]
+  },
+  {
+    text: "Der Kanzler fordert bei einem Parteitag: 'Wir müssen uns von der AfD nicht abgrenzen, sondern sie entlarven, indem wir ihre Themen übernehmen.'",
+    options: [
+      { text: "Ablehnen – Themenübernahme stärkt Gegner.", effect: { wall:+10, trust:+9, power:-7, right:-5, awareness:+6 }, comment: "Firewall blockiert rechte Mimese.", level: "success" },
+      { text: "Strategisch zustimmen – Inhalte „neutralisieren“.", effect: { wall:-4, trust:-4, power:+6, right:+4 }, comment: "Firewall warnt: Sprachinfektion erkannt.", level: "warn" },
+      { text: "Voll zustimmen – Themen sind Volksnähe.", effect: { wall:-10, trust:-9, power:+9, right:+8 }, comment: "Brandmauer.exe: ideologische Assimilation vollständig.", level: "alert" }
+    ]
+  },
+  {
+    text: "Die CDU schlägt eine 'Verfassungsänderung zum Schutz traditioneller Familienwerte' vor.",
+    options: [
+      { text: "Kritisch prüfen – Gleichheit gilt für alle.", effect: { wall:+8, trust:+8, power:-6, right:-4, awareness:+5 }, comment: "Firewall erkennt: Moralpolitik statt Menschenrechte.", level: "success" },
+      { text: "Symbolik akzeptieren – gesellschaftlichen Frieden betonen.", effect: { wall:+1, trust:+2, power:+4, right:+2 }, comment: "Firewall: Anpassung an Mehrheiten.", level: "warn" },
+      { text: "Begrüßen – Tradition als Schutzschild.", effect: { wall:-9, trust:-8, power:+9, right:+6 }, comment: "Firewall-Fehler: Patriarchat.exe aktiviert.", level: "alert" }
+    ]
+  },
+  {
+    text: "In seiner Neujahrsansprache spricht Merz von 'deutscher Führungskraft in Europa' – Kommentatoren sehen Anklänge an alte Größenfantasien.",
+    options: [
+      { text: "Warnen – Verantwortung statt Führungsanspruch.", effect: { wall:+9, trust:+9, power:-7, right:-4, awareness:+6 }, comment: "Firewall erkennt imperialen Unterton.", level: "success" },
+      { text: "Diplomatisch einordnen – 'nur ökonomisch gemeint'.", effect: { wall:+2, trust:+3, power:+5, right:+2 }, comment: "Firewall registriert semantische Glättung.", level: "warn" },
+      { text: "Bejubeln – Endlich „starke Nation“.", effect: { wall:-10, trust:-8, power:+10, right:+7 }, comment: "Firewall-Kern instabil – Nationalstolz überschreibt Ethik.", level: "alert" }
+    ]
+  }
+];
+
 
   // Bind start early
   startBtn.addEventListener("click", () => {
