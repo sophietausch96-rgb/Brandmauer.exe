@@ -3,15 +3,35 @@ body {
   background: #000;
   color: #fff;
   font-family: 'Press Start 2P', monospace;
-  text-align: center;
   overflow: hidden;
+  text-align: center;
 }
 
-/* ---------- GENERAL ---------- */
-h1 {
+/* ---------- FIXED TITLE ---------- */
+#titleBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   color: #ff0000;
-  font-size: 2em;
-  margin-top: 40px;
+  background: #000;
+  padding: 15px;
+  font-size: 1.2em;
+  z-index: 10;
+  border-bottom: 2px solid #ff0000;
+}
+
+/* ---------- START SCREEN ---------- */
+#startScreen {
+  background-image: url('start.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 100px;
 }
 
 .button {
@@ -22,44 +42,38 @@ h1 {
   font-family: 'Press Start 2P', monospace;
   font-size: 0.8em;
   cursor: pointer;
-  margin-top: 20px;
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
-.storybox {
-  width: 70%;
-  background: #000a;
-  padding: 20px;
-  margin: 0 auto;
-  font-size: 0.6em;
-  line-height: 1.6em;
-}
-
-/* ---------- BACKGROUNDS ---------- */
-#startScreen, #finishScreen {
-  background-size: cover;
-  background-position: center;
-  width: 100vw;
-  height: 100vh;
+/* ---------- INTRO ---------- */
+#introScreen {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background: #000;
 }
 
-#startScreen { background-image: url('start.jpg'); }
-#finishScreen { background-image: url('finish.jpg'); }
+.introBox {
+  width: 70%;
+  font-size: 0.6em;
+  line-height: 1.6em;
+  text-align: left;
+  color: #fff;
+}
 
-/* ---------- GAMEPLAY ---------- */
+/* ---------- GAME ---------- */
 #gameScreen {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
 }
 
 .stats {
-  width: 80%;
+  width: 70%;
   margin: 10px auto;
   font-size: 0.6em;
 }
@@ -93,13 +107,25 @@ h1 {
   margin: 10px auto;
 }
 
-/* ---------- GLITCH EFFECT ---------- */
-@keyframes glitch {
-  0% { text-shadow: 2px 2px #ff0000; }
-  50% { text-shadow: -2px -2px #00ffff; }
-  100% { text-shadow: 2px 2px #ff0000; }
+/* ---------- FINISH ---------- */
+#finishScreen {
+  background-image: url('finish.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.glitch {
-  animation: glitch 1s infinite;
+.storybox {
+  width: 70%;
+  background: #000a;
+  padding: 20px;
+  font-size: 0.6em;
+  line-height: 1.6em;
+  text-align: left;
+  color: #fff;
+  border: 2px solid #ff0000;
 }
