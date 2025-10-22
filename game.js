@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-  // === ELEMENT REFERENCES ===
   const startScreen = document.getElementById("startScreen");
   const introScreen = document.getElementById("introScreen");
   const gameScreen = document.getElementById("gameScreen");
@@ -19,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let stats = { wall: 100, trust: 50, power: 50 };
   let current = 0;
 
-  // === INTRO STORY TEXT ===
   const introStory = [
     "> LOAD MODULE: BRANDMAUER.EXE v2025\n",
     "> INITIALISIERE FIREWALL-PROTOKOLL...\n",
@@ -36,26 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       text: "Ein CDU-Landesverband schlägt vor, in Ostdeutschland mit der AfD über Sachthemen zu sprechen.",
       options: [
-        { text: "Brandmauer bleibt – keine Kooperation!", effect: { wall:+10, trust:+10, power:-5 } },
-        { text: "Wir müssen mit allen demokratischen Kräften reden.", effect: { wall:-15, trust:-10, power:+10 } },
-        { text: "Das ist Sache der Länder.", effect: { wall:-5, trust:-5, power:+5 } }
+        { text: "Brandmauer bleibt – keine Kooperation!", effect: { wall: +10, trust: +10, power: -5 } },
+        { text: "Wir müssen mit allen demokratischen Kräften reden.", effect: { wall: -15, trust: -10, power: +10 } },
+        { text: "Das ist Sache der Länder.", effect: { wall: -5, trust: -5, power: +5 } }
       ]
     },
     {
       text: "Die Parteiführung fordert 'Härtere Abschiebungen für Ordnung und Sicherheit'.",
       options: [
-        { text: "Klingt nach rechter Rhetorik – Firewall anheben!", effect: { wall:+5, trust:+10, power:-10 } },
-        { text: "Endlich klare Worte zur Migration.", effect: { wall:-10, trust:-10, power:+10 } },
-        { text: "Ignorieren – kein Kommentar.", effect: { wall:-5, trust:-5, power:0 } }
+        { text: "Klingt nach rechter Rhetorik – Firewall anheben!", effect: { wall: +5, trust: +10, power: -10 } },
+        { text: "Endlich klare Worte zur Migration.", effect: { wall: -10, trust: -10, power: +10 } },
+        { text: "Ignorieren – kein Kommentar.", effect: { wall: -5, trust: -5, power: 0 } }
       ]
     }
   ];
 
-  // === EVENT HANDLERS ===
   startBtn.addEventListener("click", showIntro);
   restartBtn.addEventListener("click", restart);
 
-  // === FUNCTIONS ===
   function showIntro() {
     startScreen.classList.add("hidden");
     introScreen.classList.remove("hidden");
@@ -111,10 +106,10 @@ document.addEventListener("DOMContentLoaded", () => {
     stats.wall += effect.wall;
     stats.trust += effect.trust;
     stats.power += effect.power;
-    Object.keys(stats).forEach(k => {
-      if (stats[k] > 100) stats[k] = 100;
-      if (stats[k] < 0) stats[k] = 0;
-    });
+    for (let key in stats) {
+      if (stats[key] > 100) stats[key] = 100;
+      if (stats[key] < 0) stats[key] = 0;
+    }
     updateBars();
     current++;
     loadSituation();
@@ -131,5 +126,4 @@ document.addEventListener("DOMContentLoaded", () => {
     finishScreen.classList.add("hidden");
     startScreen.classList.remove("hidden");
   }
-
 });
