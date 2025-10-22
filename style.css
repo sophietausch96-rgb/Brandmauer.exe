@@ -19,6 +19,36 @@ body {
   font-size: 1.2em;
   z-index: 10;
   border-bottom: 2px solid #ff0000;
+  text-align: center;
+}
+
+/* ---------- GLOBAL UTILS ---------- */
+.hidden {
+  display: none;
+}
+
+.button {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8em;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+/* ---------- VIEWPORT CONTAINER ---------- */
+.viewport {
+  width: 70%;
+  max-width: 800px;
+  margin: 100px auto 0 auto;
+  padding: 40px;
+  background: #000a;
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 20px #ff000055;
+  text-align: left;
+  min-height: 400px;
 }
 
 /* ---------- START SCREEN ---------- */
@@ -31,22 +61,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 100px;
+  padding-bottom: 120px;
 }
 
-.button {
-  background: #ff0000;
-  color: #fff;
-  border: none;
-  padding: 15px 30px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.8em;
-  cursor: pointer;
-}
-
-.hidden { display: none; }
-
-/* ---------- INTRO ---------- */
+/* ---------- INTRO SCREEN ---------- */
 #introScreen {
   display: flex;
   justify-content: center;
@@ -56,25 +74,23 @@ body {
 }
 
 .introBox {
-  width: 70%;
   font-size: 0.6em;
   line-height: 1.6em;
-  text-align: left;
   color: #fff;
+  white-space: pre-line;
 }
 
 /* ---------- GAME ---------- */
 #gameScreen {
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 80vh;
+  align-items: center;
 }
 
 .stats {
-  width: 70%;
-  margin: 10px auto;
+  width: 100%;
+  margin-bottom: 20px;
   font-size: 0.6em;
 }
 
@@ -84,7 +100,6 @@ body {
   border: 2px solid #ff0000;
   background: #111;
   margin-bottom: 10px;
-  position: relative;
 }
 
 .fill {
@@ -95,19 +110,18 @@ body {
 }
 
 .situation {
-  margin: 30px auto;
-  width: 80%;
-  font-size: 0.8em;
+  margin-top: 20px;
+  font-size: 0.7em;
   line-height: 1.6em;
 }
 
 .choice {
   display: block;
-  width: 80%;
+  width: 100%;
   margin: 10px auto;
 }
 
-/* ---------- FINISH ---------- */
+/* ---------- FINISH SCREEN ---------- */
 #finishScreen {
   background-image: url('finish.jpg');
   background-size: cover;
@@ -120,12 +134,10 @@ body {
 }
 
 .storybox {
-  width: 70%;
   background: #000a;
   padding: 20px;
   font-size: 0.6em;
   line-height: 1.6em;
-  text-align: left;
   color: #fff;
   border: 2px solid #ff0000;
 }

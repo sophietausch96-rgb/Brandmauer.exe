@@ -19,33 +19,39 @@
     <button class="button" id="startBtn">START</button>
   </section>
 
-  <!-- === INTRO SCENE (TYPING EFFECT) === -->
+  <!-- === INTRO SCENE === -->
   <section id="introScreen" class="hidden">
-    <div class="introBox" id="introText"></div>
+    <div class="viewport">
+      <div class="introBox" id="introText"></div>
+    </div>
   </section>
 
   <!-- === GAME SCREEN === -->
   <section id="gameScreen" class="hidden">
-    <div class="stats">
-      🧱 Brandmauer: <div class="bar"><div id="barWall" class="fill"></div></div>
-      ⚡ Vertrauen: <div class="bar"><div id="barTrust" class="fill"></div></div>
-      🏛️ Macht: <div class="bar"><div id="barPower" class="fill"></div></div>
+    <div class="viewport">
+      <div class="stats">
+        🧱 Brandmauer: <div class="bar"><div id="barWall" class="fill"></div></div>
+        ⚡ Vertrauen: <div class="bar"><div id="barTrust" class="fill"></div></div>
+        🏛️ Macht: <div class="bar"><div id="barPower" class="fill"></div></div>
+      </div>
+      <div id="situation" class="situation"></div>
+      <div id="choices"></div>
     </div>
-    <div id="situation" class="situation"></div>
-    <div id="choices"></div>
   </section>
 
   <!-- === FINISH SCREEN === -->
   <section id="finishScreen" class="hidden">
-    <div class="storybox">
-      <p id="finishText">
-        Du hast gesehen, wie die Brandmauer gegen Rechts bröckelte.<br>
-        Während rechte Narrative Einzug hielten – von „Härtere Abschiebungen“
-        bis „Leitkultur zuerst“ – blieb Demokratie auf der Strecke.<br><br>
-        <strong>FAZIT:</strong> Freiheit + Vielfalt statt Angst + Abschottung.<br>
-        Die Brandmauer darf keine Fassade sein – sie muss Haltung haben.
-      </p>
-      <button class="button" id="restartBtn">NEUSTART</button>
+    <div class="viewport">
+      <div class="storybox">
+        <p id="finishText">
+          Du hast gesehen, wie die Brandmauer gegen Rechts bröckelte.<br>
+          Während rechte Narrative Einzug hielten – von „Härtere Abschiebungen“
+          bis „Leitkultur zuerst“ – blieb Demokratie auf der Strecke.<br><br>
+          <strong>FAZIT:</strong> Freiheit + Vielfalt statt Angst + Abschottung.<br>
+          Die Brandmauer darf keine Fassade sein – sie muss Haltung haben.
+        </p>
+        <button class="button" id="restartBtn">NEUSTART</button>
+      </div>
     </div>
   </section>
 
