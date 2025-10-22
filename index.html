@@ -1,17 +1,17 @@
+<!-- /brandmauer/index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Brandmauer.exe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <!-- HEADER -->
   <header id="titleBar">BRANDMAUER.EXE</header>
 
-  <!-- START SCREEN -->
+  <!-- START -->
   <section id="startScreen">
     <div class="viewport">
       <div id="startIntro" class="introBox"></div>
@@ -19,38 +19,46 @@
     </div>
   </section>
 
-  <!-- INTRO SCREEN -->
+  <!-- INTRO -->
   <section id="introScreen" class="hidden">
     <div class="viewport">
       <div class="introBox" id="introText"></div>
     </div>
   </section>
 
-  <!-- GAME SCREEN -->
+  <!-- GAME -->
   <section id="gameScreen" class="hidden">
-    <!-- Hauptansicht -->
-    <div class="viewport">
+    <!-- Linke Spielansicht -->
+    <div class="viewport" id="viewportBox">
       <div class="stats">
-        🧱 Brandmauer-Stabilität:
+        🧱 Brandmauer-Stabilität
         <div class="bar"><div id="barWall" class="fill"></div></div>
-        ⚡ Vertrauen:
+        ⚡ Vertrauen
         <div class="bar"><div id="barTrust" class="fill"></div></div>
-        🏛️ Macht:
+        🏛️ Macht
         <div class="bar"><div id="barPower" class="fill"></div></div>
-        ➡️ Rechtsdrift:
-        <div class="bar"><div id="barRight" class="fill"></div></div>
+        ➡️ Rechtsdrift (CDU)
+        <div class="bar" id="barRightWrap"><div id="barRight" class="fill"></div></div>
+        🧠 Selbstbewusstsein.exe
+        <div class="bar"><div id="barAwareness" class="fill"></div></div>
       </div>
       <div id="situation" class="situation"></div>
       <div id="choices" class="choices"></div>
     </div>
 
-    <!-- Terminal rechts -->
-    <div id="terminal" class="terminal">
+    <!-- Rechte Terminal-Seitenleiste (macOS-Look) -->
+    <aside id="terminal" class="terminal">
+      <div class="term-titlebar">
+        <span class="tl red"></span>
+        <span class="tl yellow"></span>
+        <span class="tl green"></span>
+        <span class="term-title">Terminal — Brandmauer.log</span>
+      </div>
       <div id="terminalOutput" class="terminal-output"></div>
-    </div>
+    </aside>
   </section>
 
-  <!-- FINISH SCREEN -->
+  <!-- FINISH -->
   <section id="finishScreen" class="hidden">
     <div class="viewport">
       <div class="storybox">
