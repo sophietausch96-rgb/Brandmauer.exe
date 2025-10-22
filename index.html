@@ -1,43 +1,117 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Validation.exe</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- GSAP Animation Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <div class="app">
 
-  <div class="game-container">
-    <h1 class="title">Validation.exe</h1>
-
-    <div class="profile">
-      <img src="https://placekitten.com/120/120" alt="profile" class="avatar">
-      <button id="postBtn">Post ✨</button>
-    </div>
-
-    <div class="bars">
-      <div class="bar ego">
-        <span>Ego</span>
-        <div class="bar-fill" id="egoBar"></div>
+    <!-- SCENE: INTRO -->
+    <section id="scene-intro" class="scene active">
+      <div class="card center">
+        <h1 class="title">Validation.exe</h1>
+        <p class="subtitle">Ein Spiel über Selbstwert in 15 Sekunden Ruhm.</p>
+        <button id="btnIntroStart" class="btn primary">Spiel starten</button>
       </div>
-      <div class="bar energy">
-        <span>Energy</span>
-        <div class="bar-fill" id="energyBar"></div>
+      <div class="bg-hearts" aria-hidden="true"></div>
+    </section>
+
+    <!-- SCENE: PROFILE SETUP -->
+    <section id="scene-setup" class="scene">
+      <div class="card">
+        <h2>Dein Profil</h2>
+        <div class="setup-grid">
+          <div class="avatar-picker">
+            <img id="avatarPreview" class="avatar" src="https://placekitten.com/160/160" alt="Avatar"/>
+            <div class="avatar-row">
+              <button class="chip" data-avatar="https://placekitten.com/160/160">🐱</button>
+              <button class="chip" data-avatar="https://picsum.photos/160?random=1">🫧</button>
+              <button class="chip" data-avatar="https://picsum.photos/seed/face/160">🙂</button>
+              <button class="chip" data-avatar="https://placebear.com/160/160">🐻</button>
+            </div>
+          </div>
+          <div class="form">
+            <label for="playerName">Name</label>
+            <input id="playerName" type="text" placeholder="z. B. @itsSophie"/>
+            <small class="hint">Du kannst später echte Bilder & Namen einsetzen.</small>
+            <button id="btnSetupNext" class="btn primary full">Persona launchen</button>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="like-container" id="likeContainer"></div>
+    <!-- SCENE: PREP (FOLLOWER GROWTH) -->
+    <section id="scene-prep" class="scene">
+      <div class="card center">
+        <h2>Du trendest gerade…</h2>
+        <div class="stat-stack">
+          <div class="stat">
+            <span>Follower</span>
+            <div class="big-number" id="followerCount">0</div>
+          </div>
+          <div class="bars compact">
+            <div class="bar ego">
+              <span>Ego</span>
+              <div class="bar-fill" id="egoBarPrep"></div>
+            </div>
+          </div>
+        </div>
+        <p class="muted">Halte durch — Ruhm hält nicht lang.</p>
+      </div>
+      <div id="prepLikeContainer" class="like-container"></div>
+    </section>
 
-    <div class="game-over hidden" id="gameOver">
-      <h2>You’ve been forgotten 💀</h2>
-      <p>Your relevance lasted <span id="score">0</span> seconds.</p>
-      <button id="restartBtn">Try Again</button>
-    </div>
+    <!-- SCENE: GAME -->
+    <section id="scene-game" class="scene">
+      <header class="ui-top">
+        <div class="profile-mini">
+          <img id="avatarMini" class="avatar mini" src="" alt="Avatar"/>
+          <div class="id">
+            <div id="uiName" class="name">@NewUser</div>
+            <div class="followers"><span id="uiFollowers">0</span> Followers</div>
+          </div>
+        </div>
+        <div class="bars">
+          <div class="bar ego">
+            <span>Ego</span>
+            <div class="bar-fill" id="egoBar"></div>
+          </div>
+          <div class="bar energy">
+            <span>Energy</span>
+            <div class="bar-fill" id="energyBar"></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="playfield">
+        <button id="btnPost" class="btn pulse">Post ✨</button>
+        <div id="likeContainer" class="like-container"></div>
+      </main>
+
+      <footer class="ui-bottom">
+        <div>Zeit: <span id="uiTime">0</span>s</div>
+        <div>Score: <span id="uiScore">0</span></div>
+        <div class="tooltip">Tipp: Zu oft posten = Burnout, zu selten = Unsichtbar.</div>
+      </footer>
+    </section>
+
+    <!-- SCENE: GAME OVER -->
+    <section id="scene-over" class="scene">
+      <div class="card center">
+        <h2>Du wurdest vergessen 💀</h2>
+        <p>Deine Relevanz hielt <strong><span id="finalTime">0</span>s</strong>.</p>
+        <p>Letzter Stand: <strong><span id="finalFollowers">0</span></strong> Follower.</p>
+        <button id="btnRestart" class="btn">Nochmal versuchen</button>
+        <button id="btnBackToIntro" class="btn ghost">Zurück zum Intro</button>
+      </div>
+    </section>
+
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
