@@ -1,51 +1,56 @@
-<!-- /brandmauer/index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brandmauer.exe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- HEADER -->
   <header id="titleBar">BRANDMAUER.EXE</header>
 
-  <!-- START -->
+  <!-- START SCREEN -->
   <section id="startScreen">
-    <button class="button" id="startBtn">START</button>
+    <div class="viewport">
+      <div id="startIntro" class="introBox"></div>
+      <button class="button" id="startBtn">SYSTEM STARTEN</button>
+    </div>
   </section>
 
-  <!-- INTRO -->
+  <!-- INTRO SCREEN -->
   <section id="introScreen" class="hidden">
     <div class="viewport">
       <div class="introBox" id="introText"></div>
     </div>
   </section>
 
-  <!-- GAME -->
+  <!-- GAME SCREEN -->
   <section id="gameScreen" class="hidden">
+    <!-- Hauptansicht -->
     <div class="viewport">
       <div class="stats">
-        🧱 Brandmauer: <div class="bar"><div id="barWall" class="fill"></div></div>
-        ⚡ Vertrauen: <div class="bar"><div id="barTrust" class="fill"></div></div>
-        🏛️ Macht: <div class="bar"><div id="barPower" class="fill"></div></div>
-        ➡️ Rechtsdrift (CDU): <div class="bar"><div id="barRight" class="fill"></div></div>
+        🧱 Brandmauer-Stabilität:
+        <div class="bar"><div id="barWall" class="fill"></div></div>
+        ⚡ Vertrauen:
+        <div class="bar"><div id="barTrust" class="fill"></div></div>
+        🏛️ Macht:
+        <div class="bar"><div id="barPower" class="fill"></div></div>
+        ➡️ Rechtsdrift:
+        <div class="bar"><div id="barRight" class="fill"></div></div>
       </div>
       <div id="situation" class="situation"></div>
       <div id="choices" class="choices"></div>
     </div>
+
+    <!-- Terminal rechts -->
+    <div id="terminal" class="terminal">
+      <div id="terminalOutput" class="terminal-output"></div>
+    </div>
   </section>
 
-  <!-- COMMENT / INTERLUDE OVERLAY -->
-  <div id="overlay" class="overlay hidden">
-    <div class="overlay-box">
-      <pre id="overlayText" class="overlay-text"></pre>
-      <button class="button overlay-btn" id="overlayContinue">Weiter</button>
-    </div>
-  </div>
-
-  <!-- FINISH -->
+  <!-- FINISH SCREEN -->
   <section id="finishScreen" class="hidden">
     <div class="viewport">
       <div class="storybox">

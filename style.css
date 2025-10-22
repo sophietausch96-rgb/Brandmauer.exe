@@ -1,85 +1,227 @@
-/* /brandmauer/style.css */
-
-/* Base */
-:root{
-  --bg:#000;
-  --red:#ff0000;
-  --green:#00ff00;
-  --glow:rgba(255,0,0,0.5);
+/* === GLOBAL === */
+:root {
+  --bg: #000;
+  --red: #ff0000;
+  --green: #00ff00;
+  --glow: rgba(255, 0, 0, 0.5);
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:#fff;font-family:'Press Start 2P',monospace;text-align:center;height:100vh;overflow:hidden;
-  animation:flicker 3s infinite;
+* {
+  box-sizing: border-box;
 }
-.hidden{display:none !important;}
-.button{
-  background:var(--red);color:#fff;border:none;padding:14px 24px;cursor:pointer;
-  box-shadow:0 0 10px var(--red);text-transform:uppercase;transition:transform .12s, box-shadow .2s;font-size:.8em;
-}
-.button:hover{transform:scale(1.05);box-shadow:0 0 20px var(--red);}
-
-/* Header */
-#titleBar{
-  position:fixed;inset:0 auto auto 0;height:auto;padding:14px;font-size:1.1em;color:var(--red);
-  border-bottom:2px solid var(--red);background:var(--bg);z-index:30;letter-spacing:2px;
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #fff;
+  font-family: "Press Start 2P", monospace;
+  overflow: hidden;
+  text-align: center;
+  height: 100vh;
+  animation: flicker 3s infinite;
 }
 
-/* Scenes layout */
-section{
-  position:absolute;inset:0;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;z-index:1;
-}
-#startScreen{background:url('start.jpg') center/cover no-repeat;align-items:flex-end;padding-bottom:120px;z-index:5;}
-#introScreen{background:#000;z-index:10;}
-#gameScreen{z-index:15;}
-#finishScreen{background:url('finish.jpg') center/cover no-repeat;z-index:15;}
-
-.viewport{
-  width:min(800px,70vw);margin-top:80px;padding:32px;background:#000a;border:2px solid var(--red);
-  box-shadow:0 0 20px #ff000055;text-align:left;min-height:420px;position:relative;
-}
-.viewport::after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;
-  background:repeating-linear-gradient(rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 2px, transparent 4px);
+/* === HEADER === */
+#titleBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: var(--red);
+  background: #000;
+  padding: 15px;
+  font-size: 1.2em;
+  border-bottom: 2px solid var(--red);
+  text-transform: uppercase;
+  z-index: 20;
+  letter-spacing: 2px;
 }
 
-.introBox{font-size:.62em;line-height:1.6em;color:#fff;white-space:pre-line;text-shadow:0 0 5px var(--red);}
-.stats{font-size:.6em;margin-bottom:18px;}
-.bar{width:100%;height:18px;border:2px solid var(--red);background:#111;margin:8px 0;position:relative;overflow:hidden;}
-.fill{height:100%;width:100%;background:var(--green);transition:width .5s ease;}
-.situation{margin-top:12px;font-size:.72em;line-height:1.6em;}
-.choices{margin-top:12px;}
-.choice{display:block;width:100%;margin:10px 0}
+/* === UTILITIES === */
+.hidden {
+  display: none !important;
+}
+.button {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.8em;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--red);
+  text-transform: uppercase;
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--red);
+}
 
-/* Overlay */
-.overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;justify-content:center;align-items:center;z-index:50;
+/* === VIEWPORT BOX === */
+.viewport {
+  width: 70%;
+  max-width: 800px;
+  margin: 140px auto 0 auto;
+  padding: 40px;
+  background: #000a;
+  border: 2px solid var(--red);
+  box-shadow: 0 0 20px #ff000055;
+  text-align: left;
+  min-height: 400px;
+  position: relative;
+  z-index: 1;
 }
-.overlay-box{
-  width:min(780px,80vw);background:#000e;border:2px solid var(--red);box-shadow:0 0 25px var(--glow);
-  padding:24px;text-align:left;position:relative;transform:translateY(8px);animation:pop .18s ease-out both;
+.viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
 }
-.overlay-text{
-  margin:0;white-space:pre-wrap;min-height:90px;font-size:.68em;line-height:1.6em;text-shadow:0 0 4px var(--red);
-}
-.overlay-btn{margin-top:14px;}
 
-/* Animations */
-@keyframes flicker{
-  0%,18%,22%,25%,53%,57%,100%{opacity:1}
-  20%,24%,55%{opacity:.85}
+/* === START SCREEN === */
+#startScreen {
+  background-image: url("start.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-@keyframes glitch{
-  0% { text-shadow: 2px 2px var(--red);}
-  50%{ text-shadow:-2px -2px #00ffff;}
-  100%{ text-shadow: 2px 2px var(--red);}
+#startScreen .viewport {
+  text-align: center;
+  font-size: 0.6em;
+  color: #fff;
+  text-shadow: 0 0 6px var(--red);
 }
-.glitch{animation:glitch 1s infinite}
-@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-/* Responsive tweaks */
-@media (max-width:520px){
-  .viewport{padding:22px}
-  .introBox,.stats,.overlay-text{font-size:.58em}
-  .situation{font-size:.64em}
+/* === INTRO SCREEN === */
+#introScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #000;
+}
+.introBox {
+  font-size: 0.6em;
+  line-height: 1.6em;
+  color: #fff;
+  white-space: pre-line;
+  text-shadow: 0 0 5px var(--red);
+}
+
+/* === GAME SCREEN === */
+#gameScreen {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 120px;
+  gap: 20px;
+}
+.stats {
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 0.6em;
+}
+.bar {
+  width: 100%;
+  height: 20px;
+  border: 2px solid var(--red);
+  background: #111;
+  margin-bottom: 10px;
+  position: relative;
+}
+.fill {
+  height: 100%;
+  background: var(--green);
+  width: 100%;
+  transition: width 0.5s ease;
+}
+.situation {
+  margin-top: 20px;
+  font-size: 0.7em;
+  line-height: 1.6em;
+}
+.choice {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+}
+
+/* === TERMINAL SIDEBAR === */
+.terminal {
+  width: 28%;
+  max-width: 400px;
+  height: 500px;
+  background: #000a;
+  border: 2px solid var(--red);
+  box-shadow: 0 0 20px #ff000055;
+  overflow-y: auto;
+  font-size: 0.55em;
+  text-align: left;
+  padding: 16px;
+  color: #00ff00;
+  white-space: pre-line;
+  scrollbar-width: thin;
+}
+.terminal-output {
+  animation: flicker 3s infinite;
+}
+
+/* === FINISH SCREEN === */
+#finishScreen {
+  background-image: url("finish.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.storybox {
+  background: #000a;
+  padding: 20px;
+  font-size: 0.6em;
+  line-height: 1.6em;
+  color: #fff;
+  border: 2px solid var(--red);
+  text-align: left;
+  box-shadow: 0 0 15px #ff000055;
+}
+
+/* === ANIMATIONS === */
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.8;
+  }
+}
+@keyframes glitch {
+  0% {
+    text-shadow: 2px 2px var(--red);
+  }
+  50% {
+    text-shadow: -2px -2px #00ffff;
+  }
+  100% {
+    text-shadow: 2px 2px var(--red);
+  }
+}
+.glitch {
+  animation: glitch 1s infinite;
 }

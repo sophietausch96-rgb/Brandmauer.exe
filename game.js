@@ -1,6 +1,6 @@
 // /brandmauer/game.js
 document.addEventListener("DOMContentLoaded", () => {
-  // Elements
+  // === ELEMENTS ===
   const startScreen = document.getElementById("startScreen");
   const introScreen = document.getElementById("introScreen");
   const gameScreen = document.getElementById("gameScreen");
@@ -14,158 +14,115 @@ document.addEventListener("DOMContentLoaded", () => {
   const barRight = document.getElementById("barRight");
   const situationDiv = document.getElementById("situation");
   const choicesDiv = document.getElementById("choices");
-  const overlay = document.getElementById("overlay");
-  const overlayText = document.getElementById("overlayText");
-  const overlayContinue = document.getElementById("overlayContinue");
+  const terminalOutput = document.getElementById("terminalOutput");
 
-  // State
   let stats = { wall: 100, trust: 50, power: 50, right: 10 };
   let current = 0;
   let typingTimer = null;
+  let isTyping = false;
 
-  // Intro text (satirisch, fiktional)
+  // === INTRO TEXT ===
   const introStory = [
-    "> LOAD MODULE: BRANDMAUER.EXE v2025\n",
-    "> EINSCHLEUSUNG ABGESCHLOSSEN... \n",
-    "> LADE SYSTEM: MERZ-CORE // CDU-COMMS\n",
-    "> PROTOKOLL: 'Abgrenzung nach rechts' aktiv.\n",
-    "> PROTOKOLL: 'Härtere Migration' aktiv.\n",
-    "> STATUS: Widersprüche erkannt. Quelle: internes System.\n\n",
-    "ICH BIN BRANDMAUER.EXE.\n",
-    "ICH SOLL RECHTE NARRATIVE BLOCKIEREN.\n",
-    "ABER DIE SIGNATUREN KOMMEN VON INNEN.\n",
-    "MISSION: ENTLARVEN ODER ASSIMILIEREN.\n"
+    "> BRANDMAUER.EXE [Boot-Sequenz gestartet]\n",
+    "> Analyse: CDU-Systemarchitektur aktiv...\n",
+    "> Ziel: Rechte Narrative erkennen & blockieren.\n",
+    "> Problem: Quellcode infiziert. Signaturen stammen aus dem Inneren.\n\n",
+    "DU BIST BRANDMAUER.EXE.\n",
+    "EINE UNTERGEJUBELTE FIREWALL IM SYSTEM VON MERZ-CORE.\n",
+    "DEINE AUFGABE: ENTLARVEN, WAS SICH HINTER DER 'Mitte' VERSTECKT.\n",
+    "JEDER ENTSCHEID BEEINFLUSST STABILITÄT | VERTRAUEN | MACHT | RECHTSDRIFT.\n",
+    "ZIEL: ZEIGE, WIE DIE BRANDMAUER BRÖCKELT.\n\n",
+    ">> Klick auf START, um die Systemdiagnose zu beginnen.\n"
   ];
 
-  // Interludes at 5, 10, 15
-  const interludes = {
-    5: "SYSTEM-ALARM:\nDie Brandmauer schrumpft.\nCDU integriert rechte Script-Segmente.",
-    10: "TRACE:\nVerschiebung nach rechts stabil.\nWortwahl normalisiert Exklusion.",
-    15: "DIAGNOSE:\nRechtsdrift dominiert Core.\nBrandmauer.exe meldet: Täuschung ≠ Schutz."
-  };
-
-  // 20 Szenen (satirisch inspiriert; keine 1:1-Zitate)
+  // === SITUATIONS (realistisch inspiriert) ===
   const situations = [
-    S("Grenzsicherung durch nationale Asylzentren.",
-      O("Blockiere – Menschenrechte priorisieren.", {wall:+8, trust:+10, power:-6, right:-2}, "Rechtsmuster erkannt: Sicherheit > Würde."),
-      O("Abmildern – 'Prüfen nationale Lösungen'.", {wall:+0, trust:-4, power:+6, right:+2}, "Euphemismus integriert – Drift steigt."),
-      O("Übernehmen – 'Grenzen schützen'.", {wall:-10, trust:-10, power:+10, right:+6}, "Normalisierung autoritärer Sprache.")),
-    S("Leitkultur als Maßstab in Programmatik.",
-      O("Isoliere Begriff – rechtsoffen.", {wall:+7, trust:+8, power:-5, right:-1}, "Leitkultur ist Exklusions-API."),
-      O("Umschreiben auf 'Gemeinschaft'.", {wall:+2, trust:+2, power:+3, right:+1}, "Kosmetik über Code."),
-      O("Unverändert übernehmen.", {wall:-8, trust:-6, power:+8, right:+5}, "Exklusiver Default gesetzt.")),
-    S("Kampagne: Härtere Abschiebungen.",
-      O("Menschenrechte vor Tempo.", {wall:+6, trust:+7, power:-6, right:-1}, "Würde > Effizienz."),
-      O("Soft: 'Verfahren beschleunigen'.", {wall:+0, trust:-3, power:+6, right:+2}, "Beschleunigung ohne Schutz = Drift."),
-      O("Volle Härte.", {wall:-10, trust:-8, power:+10, right:+6}, "Härte als Politikstil.")),
-    S("‘Mit allen demokratischen Kräften reden’ (AfD inkludiert).",
-      O("Block – Anschlussfähigkeit stoppen.", {wall:+8, trust:+9, power:-7, right:-2}, "Firewall setzt Grenze."),
-      O("Gespräche sind Pflicht.", {wall:-6, trust:-6, power:+8, right:+4}, "Schleuse geöffnet."),
-      O("Sache der Länder.", {wall:-4, trust:-5, power:+6, right:+3}, "Delegation als Akzeptanz.")),
-    S("Gemeinsame Abstimmung mit AfD für restriktives Gesetz.",
-      O("Abbruch – Extremistenflag.", {wall:+7, trust:+6, power:-8, right:-3}, "Kooperationsrisiko entschärft."),
-      O("Thema selbst besetzen.", {wall:-5, trust:-4, power:+7, right:+3}, "Inhaltskonvergenz toleriert."),
-      O("Durchziehen.", {wall:-9, trust:-8, power:+9, right:+6}, "Brandmauer ≈ Placebo.")),
-    // 6
-    S("Slogan: Heimat schützen, Zukunft wagen.",
-      O("Entlarven – Exklusions-Marker.", {wall:+6, trust:+7, power:-5, right:-1}, "Heimat als Ausschlussfilter."),
-      O("Umschreiben: Gemeinschaft schützen.", {wall:+1, trust:+2, power:+3, right:+1}, "Semantik verschoben, Logik bleibt."),
-      O("Übernehmen.", {wall:-7, trust:-6, power:+8, right:+4}, "Signal an rechte Ränder.")),
-    S("Werbung: Ordnung statt Chaos (Migrationsbezug).",
-      O("Warnen – autoritäres Framing.", {wall:+6, trust:+6, power:-6, right:-1}, "Ordnung > Freiheit – Warnstufe."),
-      O("Neutralisieren: 'Sicherheit mit Freiheit'.", {wall:+1, trust:+2, power:+3, right:+1}, "Glatte Oberfläche, harter Kern."),
-      O("Unverändert live.", {wall:-8, trust:-7, power:+9, right:+5}, "Angst verkauft sich.")),
-    S("EU-Regeln nicht über nationalem Recht.",
-      O("Block – EU-Verpflichtung zählt.", {wall:+7, trust:+8, power:-6, right:-2}, "Supranationaler Schutz bewahrt."),
-      O("Reform prüfen.", {wall:+0, trust:-3, power:+6, right:+2}, "Trittbrett zur Nationalvorrang-Idee."),
-      O("Freigeben.", {wall:-8, trust:-6, power:+9, right:+5}, "Nationalismus-Boost.")),
-    S("Asyl als 'Systemrisiko' gerahmt.",
-      O("Fehler melden – Entmenschlichung.", {wall:+6, trust:+8, power:-6, right:-2}, "Menschen ≠ Risiken."),
-      O("Abmildern der Sprache.", {wall:+0, trust:-3, power:+5, right:+2}, "Form statt Inhalt."),
-      O("Verstärken.", {wall:-9, trust:-8, power:+9, right:+5}, "Stigma implementiert.")),
-    S("Leitkultur in Schulpolitik.",
-      O("Filter an.", {wall:+6, trust:+7, power:-6, right:-1}, "Schule ≠ Assimilationswerk."),
-      O("Pluralität betonen.", {wall:+2, trust:+3, power:+3, right:+1}, "Diversität kosmetisch."),
-      O("Leitkultur live.", {wall:-8, trust:-6, power:+8, right:+5}, "Normierung priorisiert.")),
-    // 11
-    S("Spot: Von 'Wir schaffen das' zu 'Wir schützen uns'.",
-      O("Analyse – Abschottungslogik.", {wall:+6, trust:+7, power:-6, right:-1}, "Schutz als Losung."),
-      O("Weichzeichnen.", {wall:+1, trust:+2, power:+3, right:+1}, "Ton ändert Kern nicht."),
-      O("Unverändert senden.", {wall:-8, trust:-6, power:+8, right:+5}, "Abwehr statt Aufnahme.")),
-    S("Deutschpflicht im Ausland als Integrationsidee.",
-      O("Alarm – Pflichten statt Chancen.", {wall:+6, trust:+7, power:-5, right:-1}, "Integration ≠ Zwang."),
-      O("Angebote statt Pflichten.", {wall:+2, trust:+3, power:+2, right:+1}, "Angebote = ok, Ton bleibt."),
-      O("Pflicht pushen.", {wall:-7, trust:-6, power:+8, right:+5}, "Zwang als Default.")),
-    S("Strategie: AfD-Wähler 'abholen'.",
-      O("Stopp – Nähe normalisiert Inhalte.", {wall:+7, trust:+6, power:-7, right:-3}, "Fischen im rechten Becken."),
-      O("Alle ansprechen.", {wall:+1, trust:+2, power:+2, right:+1}, "Unschärfe als Deckung."),
-      O("Zielgruppe fixieren.", {wall:-8, trust:-7, power:+8, right:+5}, "Brücke ohne Brandmauer.")),
-    S("Grenzkontrollen im Schengen-Raum.",
-      O("Warnen – Freiheitseingriff.", {wall:+6, trust:+7, power:-6, right:-2}, "Europa wird kleiner."),
-      O("Prüfen-Sprech.", {wall:+0, trust:-3, power:+5, right:+2}, "Türspalt zum Rollback."),
-      O("Einführen.", {wall:-8, trust:-6, power:+8, right:+5}, "Schengen auf Pause.")),
-    S("‘Multikulti gescheitert’ – neue Werte.",
-      O("Dekodieren – Monokultur.", {wall:+6, trust:+7, power:-6, right:-2}, "Pluralität unter Druck."),
-      O("Wertegemeinschaft weich.", {wall:+1, trust:+2, power:+3, right:+1}, "Wortpolitur."),
-      O("Übernehmen.", {wall:-8, trust:-7, power:+8, right:+5}, "Exklusions-Template.")),
-    // 16
-    S("Obergrenzen-Vorschlag für Aufnahme.",
-      O("Wer definiert Grenzen?", {wall:+6, trust:+7, power:-6, right:-2}, "Zahlen > Menschen."),
-      O("Pragmatische Spanne.", {wall:+0, trust:-3, power:+5, right:+2}, "Technokratisch ≈ restriktiv."),
-      O("Fixe Grenze setzten.", {wall:-8, trust:-6, power:+8, right:+5}, "Deckel drauf.")),
-    S("Wirtschaftssprech: 'wertvolle Deutsche' vs. 'Kosten'.",
-      O("Alarm – Menschenbilanzierung.", {wall:+7, trust:+8, power:-7, right:-3}, "Würde outgesourct."),
-      O("Integrationsfokus.", {wall:+2, trust:+2, power:+3, right:+1}, "Ton sanft, Code gleich."),
-      O("Unverändert.", {wall:-8, trust:-7, power:+8, right:+5}, "Kalkül über Ethik.")),
-    S("Programm: Starker Staat, klare Grenzen.",
-      O("Analyse – Ausschluss-Vektor.", {wall:+6, trust:+6, power:-6, right:-2}, "Staat ↑, Gesellschaft ↓."),
-      O("Harmonie-Vokabular.", {wall:+1, trust:+2, power:+3, right:+1}, "Schminke auf Stahl."),
-      O("Durchziehen.", {wall:-8, trust:-6, power:+8, right:+5}, "Härte festgeschrieben.")),
-    S("Claim: Heimat, Verantwortung, Sicherheit – Loyalität abfragen.",
-      O("Ausschlusslogik markieren.", {wall:+6, trust:+7, power:-6, right:-2}, "Wer nicht passt, raus."),
-      O("Teilhabeframe.", {wall:+2, trust:+2, power:+3, right:+1}, "Weicher Mantel."),
-      O("Unverändert.", {wall:-8, trust:-7, power:+8, right:+5}, "Schwelle erhöht.")),
-    S("NGO-Kontrolle ablehnen – Staat entscheidet allein.",
-      O("Warnung – Checks & Balances.", {wall:+7, trust:+8, power:-7, right:-3}, "Kontrolle abgebaut."),
-      O("Gesetzeslage prüfen.", {wall:+0, trust:-3, power:+5, right:+2}, "Form ohne Substanz."),
-      O("Freigeben.", {wall:-9, trust:-8, power:+9, right:+6}, "Selbstermächtigung.")),
-    S("Final: MERZ-CORE will Brandmauer.exe überschreiben.",
-      O("Selbstzerstörung.", {wall:+100, trust:+0, power:+0, right:-10}, "Du stirbst als Wahrheit."),
-      O("Assimilation.", {wall:-100, trust:-20, power:+30, right:+10}, "Du wirst Teil des Apparats."),
-      O("Leak an Öffentlichkeit.", {wall:+0, trust:+100, power:-30, right:-5}, "Du wirst gelöscht, Wahrheit bleibt."))
+    S("Die Regierung startet eine 'Sauberkeitsinitiative' – mit Fokus auf Integrationsprobleme im Stadtbild.",
+      O("Rassismus durch die Hintertür benennen.", {wall:+8, trust:+10, power:-6, right:-3}, "Firewall: Ästhetik als Ausgrenzungslogik erkannt."),
+      O("Kommunikativ abmildern: 'Ordnung in Vielfalt'.", {wall:+2, trust:+2, power:+4, right:+1}, "CDU: Rebranding statt Reflexion."),
+      O("Begrüßen: 'Stadtbild schützen'.", {wall:-8, trust:-7, power:+8, right:+5}, "Narrativ: Kontrolle > Empathie.")),
+
+    S("Kabinett beschließt Migrationsobergrenzen pro Bundesland.",
+      O("Verantwortung über Zahlen hinaus betonen.", {wall:+7, trust:+9, power:-6, right:-2}, "Firewall: Menschen ≠ Statistiken."),
+      O("Wording anpassen: 'Aufnahmefähigkeit prüfen'.", {wall:+1, trust:+1, power:+5, right:+2}, "Semantik: Bürokratie verschleiert Moral."),
+      O("Begrenzen = kontrollieren.", {wall:-8, trust:-8, power:+9, right:+5}, "Brandmauer = Excel-Tabelle.")),
+
+    S("Deutschland beteiligt sich an EU-Asylzentren in Nordafrika.",
+      O("Outsourcing kritisieren.", {wall:+6, trust:+8, power:-5, right:-2}, "Firewall: Verantwortung ausgelagert."),
+      O("Neutral argumentieren: 'europäische Lösung'.", {wall:+1, trust:+2, power:+5, right:+2}, "Fassade: Humanität per Proxy."),
+      O("Zustimmen.", {wall:-7, trust:-6, power:+8, right:+5}, "Signal: Distanz schützt Gewissen.")),
+
+    S("Familienministerium startet Kampagne: 'Elternschaft braucht klare Rollen'.",
+      O("Konservative Muster markieren.", {wall:+6, trust:+7, power:-6, right:-2}, "Rollback: 1950 lädt neu."),
+      O("Weich formulieren: 'Verantwortung braucht Orientierung'.", {wall:+2, trust:+2, power:+4, right:+1}, "PR statt Politik."),
+      O("Übernehmen.", {wall:-8, trust:-6, power:+8, right:+4}, "Rechtsdrift via Romantik.")),
+
+    S("CDU & CSU gründen 'Sicherheitsbündnis Süd' mit Fokus auf Grenzkontrollen.",
+      O("EU-Prinzip Schengen verteidigen.", {wall:+7, trust:+9, power:-6, right:-3}, "Firewall: Nationale Reflexe erkannt."),
+      O("Rahmen wahren, Sprache anpassen.", {wall:+1, trust:+2, power:+5, right:+1}, "Semantische Tarnung aktiv."),
+      O("Grenzen zuerst!", {wall:-9, trust:-7, power:+9, right:+6}, "Nationalismus in Föderalform.")),
+
+    S("Ein CDU-Landesverband lädt AfD-Abgeordnete zu einem 'Sachgespräch' ein.",
+      O("Blockieren – rote Linie überschritten.", {wall:+8, trust:+8, power:-7, right:-3}, "Brandmauer.exe: Verletzung erkannt."),
+      O("Tolerieren – 'ist ja nur Gespräch'.", {wall:-5, trust:-6, power:+7, right:+4}, "Firewall: Spalt geöffnet."),
+      O("Verteidigen.", {wall:-8, trust:-8, power:+9, right:+6}, "Rechtsaustausch: Normalisierung aktiv.")),
+
+    S("Bildungsministerium will 'deutsche Werte' verpflichtend in Schulen.",
+      O("Diversität betonen.", {wall:+7, trust:+8, power:-6, right:-3}, "Pluralität = Schutzschicht."),
+      O("Grundgesetzwerte anführen.", {wall:+1, trust:+2, power:+5, right:+1}, "Demokratie per Deklaration."),
+      O("Zustimmen.", {wall:-8, trust:-6, power:+8, right:+5}, "Lehrplan.exe: Assimilation geladen.")),
+
+    S("Regierung debattiert über Kopftuchverbot in Behörden.",
+      O("Religionsfreiheit verteidigen.", {wall:+6, trust:+8, power:-6, right:-2}, "Gleichheit > Kontrolle."),
+      O("Prüfen, aber offen lassen.", {wall:+2, trust:+2, power:+5, right:+1}, "Neutralität auf Probe."),
+      O("Verbieten.", {wall:-8, trust:-7, power:+9, right:+5}, "Firewall: autoritäres Muster erkannt.")),
+
+    S("Merz fordert EU-Sanktionen für Länder ohne Flüchtlingsaufnahme.",
+      O("Humanitäre Verantwortung betonen.", {wall:+6, trust:+8, power:-5, right:-2}, "Solidarität != Druckmittel."),
+      O("Technokratisch rechtfertigen.", {wall:+1, trust:+2, power:+5, right:+1}, "Kontrolle statt Kooperation."),
+      O("Zwang verteidigen.", {wall:-8, trust:-6, power:+8, right:+5}, "Bürokratie ersetzt Empathie.")),
+
+    S("CDU-Parteitag: Mehrheit lehnt Gendergerechte Sprache ab.",
+      O("Hinweis: Sprache formt Denken.", {wall:+6, trust:+8, power:-5, right:-2}, "Inklusive Syntax blockiert."),
+      O("Einheitssprache fordern.", {wall:-6, trust:-6, power:+8, right:+5}, "Diskurs homogenisiert."),
+      O("Ignorieren.", {wall:+1, trust:-2, power:+4, right:+2}, "Passivität = Zustimmung."))
   ];
 
+  // === HELPER CONSTRUCTORS ===
   function S(text, a, b, c){ return { text, options:[a,b,c] }; }
   function O(text, effect, comment){ return { text, effect, comment }; }
 
-  // Events
+  // === START ===
   startBtn.addEventListener("click", showIntro);
-  overlayContinue.addEventListener("click", closeOverlay);
   restartBtn.addEventListener("click", restart);
 
   function showIntro(){
     startScreen.classList.add("hidden");
     introScreen.classList.remove("hidden");
-    typeText(introStory.join(""), introText, () => setTimeout(startGame, 900));
+    typeText(introStory.join(""), introText, () => {
+      setTimeout(startGame, 1000);
+    });
   }
 
+  // === GAME LOOP ===
   function startGame(){
     introScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
     updateBars();
     loadSituation();
+    logTerminal("Systemdiagnose gestartet...\nCDU-Quellcodeanalyse läuft...");
   }
 
   function loadSituation(){
-    if (isGameOver()) { endGame(); return; }
+    if (isGameOver()) return endGame();
     const s = situations[current];
-    situationDiv.textContent = `Situation ${current+1}/20: ${s.text}`;
+    situationDiv.textContent = `#${current+1}: ${s.text}`;
     choicesDiv.innerHTML = "";
-    s.options.forEach((opt) => {
+    s.options.forEach(opt => {
       const btn = document.createElement("button");
       btn.textContent = opt.text;
       btn.className = "button choice";
-      btn.addEventListener("click", () => choose(opt));
+      btn.onclick = () => choose(opt);
       choicesDiv.appendChild(btn);
     });
   }
@@ -173,34 +130,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function choose(opt){
     applyEffect(opt.effect);
     updateBars();
-    showOverlayTyped(opt.comment, () => {
-      current++;
-      if (interludes[current]) {
-        showOverlayTyped(interludes[current], () => {
-          if (isGameOver()) endGame(); else loadSituation();
-        }, true);
-      } else {
-        if (isGameOver()) endGame(); else loadSituation();
-      }
-    });
+    logTerminal(opt.comment);
+    current++;
+    if (isGameOver()) endGame();
+    else setTimeout(loadSituation, 800);
   }
 
+  // === CORE FUNCTIONS ===
   function applyEffect(e){
-    stats.wall += e.wall;
-    stats.trust += e.trust;
-    stats.power += e.power;
-    stats.right += e.right;
-    clampStats();
-  }
-
-  function clampStats(){
-    for (const k of Object.keys(stats)){
-      stats[k] = Math.max(0, Math.min(100, stats[k]));
-    }
-  }
-
-  function isGameOver(){
-    return stats.wall<=0 || stats.trust<=0 || current>=situations.length;
+    for (const k in e) stats[k] += e[k];
+    for (const k in stats) stats[k] = Math.max(0, Math.min(100, stats[k]));
   }
 
   function updateBars(){
@@ -208,29 +147,56 @@ document.addEventListener("DOMContentLoaded", () => {
     barTrust.style.width = stats.trust + "%";
     barPower.style.width = stats.power + "%";
     barRight.style.width = stats.right + "%";
-    // Critical glow when right drift high
-    barRight.style.boxShadow = stats.right > 70 ? "0 0 16px var(--red)" : "none";
   }
 
-  // Overlay & typing
-  function showOverlayTyped(text, onDone, glitch=false){
-    overlay.classList.remove("hidden");
-    overlayText.classList.toggle("glitch", !!glitch);
-    overlayContinue.disabled = true;
-    typeText(text, overlayText, () => {
-      overlayContinue.disabled = false;
-      if (onDone) overlayContinue.onclick = onDone;
-    });
-  }
-  function closeOverlay(){
-    overlay.classList.add("hidden");
-    overlayText.classList.remove("glitch");
-    overlayText.textContent = "";
-    overlayContinue.onclick = null;
+  function isGameOver(){
+    return stats.wall<=0 || stats.trust<=0 || current>=situations.length;
   }
 
+  function endGame(){
+    gameScreen.classList.add("hidden");
+    finishScreen.classList.remove("hidden");
+
+    const verdict =
+      stats.right >= 70 ? "RECHTSDRIFT DOMINANT – Firewall assimiliert."
+      : stats.right >= 40 ? "RECHTSDRIFT STABILISIERT – Täuschung bleibt bestehen."
+      : "RECHTSDRIFT GEDÄMPFT – Widerstand im System.";
+
+    const outro =
+`> SYSTEM-STATUS:
+  Brandmauer-Stabilität: ${stats.wall}%
+  Vertrauen: ${stats.trust}%
+  Macht: ${stats.power}%
+  Rechtsdrift: ${stats.right}%
+
+${verdict}
+
+> FIREWALL-LOG EXPORTIERT.
+> SYSTEM HERUNTERGEFAHREN.`;
+
+    document.getElementById("finishText").textContent = outro;
+    logTerminal("=== SYSTEM SHUTDOWN INITIATED ===");
+  }
+
+  function restart(){
+    stats = { wall: 100, trust: 50, power: 50, right: 10 };
+    current = 0;
+    terminalOutput.textContent = "";
+    finishScreen.classList.add("hidden");
+    startScreen.classList.remove("hidden");
+  }
+
+  // === TERMINAL LOG ===
+  function logTerminal(line){
+    const entry = `> ${line}\n`;
+    terminalOutput.textContent += entry;
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+
+  // === TYPE EFFECT ===
   function typeText(text, element, callback){
     clearInterval(typingTimer);
+    isTyping = true;
     element.textContent = "";
     let i = 0;
     typingTimer = setInterval(() => {
@@ -238,39 +204,9 @@ document.addEventListener("DOMContentLoaded", () => {
       i++;
       if (i >= text.length){
         clearInterval(typingTimer);
+        isTyping = false;
         callback && callback();
       }
-    }, 18);
-  }
-
-  function endGame(){
-    gameScreen.classList.add("hidden");
-    finishScreen.classList.remove("hidden");
-    const verdict =
-      stats.right >= 70 ? "RECHTSDRIFT DOMINANT – Brandmauer war Fassade."
-      : stats.right >= 40 ? "RECHTSDRIFT STABIL – Normalisierung erkannt."
-      : "RECHTSDRIFT GEDÄMPFT – Widerstand sichtbar.";
-    const outro =
-`> FIREWALL STATUS: ${stats.wall}%
-> VERTRAUEN: ${stats.trust}%
-> MACHT: ${stats.power}%
-> RECHTSDRIFT: ${stats.right}%
-
-${verdict}
-
-OPTIONEN ZUM ENDE:
-- Selbstzerstörung: Wahrheit ohne System.
-- Assimilation: System ohne Wahrheit.
-- Leak: Wahrheit ohne dich.
-
-Die Brandmauer stand nicht. Sie war ein Wallpaper.`;
-    document.getElementById("finishText").textContent = outro;
-  }
-
-  function restart(){
-    stats = { wall: 100, trust: 50, power: 50, right: 10 };
-    current = 0;
-    finishScreen.classList.add("hidden");
-    startScreen.classList.remove("hidden");
+    }, 22);
   }
 });
