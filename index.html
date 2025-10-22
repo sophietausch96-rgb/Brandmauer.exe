@@ -1,33 +1,34 @@
+<!-- /brandmauer/index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brandmauer.exe — Director’s Cut v4.5</title>
+  <title>Brandmauer.exe</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <header id="titleBar">BRANDMAUER.EXE // SYSTEM FIREWALL SIMULATION</header>
 
-  <!-- === START SCREEN === -->
+  <!-- START -->
   <section id="startScreen">
-    <div class="start-container">
+    <div class="start-overlay">
       <button class="button" id="startBtn">SYSTEM STARTEN</button>
     </div>
   </section>
 
-  <!-- === INTRO SCREEN === -->
+  <!-- INTRO -->
   <section id="introScreen" class="hidden">
-    <div class="viewport">
+    <div class="card">
       <div class="introBox" id="introText"></div>
       <button class="button hidden" id="beginBtn">LOSLEGEN</button>
     </div>
   </section>
 
-  <!-- === GAME SCREEN === -->
+  <!-- GAME -->
   <section id="gameScreen" class="hidden">
-    <div id="viewportBox">
+    <div id="viewportBox" class="card">
       <div class="stats">
         🧱 Brandmauer-Stabilität
         <div class="bar"><div id="barWall" class="fill"></div></div>
@@ -44,7 +45,7 @@
       <div id="choices" class="choices"></div>
     </div>
 
-    <aside id="terminal" class="terminal">
+    <aside class="terminal">
       <div class="term-titlebar">
         <span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span>
         <span class="term-title">Terminal — Brandmauer.log</span>
@@ -53,19 +54,15 @@
     </aside>
   </section>
 
-  <!-- === FINISH SCREEN === -->
+  <!-- FINISH -->
   <section id="finishScreen" class="hidden">
-    <div class="viewport">
-      <div class="storybox">
-        <p id="finishText"></p>
-        <button class="button" id="restartBtn">NEUSTART</button>
-      </div>
+    <div class="card">
+      <pre id="finishText" class="finishBox"></pre>
+      <button class="button" id="restartBtn">NEUSTART</button>
     </div>
   </section>
 
-  <!-- === NEWS TICKER === -->
-  <div id="ticker"><div id="tickerContent"></div></div>
-  <div id="noise"></div>
+  <div id="crtNoise" aria-hidden="true"></div>
 
   <script src="game.js"></script>
 </body>
