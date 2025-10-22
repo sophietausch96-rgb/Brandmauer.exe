@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validation.exe</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+  <div class="game-container">
+    <h1 class="title">Validation.exe</h1>
+
+    <div class="profile">
+      <img src="https://placekitten.com/120/120" alt="profile" class="avatar">
+      <button id="postBtn">Post ✨</button>
+    </div>
+
+    <div class="bars">
+      <div class="bar ego">
+        <span>Ego</span>
+        <div class="bar-fill" id="egoBar"></div>
+      </div>
+      <div class="bar energy">
+        <span>Energy</span>
+        <div class="bar-fill" id="energyBar"></div>
+      </div>
+    </div>
+
+    <div class="like-container" id="likeContainer"></div>
+
+    <div class="game-over hidden" id="gameOver">
+      <h2>You’ve been forgotten 💀</h2>
+      <p>Your relevance lasted <span id="score">0</span> seconds.</p>
+      <button id="restartBtn">Try Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
