@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brandmauer.exe — Director’s Cut v4</title>
+  <title>Brandmauer.exe — Director’s Cut v4.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header id="titleBar">BRANDMAUER.EXE</header>
+  <header id="titleBar">BRANDMAUER.EXE // SYSTEM FIREWALL SIMULATION</header>
 
   <!-- === START SCREEN === -->
   <section id="startScreen">
@@ -17,17 +17,17 @@
     </div>
   </section>
 
-  <!-- === INTRO SCREEN (Erklärung + Loslegen) === -->
+  <!-- === INTRO SCREEN === -->
   <section id="introScreen" class="hidden">
     <div class="viewport">
       <div class="introBox" id="introText"></div>
-      <button class="button" id="beginBtn" class="hidden">LOSLEGEN</button>
+      <button class="button hidden" id="beginBtn">LOSLEGEN</button>
     </div>
   </section>
 
-  <!-- === GAME === -->
+  <!-- === GAME SCREEN === -->
   <section id="gameScreen" class="hidden">
-    <div class="viewport" id="viewportBox">
+    <div id="viewportBox">
       <div class="stats">
         🧱 Brandmauer-Stabilität
         <div class="bar"><div id="barWall" class="fill"></div></div>
@@ -44,7 +44,6 @@
       <div id="choices" class="choices"></div>
     </div>
 
-    <!-- TERMINAL -->
     <aside id="terminal" class="terminal">
       <div class="term-titlebar">
         <span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span>
