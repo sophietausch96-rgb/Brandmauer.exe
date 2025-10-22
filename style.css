@@ -1,3 +1,4 @@
+/* === GLOBAL === */
 body {
   margin: 0;
   background: #000;
@@ -5,9 +6,10 @@ body {
   font-family: 'Press Start 2P', monospace;
   overflow: hidden;
   text-align: center;
+  height: 100vh;
 }
 
-/* ---------- FIXED TITLE ---------- */
+/* === FIXED TITLE BAR === */
 #titleBar {
   position: fixed;
   top: 0;
@@ -20,11 +22,13 @@ body {
   z-index: 10;
   border-bottom: 2px solid #ff0000;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-/* ---------- GLOBAL UTILS ---------- */
+/* === UTILITIES === */
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .button {
@@ -36,22 +40,50 @@ body {
   font-size: 0.8em;
   cursor: pointer;
   box-shadow: 0 0 10px #ff0000;
+  text-transform: uppercase;
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
 }
 
-/* ---------- VIEWPORT CONTAINER ---------- */
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff0000;
+}
+
+/* === VIEWPORT BOX (main content area) === */
 .viewport {
   width: 70%;
   max-width: 800px;
-  margin: 100px auto 0 auto;
+  margin: 140px auto 0 auto;
   padding: 40px;
   background: #000a;
   border: 2px solid #ff0000;
   box-shadow: 0 0 20px #ff000055;
   text-align: left;
   min-height: 400px;
+  position: relative;
+  z-index: 1;
 }
 
-/* ---------- START SCREEN ---------- */
+/* CRT overlay effect */
+.viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+}
+
+/* === START SCREEN === */
 #startScreen {
   background-image: url('start.jpg');
   background-size: cover;
@@ -64,7 +96,7 @@ body {
   padding-bottom: 120px;
 }
 
-/* ---------- INTRO SCREEN ---------- */
+/* === INTRO SCREEN === */
 #introScreen {
   display: flex;
   justify-content: center;
@@ -78,9 +110,10 @@ body {
   line-height: 1.6em;
   color: #fff;
   white-space: pre-line;
+  text-shadow: 0 0 5px #ff0000;
 }
 
-/* ---------- GAME ---------- */
+/* === GAME SCREEN === */
 #gameScreen {
   height: 100vh;
   display: flex;
@@ -100,6 +133,7 @@ body {
   border: 2px solid #ff0000;
   background: #111;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .fill {
@@ -121,7 +155,7 @@ body {
   margin: 10px auto;
 }
 
-/* ---------- FINISH SCREEN ---------- */
+/* === FINISH SCREEN === */
 #finishScreen {
   background-image: url('finish.jpg');
   background-size: cover;
@@ -140,4 +174,29 @@ body {
   line-height: 1.6em;
   color: #fff;
   border: 2px solid #ff0000;
+  text-align: left;
+  box-shadow: 0 0 15px #ff000055;
+}
+
+/* === ANIMATIONS === */
+
+/* Subtle flicker for CRT effect */
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.8; }
+}
+
+body {
+  animation: flicker 3s infinite;
+}
+
+/* Glow/Glitch style (optional for text) */
+@keyframes glitch {
+  0% { text-shadow: 2px 2px #ff0000; }
+  50% { text-shadow: -2px -2px #00ffff; }
+  100% { text-shadow: 2px 2px #ff0000; }
+}
+
+.glitch {
+  animation: glitch 1s infinite;
 }
