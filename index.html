@@ -11,22 +11,21 @@
 
 <body>
 
-  <!-- Fixierter Titel -->
   <header id="titleBar">BRANDMAUER.EXE</header>
 
-  <!-- === START SCREEN === -->
-  <section id="startScreen">
+  <!-- START SCREEN -->
+  <section id="startScreen" class="active">
     <button class="button" id="startBtn">START</button>
   </section>
 
-  <!-- === INTRO SCENE === -->
+  <!-- INTRO -->
   <section id="introScreen" class="hidden">
     <div class="viewport">
       <div class="introBox" id="introText"></div>
     </div>
   </section>
 
-  <!-- === GAME SCREEN === -->
+  <!-- GAME -->
   <section id="gameScreen" class="hidden">
     <div class="viewport">
       <div class="stats">
@@ -39,7 +38,7 @@
     </div>
   </section>
 
-  <!-- === FINISH SCREEN === -->
+  <!-- FINISH -->
   <section id="finishScreen" class="hidden">
     <div class="viewport">
       <div class="storybox">
@@ -55,6 +54,7 @@
     </div>
   </section>
 
-  <script src="script.js"></script>
+  <!-- ✅ Fix: Richtiger Skriptname -->
+  <script src="game.js"></script>
 </body>
 </html>
