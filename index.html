@@ -11,18 +11,27 @@
 <body>
   <header id="titleBar">BRANDMAUER.EXE — Firewall Simulation</header>
 
-  <!-- === START SCREEN === -->
+  <!-- Start -->
   <section id="startScreen" class="screen screen--start">
     <div class="overlay">
       <h2>Willkommen bei BRANDMAUER.EXE</h2>
-      <p>Du spielst als linke Brandmauer gegen den Rechtsdrift.<br/>
-      Erkenne rechte Narrative, widersprich gezielt und halte Werte stabil.</p>
+      <p>Du bist der <b>Virus</b> in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br/>Erkenne Narrativ → kontere → zerlege die Szene.</p>
       <button id="startBtn" class="button">Start</button>
     </div>
   </section>
 
-  <!-- === GAME SCREEN === -->
+  <!-- Game -->
   <section id="gameScreen" class="hidden">
+    <!-- Szene-Hintergrund (Crossfade) -->
+    <div id="sceneBg" aria-hidden="true">
+      <div class="bgLayer bgA"></div>
+      <div class="bgLayer bgB"></div>
+    </div>
+    <!-- Effekt-Layer (Shatter/Tear) -->
+    <div id="fxLayer" aria-hidden="true"></div>
+    <!-- Vignette/Mask -->
+    <div id="vignette" aria-hidden="true"></div>
+
     <div id="gameWrap">
       <div id="viewportBox">
         <div class="hud">
@@ -49,7 +58,7 @@
         </div>
         <div id="situation" class="situation"></div>
         <div id="choices" class="choices"></div>
-        <div class="hint">Kurzbefehle: [1] Widersprechen · [2] Neutral · [3] Beifall</div>
+        <div class="hint">Enter/Leertaste: Gegenrede ausführen</div>
       </div>
 
       <aside class="terminal">
@@ -62,7 +71,7 @@
     </div>
   </section>
 
-  <!-- === FINISH SCREEN === -->
+  <!-- Finish -->
   <section id="finishScreen" class="screen screen--finish hidden">
     <div class="overlay">
       <p id="finishText"></p>

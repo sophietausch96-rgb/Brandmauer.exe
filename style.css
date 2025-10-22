@@ -6,86 +6,100 @@
 }
 
 *{box-sizing:border-box}
-body{
-  margin:0; background:var(--bg); color:#fff; font-family:var(--pixel);
-  animation:flicker 3s infinite;
-}
+body{ margin:0; background:var(--bg); color:#fff; font-family:var(--pixel); animation:flicker 3s infinite;}
 .hidden{display:none!important}
+
 #titleBar{
   position:fixed; top:0; left:0; right:0;
   background:#000; border-bottom:2px solid var(--red);
-  color:var(--red); text-align:center; padding:12px; z-index:100;
+  color:var(--red); text-align:center; padding:12px; z-index:1000;
 }
 
-/* Screens with bg images */
+/* Screens */
 .screen{
   position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
-  background:radial-gradient(circle,#111,#000);
-  background-size:cover; background-position:center;
+  background:#000; background-size:cover; background-position:center;
 }
 .screen--start{ background-image:url('start.jpg'); }
 .screen--finish{ background-image:url('finish.jpg'); }
-.overlay{
-  background:rgba(0,0,0,.78); border:2px solid var(--red); padding:40px; text-align:center;
-  box-shadow:0 0 25px var(--red);
-}
-.button{
-  background:var(--red); color:#fff; border:none; padding:15px 30px; cursor:pointer; margin-top:20px;
-  font-family:var(--pixel); transition:.2s;
-}
+.overlay{ background:rgba(0,0,0,.78); border:2px solid var(--red); padding:40px; text-align:center; box-shadow:0 0 25px var(--red); }
+.button{ background:var(--red); color:#fff; border:none; padding:15px 30px; cursor:pointer; margin-top:20px; font-family:var(--pixel); transition:.2s;}
 .button:hover{ box-shadow:0 0 20px var(--red); transform:scale(1.05); }
 
-/* Center game */
-#gameScreen{
-  position:fixed; inset:0; padding-top:58px;
+/* Game layout */
+#gameScreen{ position:fixed; inset:0; padding-top:58px; overflow:hidden; }
+#sceneBg{ position:fixed; inset:0; z-index:0; }
+.bgLayer{
+  position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transition:opacity .5s ease; will-change:opacity;
 }
+.bgLayer.show{ opacity:1; }
+#fxLayer{ position:fixed; inset:0; z-index:1; pointer-events:none; }
+
+#vignette{
+  position:fixed; inset:0; z-index:2;
+  background:
+    radial-gradient(1200px 600px at 50% 60%, rgba(0,0,0,.0), rgba(0,0,0,.55) 60%),
+    linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.65));
+}
+
 #gameWrap{
-  height:calc(100vh - 58px); width:100%;
-  display:flex; gap:28px; justify-content:center; align-items:center; /* why: zentriert vertikal & horizontal */
-  padding:20px;
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  display:flex; gap:32px; justify-content:center; align-items:flex-start;
+  width:min(92vw,1500px); z-index:3;
 }
+
 #viewportBox{
-  width:min(900px,90vw); background:rgba(0,0,0,.72);
-  border:2px solid var(--red); box-shadow:0 0 20px #ff000055; padding:24px;
+  flex:2; min-width:520px; width:min(62vw,1000px); padding:28px;
+  background:rgba(0,0,0,.72); border:2px solid var(--red); box-shadow:0 0 20px #ff000055;
 }
 
 /* HUD row */
-.hud{
-  display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap; align-items:flex-end;
-}
-.meter{ width:calc((900px - 3*14px)/4); max-width:210px; flex:1 1 180px }
-.meter-label{ font-size:.6rem; display:block; margin-bottom:6px }
-.bar{ width:100%; height:16px; border:1px solid var(--red); background:#111 }
-.fill{ height:100%; background:var(--green); transition:width .4s ease }
+.hud{ display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap; align-items:flex-end; }
+.meter{ flex:1 1 180px; max-width:280px }
+.meter-label{ font-size:.6rem; display:block; margin-bottom:6px; text-align:center }
+.bar{ width:100%; height:20px; border:2px solid var(--red); background:#111 }
+.fill{ height:100%; background:var(--green); transition:width .35s ease }
 
 .situationHeader{ display:flex; justify-content:space-between; font-size:.6rem; margin:.25rem 0 6px }
-.situation{ font-size:.8rem; line-height:1.6em; min-height:64px }
+.situation{ font-size:.9rem; line-height:1.7; min-height:70px; max-width:760px; margin:0 auto; color:#f0f0f0; text-align:left }
 .choices{ margin-top:16px; text-align:center }
-.choiceBtn{
-  background:#111; color:#fff; border:1px solid var(--red); padding:10px 12px; margin:8px; cursor:pointer; width:220px;
-}
+.choiceBtn{ background:#111; color:#fff; border:1px solid var(--red); padding:14px 16px; margin:8px; cursor:pointer; width:320px; }
 .choiceBtn:hover{ background:#300 }
-.hint{ opacity:.7; font-family:var(--mono); font-size:.65rem; margin-top:10px }
+.hint{ opacity:.75; font-family:var(--mono); font-size:.65rem; margin-top:10px }
 
 .terminal{
-  width:min(360px,30vw); background:#0b0b0b; border:1px solid #2a2a2a; display:flex; flex-direction:column;
-  height:min(540px,70vh);
+  flex:1; width:min(34vw,420px); height:min(540px,70vh);
+  background:rgba(11,11,11,.9); border:1px solid #2a2a2a; display:flex; flex-direction:column; align-self:center;
 }
 .term-titlebar{ height:30px; display:flex; align-items:center; gap:6px; background:#111; border-bottom:1px solid #333 }
 .tl{ width:10px; height:10px; border-radius:50% }
 .red{ background:#ff5f57 } .yellow{ background:#febc2e } .green{ background:#28c840 }
 .term-title{ flex:1; text-align:center; color:#bbb; font-family:var(--mono); font-size:.75em }
-.terminal-output{
-  flex:1; overflow-y:auto; padding:10px; font-family:var(--mono); font-size:.8em; color:#a8f7b0;
-}
+.terminal-output{ flex:1; overflow-y:auto; padding:10px; font-family:var(--mono); font-size:.8em; color:#a8f7b0 }
 
 .log-info{color:#a8f7b0} .log-warn{color:#ffd479} .log-alert{color:#ff6a6a} .log-success{color:#9be5ff}
 
-/* Feedback bei starkem Rechtsdrift */
-.shake{ animation:shake .3s linear 2 } /* why: Driftrisiko spürbar machen */
+.shake{ animation:shake .3s linear 2 }
 @keyframes shake{ 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+@keyframes flicker{ 0%,18%,22%,25%,53%,57%,100%{opacity:1} 20%,24%,55%{opacity:.85} }
 
-@keyframes flicker{
-  0%,18%,22%,25%,53%,57%,100%{opacity:1}
-  20%,24%,55%{opacity:.85}
+/* Shatter/Tear animation */
+.piece{
+  position:absolute; background-size:cover; background-position:center; will-change:transform,opacity;
+}
+@keyframes explode{
+  to{
+    transform:translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0.9);
+    opacity:0;
+    filter:blur(2px);
+  }
+}
+@keyframes tearLeft{ to{ transform:translateX(-40%) rotate(-2deg); opacity:0 } }
+@keyframes tearRight{ to{ transform:translateX(40%) rotate(2deg); opacity:0 } }
+
+/* Responsive */
+@media (max-width: 1000px){
+  #gameWrap{ flex-direction:column; gap:18px }
+  .terminal{ width:90vw; height:40vh }
+  #viewportBox{ width:92vw }
 }
