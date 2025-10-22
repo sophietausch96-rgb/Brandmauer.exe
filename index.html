@@ -1,168 +1,65 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Validation.exe</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="game.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brandmauer.exe</title>
+
+  <!-- Pixel Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="app">
 
-    <!-- INTRO -->
-    <section id="scene-intro" class="scene active">
-      <div class="card center">
-        <h1 class="title">Validation.exe</h1>
-        <p class="subtitle">Ein sarkastisch-ehrlicher Instagram-Simulator über Selbstwert, Ruhm und Burnout.</p>
-        <button id="btnStart" class="btn primary">Spiel starten</button>
-      </div>
-    </section>
+  <!-- === START SCREEN === -->
+  <section id="startScreen">
+    <h1>BRANDMAUER.EXE</h1>
+    <div class="storybox">
+      <p>
+        &gt; LOAD MODULE: BRANDMAUER.EXE v2025<br>
+        &gt; INITIALISIERE FIREWALL-PROTOKOLL...<br>
+        &gt; PROTOKOLL: „Keine Kooperation mit der AfD!“ geladen.<br>
+        &gt; PROTOKOLL: „Wir müssen mit allen demokratischen Kräften reden.“ geladen.<br>
+        &gt; STATUS: Widersprüche erkannt.<br><br>
+        DU BIST EIN FIREWALL-PROGRAMM IM POLITISCHEN SYSTEM DER CDU.<br>
+        DEINE AUFGABE: Rechte Narrative abwehren – aber dein CODE IST WIDERSPRÜCHLICH.<br>
+        JEDER SCHRITT VERÄNDERT: STABILITÄT | VERTRAUEN | MACHTBALANCE.<br>
+        ZIEL: Rechte Narrative der CDU aufdecken.
+      </p>
+      <button class="button" onclick="startGame()">START</button>
+    </div>
+  </section>
 
-    <!-- SETUP -->
-    <section id="scene-setup" class="scene">
-      <div class="card">
-        <h2>Profil anlegen</h2>
-        <div class="setup-grid">
-          <div>
-            <img id="setupAvatar" class="avatar" src="https://placekitten.com/200/200" alt="Avatar">
-            <div class="avatar-row">
-              <button class="chip" data-avatar="https://placekitten.com/200/200">🐱</button>
-              <button class="chip" data-avatar="https://placebear.com/200/200">🐻</button>
-              <button class="chip" data-avatar="https://picsum.photos/200?random=1">🫧</button>
-              <button class="chip" data-avatar="https://picsum.photos/seed/face/200">🙂</button>
-            </div>
-          </div>
-          <div>
-            <label for="setupName">Handle</label>
-            <input id="setupName" type="text" placeholder="@itsSophie" />
-            <label>Fokus (2 wählen)</label>
-            <div class="pill-row" id="focusPills">
-              <button class="pill" data-tag="lifestyle">Lifestyle</button>
-              <button class="pill" data-tag="fitness">Fitness</button>
-              <button class="pill" data-tag="food">Food</button>
-              <button class="pill" data-tag="travel">Travel</button>
-              <button class="pill" data-tag="luxury">Luxury</button>
-              <button class="pill" data-tag="activism">Activism</button>
-            </div>
-            <small class="hint">Tipp: Fokus beeinflusst Reichweite, Risiko & Glaubwürdigkeit.</small>
-            <button id="btnSetupNext" class="btn primary full">Profil erstellen</button>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- === GAME SCREEN === -->
+  <section id="gameScreen" class="hidden">
+    <h1 class="glitch">FIREWALL AKTIV</h1>
+    <div class="stats">
+      🧱 Brandmauer: <div class="bar"><div id="barWall" class="fill"></div></div>
+      ⚡ Vertrauen: <div class="bar"><div id="barTrust" class="fill"></div></div>
+      🏛️ Macht: <div class="bar"><div id="barPower" class="fill"></div></div>
+    </div>
+    <div id="situation" class="situation"></div>
+    <div id="choices"></div>
+  </section>
 
-    <!-- DASHBOARD -->
-    <section id="scene-dashboard" class="scene">
-      <header class="top">
-        <div class="me">
-          <img id="uiAvatar" class="avatar mini" src="" alt="Avatar">
-          <div>
-            <div id="uiName" class="name">@user</div>
-            <div class="muted"><span id="uiFollowers">0</span> Follower • Tag <span id="uiDay">1</span> • Zeit <span id="uiTime">8</span></div>
-          </div>
-        </div>
-        <div class="bars">
-          <div class="bar ego"><span>Glaubwürdigkeit</span><div id="barCred" class="bar-fill"></div></div>
-          <div class="bar energy"><span>Mental</span><div id="barMental" class="bar-fill"></div></div>
-          <div class="bar heat"><span>Reichweite</span><div id="barHeat" class="bar-fill"></div></div>
-        </div>
-        <div class="money">
-          💸 <span id="uiMoney">0</span>
-        </div>
-      </header>
+  <!-- === FINISH SCREEN === -->
+  <section id="finishScreen" class="hidden">
+    <h1>SYSTEMFEHLER: BRANDMAUER KOLLAPSIERT</h1>
+    <div class="storybox">
+      <p id="finishText">
+        Du hast gesehen, wie die Brandmauer gegen Rechts bröckelte.<br>
+        Während rechte Narrative Einzug hielten – von „Härtere Abschiebungen“
+        bis „Leitkultur zuerst“ – blieb Demokratie auf der Strecke.<br><br>
+        Deine Mission war klar: Entlarve die rechten Narrative, die im Schatten
+        der sogenannten Mitte wuchern.<br><br>
+        <strong>FAZIT:</strong> Freiheit + Vielfalt statt Angst + Abschottung.<br>
+        Die Brandmauer darf keine Fassade sein – sie muss Haltung haben.
+      </p>
+      <button class="button" onclick="restart()">NEUSTART</button>
+    </div>
+  </section>
 
-      <div class="grid">
-        <div class="panel">
-          <h3>Aktionen</h3>
-          <div class="action-grid">
-            <button id="actNewPost" class="btn">Neuer Post</button>
-            <button id="actModerate" class="btn">Kommentare moderieren</button>
-            <button id="actStory" class="btn">Story posten</button>
-            <button id="actResearch" class="btn">Hashtag-Research</button>
-            <button id="actCollab" class="btn">Kollab / Brand Deal</button>
-            <button id="actAds" class="btn">Ads kaufen</button>
-            <button id="actPause" class="btn">Digital Detox</button>
-            <button id="actEndDay" class="btn primary">Tag beenden</button>
-          </div>
-          <small class="hint">Ziel: 50.000 Follower & ≥70 Glaubwürdigkeit bis Tag 30.</small>
-        </div>
-
-        <div class="panel">
-          <h3>Letzter Post</h3>
-          <div id="lastPost" class="post-card muted">Noch nichts gepostet.</div>
-          <div id="pendingFlags" class="muted"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- POST-MODAL -->
-    <section id="modal-post" class="modal hidden" aria-hidden="true">
-      <div class="modal-card">
-        <h3>Post erstellen</h3>
-        <div class="post-grid" id="postGrid"></div>
-        <div class="form-row">
-          <input id="caption" type="text" placeholder="Caption …" />
-          <select id="hashtagPreset">
-            <option value="">Hashtags wählen …</option>
-            <option value="core">#daily #vibes #today</option>
-            <option value="fitness">#gym #fit #health</option>
-            <option value="travel">#wanderlust #sunset</option>
-            <option value="activism">#care #climate</option>
-            <option value="luxury">#brand #exclusive</option>
-          </select>
-          <label class="check"><input id="sponsored" type="checkbox" /> Sponsored</label>
-        </div>
-        <div class="modal-actions">
-          <button id="btnCreatePost" class="btn primary">Posten</button>
-          <button id="btnClosePost" class="btn ghost">Abbrechen</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- KOMMENTAR-MODAL -->
-    <section id="modal-mod" class="modal hidden" aria-hidden="true">
-      <div class="modal-card">
-        <h3>Kommentare moderieren</h3>
-        <div id="commentList" class="comments"></div>
-        <div class="modal-actions">
-          <button id="btnCloseMod" class="btn">Schließen</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- KOLLAB-MODAL -->
-    <section id="modal-collab" class="modal hidden" aria-hidden="true">
-      <div class="modal-card">
-        <h3>Kollabs & Brand Deals</h3>
-        <div id="collabList" class="list"></div>
-        <div class="modal-actions">
-          <button id="btnCloseCollab" class="btn">Schließen</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUMMARY-MODAL -->
-    <section id="modal-summary" class="modal hidden" aria-hidden="true">
-      <div class="modal-card">
-        <h3>Tagesabschluss</h3>
-        <div id="summaryBody"></div>
-        <div class="modal-actions">
-          <button id="btnNextDay" class="btn primary">Nächster Tag</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- GAME OVER -->
-    <section id="scene-end" class="scene">
-      <div class="card center">
-        <h2 id="endTitle">Ende</h2>
-        <p id="endDesc">Beschreibung…</p>
-        <button id="btnRestart" class="btn">Nochmal spielen</button>
-      </div>
-    </section>
-
-  </div>
+  <script src="script.js"></script>
 </body>
 </html>
