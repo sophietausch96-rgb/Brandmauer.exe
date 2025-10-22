@@ -1,4 +1,4 @@
-// === DOM ELEMENTS ===
+// === ELEMENT REFERENCES ===
 const startScreen = document.getElementById("startScreen");
 const introScreen = document.getElementById("introScreen");
 const gameScreen = document.getElementById("gameScreen");
@@ -17,7 +17,7 @@ const choicesDiv = document.getElementById("choices");
 let stats = { wall: 100, trust: 50, power: 50 };
 let current = 0;
 
-// === SCENES ===
+// === INTRO STORY TEXT ===
 const introStory = [
   "> LOAD MODULE: BRANDMAUER.EXE v2025\n",
   "> INITIALISIERE FIREWALL-PROTOKOLL...\n",
@@ -49,11 +49,10 @@ const situations = [
   }
 ];
 
-// === BUTTON EVENTS ===
+// === EVENT HANDLERS ===
 startBtn.addEventListener("click", showIntro);
 if (restartBtn) restartBtn.addEventListener("click", restart);
 
-// === FUNCTIONS ===
 function showIntro() {
   startScreen.classList.add("hidden");
   introScreen.classList.remove("hidden");
@@ -62,7 +61,7 @@ function showIntro() {
   });
 }
 
-// typewriter animation
+// === TYPEWRITER EFFECT ===
 function typeText(text, element, callback) {
   let i = 0;
   element.textContent = "";
@@ -76,6 +75,7 @@ function typeText(text, element, callback) {
   }, 25);
 }
 
+// === GAME FLOW ===
 function startGame() {
   introScreen.classList.add("hidden");
   gameScreen.classList.remove("hidden");
