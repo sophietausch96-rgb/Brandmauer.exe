@@ -1,15 +1,14 @@
-<!-- /brandmauer/index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brandmauer.exe</title>
+  <title>Brandmauer.exe — Director’s Cut</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header id="titleBar">BRANDMAUER.EXE</header>
+  <header id="titleBar">BRANDMAUER.EXE // SYSTEM FIREWALL SIMULATION</header>
 
   <!-- START -->
   <section id="startScreen">
@@ -28,7 +27,6 @@
 
   <!-- GAME -->
   <section id="gameScreen" class="hidden">
-    <!-- Linke Spielansicht -->
     <div class="viewport" id="viewportBox">
       <div class="stats">
         🧱 Brandmauer-Stabilität
@@ -37,7 +35,7 @@
         <div class="bar"><div id="barTrust" class="fill"></div></div>
         🏛️ Macht
         <div class="bar"><div id="barPower" class="fill"></div></div>
-        ➡️ Rechtsdrift (CDU)
+        ➡️ Rechtsdrift
         <div class="bar" id="barRightWrap"><div id="barRight" class="fill"></div></div>
         🧠 Selbstbewusstsein.exe
         <div class="bar"><div id="barAwareness" class="fill"></div></div>
@@ -46,7 +44,7 @@
       <div id="choices" class="choices"></div>
     </div>
 
-    <!-- Rechte Terminal-Seitenleiste (macOS-Look) -->
+    <!-- macOS Terminal -->
     <aside id="terminal" class="terminal">
       <div class="term-titlebar">
         <span class="tl red"></span>
@@ -67,6 +65,13 @@
       </div>
     </div>
   </section>
+
+  <!-- LIVE NEWS TICKER -->
+  <div id="ticker">
+    <div id="tickerContent"></div>
+  </div>
+
+  <div id="noise"></div>
 
   <script src="game.js"></script>
 </body>
