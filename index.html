@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brandmauer.exe — Diskursdiagnose</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet" />
+  <title>Brandmauer.exe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header id="titleBar">BRANDMAUER.EXE // Diskursdiagnose v7</header>
+  <header id="titleBar">BRANDMAUER.EXE — Firewall Simulation</header>
 
   <!-- === START SCREEN === -->
   <section id="startScreen">
     <div class="overlay">
-      <p>Du bist BRANDMAUER.EXE — ein politisches Firewall-System.<br>
-      Deine Aufgabe: Sprache analysieren. Wahrheit erkennen. Drift messen.</p>
-      <button id="startBtn" class="button">Analyse starten</button>
+      <h2>Willkommen bei BRANDMAUER.EXE</h2>
+      <p>Du bist eine Firewall im politischen System der CDU.<br>
+      Deine Aufgabe: rechte Narrative erkennen, Stabilität wahren,<br>
+      und verhindern, dass der Rechtsdrift das System übernimmt.</p>
+      <button id="startBtn" class="button">Start</button>
     </div>
   </section>
 
@@ -25,8 +28,10 @@
       <div class="stats">
         🧱 Brandmauer-Stabilität
         <div class="bar"><div id="barWall" class="fill"></div></div>
-        🧠 Bewusstsein
-        <div class="bar"><div id="barAwareness" class="fill"></div></div>
+        ⚡ Vertrauen
+        <div class="bar"><div id="barTrust" class="fill"></div></div>
+        🏛 Macht
+        <div class="bar"><div id="barPower" class="fill"></div></div>
         🔻 Rechtsdrift
         <div class="bar"><div id="barRight" class="fill"></div></div>
       </div>
@@ -38,7 +43,7 @@
     <aside class="terminal">
       <div class="term-titlebar">
         <span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span>
-        <span class="term-title">Terminal — Brandmauer.log</span>
+        <span class="term-title">Terminal — Firewall.log</span>
       </div>
       <div id="terminalOutput" class="terminal-output"></div>
     </aside>

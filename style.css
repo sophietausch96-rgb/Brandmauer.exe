@@ -12,7 +12,6 @@ body {
   color: #fff;
   font-family: var(--pixel);
   overflow: hidden;
-  height: 100vh;
 }
 
 .hidden { display: none !important; }
@@ -31,42 +30,34 @@ body {
 #startScreen, #finishScreen {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, #111, #000);
+  background: radial-gradient(circle, #111, #000);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
-
 .overlay {
   background: rgba(0,0,0,0.8);
   border: 2px solid var(--red);
   padding: 40px;
   box-shadow: 0 0 25px var(--red);
 }
-
 .button {
   background: var(--red);
   color: #fff;
   border: none;
   padding: 15px 30px;
   font-family: var(--pixel);
-  font-size: 0.8em;
-  margin-top: 20px;
   cursor: pointer;
+  margin-top: 20px;
+  transition: 0.2s;
 }
-
-.button:hover {
-  box-shadow: 0 0 20px var(--red);
-  transform: scale(1.05);
-}
+.button:hover { box-shadow: 0 0 20px var(--red); transform: scale(1.05); }
 
 #gameScreen {
   position: absolute;
-  top: 60px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  top: 60px; bottom: 0;
+  left: 0; right: 0;
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
@@ -85,17 +76,14 @@ body {
 .stats { font-size: 0.7em; margin-bottom: 20px; }
 
 .bar {
-  width: 100%;
-  height: 18px;
+  width: 100%; height: 18px;
   border: 1px solid var(--red);
-  margin: 6px 0;
   background: #111;
-  position: relative;
+  margin: 5px 0;
 }
 .fill {
   height: 100%;
   background: var(--green);
-  width: 100%;
   transition: width 0.5s ease;
 }
 
@@ -108,18 +96,10 @@ body {
   border: 1px solid var(--red);
   padding: 10px;
   margin: 8px;
-  font-size: 0.7em;
   cursor: pointer;
   width: 200px;
 }
 .choiceBtn:hover { background: #300; }
-
-.scan-word {
-  color: #ffaaaa;
-  cursor: pointer;
-  text-decoration: underline;
-}
-.scan-word:hover { color: #fff; }
 
 .terminal {
   width: 340px;
@@ -146,6 +126,7 @@ body {
   font-family: var(--mono); font-size: 0.8em;
   color: #a8f7b0;
 }
+
 .log-info { color: #a8f7b0; }
 .log-warn { color: #ffd479; }
 .log-alert { color: #ff6a6a; }
