@@ -1,142 +1,85 @@
-body {
-  margin: 0;
-  background: #000;
-  color: #fff;
-  font-family: 'Press Start 2P', monospace;
-  text-align: center;
-  height: 100vh;
-  overflow: hidden;
+/* /brandmauer/style.css */
+
+/* Base */
+:root{
+  --bg:#000;
+  --red:#ff0000;
+  --green:#00ff00;
+  --glow:rgba(255,0,0,0.5);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:#fff;font-family:'Press Start 2P',monospace;text-align:center;height:100vh;overflow:hidden;
+  animation:flicker 3s infinite;
+}
+.hidden{display:none !important;}
+.button{
+  background:var(--red);color:#fff;border:none;padding:14px 24px;cursor:pointer;
+  box-shadow:0 0 10px var(--red);text-transform:uppercase;transition:transform .12s, box-shadow .2s;font-size:.8em;
+}
+.button:hover{transform:scale(1.05);box-shadow:0 0 20px var(--red);}
+
+/* Header */
+#titleBar{
+  position:fixed;inset:0 auto auto 0;height:auto;padding:14px;font-size:1.1em;color:var(--red);
+  border-bottom:2px solid var(--red);background:var(--bg);z-index:30;letter-spacing:2px;
 }
 
-/* Title bar */
-#titleBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  color: #ff0000;
-  background: #000;
-  padding: 15px;
-  font-size: 1.2em;
-  border-bottom: 2px solid #ff0000;
-  text-transform: uppercase;
-  z-index: 20;
+/* Scenes layout */
+section{
+  position:absolute;inset:0;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;z-index:1;
+}
+#startScreen{background:url('start.jpg') center/cover no-repeat;align-items:flex-end;padding-bottom:120px;z-index:5;}
+#introScreen{background:#000;z-index:10;}
+#gameScreen{z-index:15;}
+#finishScreen{background:url('finish.jpg') center/cover no-repeat;z-index:15;}
+
+.viewport{
+  width:min(800px,70vw);margin-top:80px;padding:32px;background:#000a;border:2px solid var(--red);
+  box-shadow:0 0 20px #ff000055;text-align:left;min-height:420px;position:relative;
+}
+.viewport::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;
+  background:repeating-linear-gradient(rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 2px, transparent 4px);
 }
 
-.hidden { display: none !important; }
+.introBox{font-size:.62em;line-height:1.6em;color:#fff;white-space:pre-line;text-shadow:0 0 5px var(--red);}
+.stats{font-size:.6em;margin-bottom:18px;}
+.bar{width:100%;height:18px;border:2px solid var(--red);background:#111;margin:8px 0;position:relative;overflow:hidden;}
+.fill{height:100%;width:100%;background:var(--green);transition:width .5s ease;}
+.situation{margin-top:12px;font-size:.72em;line-height:1.6em;}
+.choices{margin-top:12px;}
+.choice{display:block;width:100%;margin:10px 0}
 
-.button {
-  background: #ff0000;
-  color: #fff;
-  border: none;
-  padding: 15px 30px;
-  font-family: 'Press Start 2P', monospace;
-  cursor: pointer;
-  text-transform: uppercase;
-  box-shadow: 0 0 10px #ff0000;
-  transition: 0.2s;
+/* Overlay */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;justify-content:center;align-items:center;z-index:50;
 }
-.button:hover { transform: scale(1.05); }
-
-/* Layout fix: all scenes take full screen */
-section {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
+.overlay-box{
+  width:min(780px,80vw);background:#000e;border:2px solid var(--red);box-shadow:0 0 25px var(--glow);
+  padding:24px;text-align:left;position:relative;transform:translateY(8px);animation:pop .18s ease-out both;
 }
-
-/* Start Screen */
-#startScreen {
-  background: url('start.jpg') center/cover no-repeat;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: 120px;
-  z-index: 5;
+.overlay-text{
+  margin:0;white-space:pre-wrap;min-height:90px;font-size:.68em;line-height:1.6em;text-shadow:0 0 4px var(--red);
 }
+.overlay-btn{margin-top:14px;}
 
-/* Intro Screen */
-#introScreen {
-  background: #000;
-  z-index: 10;
+/* Animations */
+@keyframes flicker{
+  0%,18%,22%,25%,53%,57%,100%{opacity:1}
+  20%,24%,55%{opacity:.85}
 }
-
-.viewport {
-  width: 70%;
-  max-width: 800px;
-  background: #000a;
-  border: 2px solid #ff0000;
-  box-shadow: 0 0 20px #ff000055;
-  padding: 40px;
-  text-align: left;
-  min-height: 400px;
-  position: relative;
+@keyframes glitch{
+  0% { text-shadow: 2px 2px var(--red);}
+  50%{ text-shadow:-2px -2px #00ffff;}
+  100%{ text-shadow: 2px 2px var(--red);}
 }
+.glitch{animation:glitch 1s infinite}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-.viewport::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    rgba(255, 255, 255, 0.03) 0px,
-    rgba(255, 255, 255, 0.03) 1px,
-    transparent 2px,
-    transparent 4px
-  );
-  pointer-events: none;
-  opacity: 0.3;
-}
-
-.introBox {
-  font-size: 0.6em;
-  line-height: 1.6em;
-  color: #fff;
-  white-space: pre-line;
-  text-shadow: 0 0 5px #ff0000;
-}
-
-/* Game Screen */
-#gameScreen { z-index: 15; }
-
-.stats { font-size: 0.6em; margin-bottom: 20px; }
-
-.bar {
-  width: 100%;
-  height: 20px;
-  border: 2px solid #ff0000;
-  background: #111;
-  margin-bottom: 10px;
-}
-
-.fill {
-  height: 100%;
-  background: #00ff00;
-  width: 100%;
-  transition: width 0.5s ease;
-}
-
-.situation {
-  font-size: 0.7em;
-  line-height: 1.6em;
-  margin-top: 20px;
-}
-
-.choice { display: block; margin: 10px auto; }
-
-/* Finish Screen */
-#finishScreen {
-  background: url('finish.jpg') center/cover no-repeat;
-  z-index: 15;
-}
-
-.storybox {
-  background: #000a;
-  padding: 20px;
-  border: 2px solid #ff0000;
-  font-size: 0.6em;
-  text-align: left;
-  line-height: 1.6em;
+/* Responsive tweaks */
+@media (max-width:520px){
+  .viewport{padding:22px}
+  .introBox,.stats,.overlay-text{font-size:.58em}
+  .situation{font-size:.64em}
 }

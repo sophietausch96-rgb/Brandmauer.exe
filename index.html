@@ -1,20 +1,18 @@
+<!-- /brandmauer/index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Brandmauer.exe</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
-
   <header id="titleBar">BRANDMAUER.EXE</header>
 
-  <!-- START SCREEN -->
-  <section id="startScreen" class="active">
+  <!-- START -->
+  <section id="startScreen">
     <button class="button" id="startBtn">START</button>
   </section>
 
@@ -32,29 +30,31 @@
         🧱 Brandmauer: <div class="bar"><div id="barWall" class="fill"></div></div>
         ⚡ Vertrauen: <div class="bar"><div id="barTrust" class="fill"></div></div>
         🏛️ Macht: <div class="bar"><div id="barPower" class="fill"></div></div>
+        ➡️ Rechtsdrift (CDU): <div class="bar"><div id="barRight" class="fill"></div></div>
       </div>
       <div id="situation" class="situation"></div>
-      <div id="choices"></div>
+      <div id="choices" class="choices"></div>
     </div>
   </section>
+
+  <!-- COMMENT / INTERLUDE OVERLAY -->
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-box">
+      <pre id="overlayText" class="overlay-text"></pre>
+      <button class="button overlay-btn" id="overlayContinue">Weiter</button>
+    </div>
+  </div>
 
   <!-- FINISH -->
   <section id="finishScreen" class="hidden">
     <div class="viewport">
       <div class="storybox">
-        <p id="finishText">
-          Du hast gesehen, wie die Brandmauer gegen Rechts bröckelte.<br>
-          Während rechte Narrative Einzug hielten – von „Härtere Abschiebungen“
-          bis „Leitkultur zuerst“ – blieb Demokratie auf der Strecke.<br><br>
-          <strong>FAZIT:</strong> Freiheit + Vielfalt statt Angst + Abschottung.<br>
-          Die Brandmauer darf keine Fassade sein – sie muss Haltung haben.
-        </p>
+        <p id="finishText"></p>
         <button class="button" id="restartBtn">NEUSTART</button>
       </div>
     </div>
   </section>
 
-  <!-- ✅ Fix: Richtiger Skriptname -->
   <script src="game.js"></script>
 </body>
 </html>
