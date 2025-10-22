@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #ffeaf2, #fff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.game-container {
+  text-align: center;
+  max-width: 400px;
+  position: relative;
+}
+
+.title {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #ff5b9a;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #ff5b9a;
+}
+
+#postBtn {
+  padding: 0.6rem 1.2rem;
+  background: #ff5b9a;
+  color: white;
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+#postBtn:active {
+  transform: scale(0.95);
+}
+
+.bars {
+  margin-top: 1rem;
+}
+
+.bar {
+  background: #eee;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin: 0.5rem 0;
+  position: relative;
+  height: 20px;
+}
+
+.bar span {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 100%;
+  transition: width 0.3s ease;
+}
+
+.ego .bar-fill {
+  background: linear-gradient(90deg, #ff5b9a, #ff9bbf);
+}
+
+.energy .bar-fill {
+  background: linear-gradient(90deg, #5bafff, #9bd1ff);
+}
+
+.like-container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #ff5b9a;
+  opacity: 0.9;
+}
+
+.game-over {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #ff5b9a;
+  padding: 2rem;
+  border-radius: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hidden {
+  display: none;
+}
