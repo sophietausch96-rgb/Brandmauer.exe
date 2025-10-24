@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BRANDMAUER.EXE – Firewall Simulation</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BRANDMAUER.EXE – Firewall Simulation</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- STARTSCREEN -->
-  <div id="startScreen" class="start-overlay">
-    <div class="start-box">
-      <h1>Willkommen bei<br><span class="brand">BRANDMAUER.EXE</span></h1>
-      <p>Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br />
-        Erkenne Narrativ → kontere → zerlege die Szene.
-      </p>
-      <button id="startBtn">Spiel starten</button>
+    <div id="startScreen" class="start-overlay">
+        <div class="start-box">
+            <h1>Willkommen bei<br><span class="brand">BRANDMAUER.EXE</span></h1>
+            <p>Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br />
+                Erkenne Narrativ → kontere → zerlege die Szene.
+            </p>
+            <button id="startBtn">Spiel starten</button>
+        </div>
     </div>
-  </div>
 
-  <!-- PROGRESSBAR -->
-  <div id="progressWrapper" class="progress-bar" style="display: none;">
-    🧠 CDU-Kernschmelze in Echtzeit
-    <div class="bar"><div class="fill" id="progressFill"></div></div>
-  </div>
+    <h1 id="permanentTitle" style="display: none;">BRANDMAUER.<span class="brand">EXE</span></h1>
 
-  <!-- GAME -->
-  <div id="gameContainer" style="display: none;"></div>
+    <div id="progressContainer">
+        <div class="progress-bar" id="progressWrapper" style="display: none;">
+            <div class="bar-text" id="barText">CDU-Kernsäge schlägt rechts aus</div>
+            <div class="bar"><div class="fill" id="progressFill" style="width: 0%;"></div></div>
+        </div>
+    </div>
 
-  <!-- LOGIK -->
-  <script>
-    document.getElementById("startBtn").addEventListener("click", function () {
-      document.getElementById("startScreen").style.display = "none";
-      document.getElementById("gameContainer").style.display = "block";
-      document.getElementById("progressWrapper").style.display = "block";
-      startGame(); // aus game.js
-    });
-  </script>
-  <script src="game.js"></script>
+    <div id="mainWrapper" style="display: none;">
+        <div id="gameContainer">
+            </div>
+
+        <div class="terminal" id="terminalPermanent">
+            <div class="terminal-header">Terminal – Firewall.log</div>
+            <div class="terminal-body">
+                <p class="terminal-log" id="terminalLog"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
 </body>
 </html>

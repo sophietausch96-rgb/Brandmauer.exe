@@ -1,407 +1,468 @@
 /* Global Styles */
 body {
-  margin: 0;
-  background-color: black;
-  color: white;
-  font-family: monospace;
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: monospace;
 }
 
-button {
-  font-family: monospace;
-  background-color: red;
-  color: white;
-  border: 2px solid white;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* Startscreen Layout */
-.centered-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  padding: 32px 16px;
-}
-
-.start-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 800px;
-}
-
-.start-image {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid red;
-  box-shadow: 0 0 24px red;
-  margin-bottom: 24px;
-}
-
-.start-box {
-  background: black;
-  padding: 24px;
-  border: 2px solid red;
-  box-shadow: 0 0 20px red;
-  text-align: center;
-}
-
-.start-box h1 {
-  font-size: 24px;
-  margin-bottom: 12px;
-}
-
-.start-box .brand {
-  font-weight: bold;
-  font-size: 26px;
-  display: block;
-}
-
-.start-box p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-/* Game Layout */
-#gameContainer {
-  padding: 16px;
-}
-
-.scene-wrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-  padding: 32px;
-}
-
-.scene-text {
-  flex: 1 1 300px;
-  max-width: 400px;
-}
-
-.scene-text .statement {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.respond-title {
-  font-size: 14px;
-  margin: 16px 0 16px;
-
-}
-
-.explanation-title {
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 24px;
-}
-
-.explanation {
-  font-size: 14px;
-  color: black;
-  line-height: 1.4;
-  margin-bottom: 24px;
-  background: white; 
-  padding: 16px;
-  
-}
-
-.scene-image img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-
-}
-
-.scene-image img {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid red;
-  box-shadow: 0 0 12px red;
-}
-
-/* Progressbar oben */
-.progress-bar {
-  text-align: center;
-  color: white;
-  margin: 0 auto 24px auto;
-  font-size: 14px;
-  width: 100%;
-}
-
-.bar {
-  width: 100%;
-  height: 10px;
-  background-color: #222;
-  border: 1px solid white;
-  margin-top: 6px;
-}
-
-.fill {
-  height: 100%;
-  background-color: limegreen;
-  transition: width 0.5s ease-in-out;
-}
-
-/* Terminal-Styling */
-.terminal {
-  flex: 1 1 300px;
-  background-color: #111;
-  border: 1px solid white;
-  box-shadow: 0 0 12px whitesmoke;
-  padding: 16px;
-  font-size: 14px;
-  max-width: 400px;
-  margin-top: 32px;
-}
-
-.terminal-header {
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: white;
-}
-
-.terminal-line {
-  color: limegreen;
-  margin: 24px 0;
-  font-family: monospace;
-}
-
-/* Final Screen */
-.final {
-  text-align: center;
-  padding: 48px;
-}
-
-.final img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 24px;
-}
-
-.final-statement {
-  font-size: 18px;
-  margin-top: 16px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .scene-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .scene-text,
-  .terminal {
-    max-width: 100%;
-  }
-
-  .start-box h1 {
+/* Permanenter Titel */
+#permanentTitle {
     font-size: 20px;
-  }
-
-  .start-box .brand {
-    font-size: 22px;
-  }
-
-  .start-box p {
-    font-size: 14px;
-  }
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 2px solid red;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
+    width: 100%;
+    position: sticky; /* Hält den Titel beim Scrollen oben */
+    top: 0;
+    background-color: black;
+    z-index: 1000;
+    margin: 0;
 }
 
-/* Neues Overlay-Layout */
-.start-overlay {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-image: url('start.jpg');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#permanentTitle .brand {
+    color: red;
 }
 
-.start-box {
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 24px;
-  border: 2px solid red;
-  box-shadow: 0 0 20px red;
-  text-align: center;
-  max-width: 600px;
-}
-
-.start-box h1 {
-  font-size: 26px;
-  margin-bottom: 12px;
-}
-
-.start-box .brand {
-  font-weight: bold;
-  font-size: 28px;
-  display: block;
-}
-
-.start-box p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-#startBtn {
-  background-color: red;
-  color: white;
-  border: 2px solid white;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.scene-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 32px;
-  gap: 24px;
-  flex-wrap: wrap;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.scene-image img {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid red;
-  box-shadow: 0 0 24px red;
-  display: block;
-}
-
-.progress-bar {
-  width: 100%;
-  max-width: 640px; /* oder gleiche Breite wie Bild */
-  margin: 0 auto 24px auto;
-  text-align: center;
-  font-size: 14px;
-  color: white;
-  font-family: monospace;
-}
-
-.bar {
-  width: 100%;
-  height: 16px;
-  border: 2px solid red;
-  background-color: #111;
-  margin-top: 8px;
-}
-
-.fill {
-  height: 100%;
-  background-color: limegreen;
-  width: 0%;
-  transition: width 1s ease-in-out;
-}
-
+/* Button Styling (bleibt gleich) */
 button {
-  background-color: red;
-  color: white;
-  border: 2px solid white;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  font-family: monospace;
-  animation: pulse 2s infinite;
-  transition: transform 0.2s ease;
+    font-family: monospace;
+    background-color: red;
+    color: white;
+    border: 2px solid red; 
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    animation: pulse 2s infinite; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    margin-top: 5px; 
+}
+
+.scene-text button {
+    display: block; 
+    width: 100%; 
+    text-align: center; 
+    font-size: 16px; 
+    padding: 15px 20px; 
+    margin-top: 32px; 
+    margin-bottom: 0; 
+    animation: none; 
 }
 
 button:hover {
-  box-shadow: 0 0 12px red;
-  transform: scale(1.05);
+    box-shadow: 0 0 12px red;
+    transform: scale(1.05);
+    border-color: white; 
 }
 
 button:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 6px red;
-  }
-  50% {
-    box-shadow: 0 0 16px red;
-  }
-  100% {
-    box-shadow: 0 0 6px red;
-  }
+    0% {
+        box-shadow: 0 0 6px red;
+    }
+    50% {
+        box-shadow: 0 0 16px red;
+    }
+    100% {
+        box-shadow: 0 0 6px red;
+    }
 }
 
-.scene-image {
-  flex: 1 1 400px;
-  text-align: center;
-  position: relative;
-  width: 400px;
-  height: 300px;
-  overflow: hidden;
+/* Startscreen Layout (bleibt gleich) */
+.start-overlay {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('start.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.fragment {
-  position: absolute;
-  width: 10%;
-  height: 10%;
-  transition: transform 1s ease, opacity 1s ease;
-  background-repeat: no-repeat;
+.start-box {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 32px;
+    border: 2px solid red;
+    box-shadow: 0 0 24px red;
+    text-align: center;
+    max-width: 600px;
+    animation: fadeIn 1.5s ease;
 }
 
-.fragment {
-  position: absolute;
-  width: 10%;
-  height: 10%;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  transition: transform 1.2s ease-out, opacity 1.2s ease-out;
-  z-index: 10;
+.start-box h1 {
+    font-size: 26px;
+    margin-bottom: 12px;
+}
+
+.start-box .brand {
+    font-weight: bold;
+    font-size: 28px;
+    display: block;
+}
+
+.start-box p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Progress Bar Container */
+#progressContainer {
+    padding: 16px;
+    max-width: 1280px;
+    margin: 0 auto;
+    min-height: auto; 
+}
+
+/* Progress Bar Styling (NEU: Satirisches Barometer) */
+.progress-bar {
+    width: 100%;
+    max-width: 640px;
+    margin: 8px auto 8px auto; 
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    font-family: monospace;
+}
+
+.bar-text {
+    font-weight: bold;
+    margin-bottom: 8px;
+    /* FIX: Satirische Aussage */
+    color: red; 
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+}
+
+.bar {
+    width: 100%;
+    height: 16px;
+    border: 2px solid red;
+    background-color: #111;
+    margin-top: 8px;
+    /* Rahmen und Hintergrund des leeren Balkens */
+}
+
+.fill {
+    height: 100%;
+    /* FIX: Farbe wechselt von Grün (anfangs) zu Rot (am Ende) */
+    background: linear-gradient(to right, limegreen 0%, orange 50%, red 100%);
+    width: 0%;
+    transition: width 1s ease-in-out;
+    /* FIX: Ein kleiner Schatten für den "Glow" */
+    box-shadow: 0 0 8px red; 
+    transform-origin: left;
+}
+
+
+/* Layout für GameContainer und Terminal (bleibt gleich) */
+#mainWrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px 16px 16px; 
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: flex-start; 
+    min-height: auto; 
+}
+
+#gameContainer {
+    flex: 1; 
+    min-width: 500px;
+}
+
+/* Game Layout und Entrance Animation (bleibt gleich) */
+.scene-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 32px 0; 
+    gap: 24px;
+    flex-wrap: wrap;
+    animation: slideIn 0.7s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glitch-elements-wrapper {
+    display: flex;
+    flex-grow: 1; 
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.scene-text {
+    flex: 1 1 300px;
+    max-width: 400px;
+}
+
+.scene-text .statement {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 32px;
+}
+
+/* Styling für die Sprachblase (bleibt gleich) */
+.explanation-container {
+    display: flex; 
+    align-items: flex-start;
+    margin-top: 0; 
+    margin-bottom: 32px; 
+    gap: 16px; 
 }
 
 .explanation-icon {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  margin-bottom: 12px;
-  display: block;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
 }
 
-/* Explosionseffekt */
-@keyframes explode {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.1) rotate(5deg);
-    filter: blur(1px);
-  }
-  100% {
+.explanation {
+    position: relative;
+    background: white;
+    color: black;
+    padding: 12px;
+    border-radius: 8px;
+    border: none; 
+    box-shadow: 0 0 8px red; 
+    line-height: 1.4;
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.explanation p {
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Pfeil der Sprachblase (Pointer) */
+.explanation:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: -10px; 
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid white; 
+    z-index: 2;
+}
+
+.scene-image {
+    flex: 1 1 400px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    max-width: 400px;
+    height: auto;
+    align-self: flex-start;
+}
+
+.scene-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    /* FIX: Rahmen entfernt */
+    border: none;
+    box-shadow: none;
+    transition: transform 0.3s ease;
+}
+
+/* Terminal-Styling (bleibt gleich) */
+.terminal {
+    flex: 0 0 400px; 
+    background-color: #1a1a1a; 
+    border: 1px solid #333; 
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
+    padding: 16px;
+    font-size: 14px;
+    max-width: 400px;
+    animation: none; 
+    
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px; 
+}
+
+.terminal-header {
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: white;
+}
+
+.terminal-body {
+    overflow-y: auto; 
+    flex-grow: 1; 
+}
+
+.terminal-log { 
+    color: white;
+    margin: 12px 0;
+    font-family: monospace;
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+
+/* Final Screen (bleibt gleich) */
+.final {
+    text-align: center;
+    padding: 48px 16px;
+    animation: fadeIn 2s ease;
+    width: 100%; 
+}
+
+.final img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+    border: 2px solid red;
+    box-shadow: 0 0 20px red;
+}
+
+.final-statement {
+    font-size: 18px;
+    margin-top: 16px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Glitch-Klassen (bleiben gleich) */
+.glitch-transition {
+    position: relative;
+    animation: fade-glitch 0.6s ease-out forwards;
+    overflow: hidden; 
+}
+
+@keyframes fade-glitch {
+    0% { opacity: 1; transform: translateY(0); }
+    20% { opacity: 0.9; transform: translateY(5px); }
+    40% { opacity: 0.7; transform: translateY(-5px); }
+    60% { opacity: 0.5; transform: translateY(3px); }
+    80% { opacity: 0.2; transform: translateY(-3px); }
+    100% { opacity: 0; transform: translateY(0); }
+}
+
+@keyframes glitch-shake {
+    0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+    25% { text-shadow: 4px 0 red, -4px 0 cyan; }
+    50% { text-shadow: -2px 0 red, 2px 0 cyan; }
+    75% { text-shadow: 0 4px red, 0 -4px cyan; }
+    100% { text-shadow: 0 0 transparent; }
+}
+
+.glitch-transition .statement,
+.glitch-transition button {
+    animation: glitch-shake 0.2s infinite steps(2),
+               glitch-out-effect 0.6s ease-out forwards; 
+}
+
+@keyframes glitch-out-effect {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    100% {
+        transform: scale(0.98);
+        filter: brightness(1.5); 
+        opacity: 0;
+    }
+}
+
+.glitch-transition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        transparent 0%,
+        rgba(255, 0, 0, 0.1) 3px,
+        rgba(0, 255, 255, 0.1) 5px
+    );
+    z-index: 100;
     opacity: 0;
-    transform: scale(2) rotate(720deg);
-    filter: blur(8px);
-  }
+    animation: scan-flicker 0.4s 0.1s steps(1) forwards; 
 }
 
-.explode {
-  animation: explode 0.6s ease forwards;
+@keyframes scan-flicker {
+    0% { opacity: 0; }
+    25% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+    75% { opacity: 0.9; }
+    100% { opacity: 0; }
 }
 
+.fade-out-fast {
+    animation: fadeOut 0.6s ease-out forwards;
+}
 
+@keyframes fadeOut {
+    to { opacity: 0; }
+}
 
+/* Responsive (bleibt gleich) */
+@media (max-width: 768px) {
+    #mainWrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+    }
+    
+    .glitch-elements-wrapper {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
 
+    .scene-text,
+    .scene-image {
+        max-width: 100%;
+        flex-basis: auto;
+    }
+    
+    .terminal {
+        max-width: 100%;
+        flex: 1 1 100%; 
+        width: 100%;
+        order: 2; 
+        margin-top: 0; 
+    }
 
-
-
+    #gameContainer {
+        width: 100%;
+        order: 1;
+        min-width: auto;
+    }
+    
+    #progressContainer {
+        padding: 16px;
+    }
+}
