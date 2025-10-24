@@ -7,29 +7,34 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="startScreen" class="centered-screen">
-    <div class="start-content">
-    <img class="start-image" src="start.jpg" alt="Startbild" />      <div class="start-box">
-        <h1>Willkommen bei<br><span class="brand">BRANDMAUER.EXE</span></h1>
-        <p>
-          Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br />
-          Erkenne Narrativ → kontere → zerlege die Szene.
-        </p>
-        <button id="startBtn">Start</button>
-      </div>
+
+  <!-- STARTSCREEN -->
+  <div id="startScreen" class="start-overlay">
+    <div class="start-box">
+      <h1>Willkommen bei<br><span class="brand">BRANDMAUER.EXE</span></h1>
+      <p>Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br />
+        Erkenne Narrativ → kontere → zerlege die Szene.
+      </p>
+      <button id="startBtn">Spiel starten</button>
     </div>
   </div>
 
-  <!-- Spielcontainer, wird später sichtbar -->
-  <div id="gameContainer" style="display: none;">
-    <!-- Weitere Elemente wie Szenenbilder, Texte, Buttons, etc. -->
+  <!-- PROGRESSBAR -->
+  <div id="progressWrapper" class="progress-bar" style="display: none;">
+    🧠 CDU-Kernschmelze in Echtzeit
+    <div class="bar"><div class="fill" id="progressFill"></div></div>
   </div>
 
+  <!-- GAME -->
+  <div id="gameContainer" style="display: none;"></div>
+
+  <!-- LOGIK -->
   <script>
     document.getElementById("startBtn").addEventListener("click", function () {
       document.getElementById("startScreen").style.display = "none";
       document.getElementById("gameContainer").style.display = "block";
-      startGame(); // Funktion in script.js
+      document.getElementById("progressWrapper").style.display = "block";
+      startGame(); // aus game.js
     });
   </script>
   <script src="game.js"></script>

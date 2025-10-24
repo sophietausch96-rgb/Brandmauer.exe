@@ -79,11 +79,8 @@ function startGame() {
 
 function showScene(index) {
   const scene = scenes[index];
+
   document.getElementById("gameContainer").innerHTML = `
-    <div class="progress-bar">
-      🧠 CDU-Kernschmelze in Echtzeit
-      <div class="bar"><div class="fill" style="width: ${(index + 1) / scenes.length * 100}%;"></div></div>
-    </div>
     <div class="scene-wrapper">
       <div class="scene-text">
         <p class="statement">${scene.statement}</p>
@@ -92,9 +89,10 @@ function showScene(index) {
         <p class="explanation-title">Erklärung:</p>
         <p class="explanation">${scene.explanation}</p>
       </div>
-      <div class="scene-image">
-        <img src="szene-${index + 1}.jpg" alt="Szene ${index + 1}">
-      </div>
+ <div class="scene-image" id="sceneImage" data-img="${scene.image}">
+  <!-- Fragmente werden später per JS erzeugt -->
+</div>
+
       <div class="terminal">
         <div class="terminal-header">Terminal – Firewall.log</div>
         <div class="terminal-body">
@@ -104,6 +102,11 @@ function showScene(index) {
       </div>
     </div>
   `;
+
+  // Animate progress
+  const fillBar = document.getElementById("progressFill");
+  const progress = ((index + 1) / scenes.length) * 100;
+  fillBar.style.width = `${progress}%`;
 }
 
 function nextScene() {
@@ -118,7 +121,7 @@ function nextScene() {
 function showFinalScreen() {
   document.getElementById("gameContainer").innerHTML = `
     <div class="final">
-      <img src="start.jpg" alt="Finish">
+      <img src="finish.jpg" alt="Finish">
       <h2>Firewall durchbrochen.</h2>
       <p class="final-statement">
         CDU-Politik ist kein Naturgesetz, sondern eine politische Entscheidung. Wer schweigt, stimmt zu. Wer widerspricht, hackt das System.
