@@ -130,10 +130,10 @@ button:hover {
 .progress-bar {
     width: 100%;
     /* Max-Breite auf die ungefähre Breite von GameContainer+Terminal+Gap setzen */
-    max-width: 924px; 
+    max-width: 1280px; /* Hier auf 100% des Wrappers setzen */
     
     /* Wichtig: Führt linkes Padding hinzu (linke Ausrichtung) */
-    margin: 8px 0 8px 16px; 
+    margin: 8px auto 8px 16px; 
     
     text-align: left; 
     font-size: 14px;
@@ -166,14 +166,14 @@ button:hover {
 }
 
 
-/* Layout für GameContainer und Terminal - ANPASSUNG DES GAP */
+/* Layout für GameContainer und Terminal - ANPASSUNG DES GAP AUF 32PX */
 #mainWrapper {
     display: flex;
     justify-content: space-between;
     padding: 0 16px 16px 16px; 
     max-width: 1280px;
     margin: 0 auto;
-    gap: 16px; /* Kleinerer Abstand für kompakteres Design */
+    gap: 32px; /* Erhöhter Abstand zwischen den drei Spalten */
     flex-wrap: wrap;
     align-items: flex-start; 
     min-height: auto; 
@@ -191,7 +191,7 @@ button:hover {
     justify-content: space-between;
     align-items: flex-start;
     padding: 32px 0; 
-    gap: 24px;
+    gap: 32px; /* Einheitlicher Abstand auch hier */
     flex-wrap: wrap;
     animation: slideIn 0.7s ease-out;
 }
@@ -201,14 +201,14 @@ button:hover {
     flex-grow: 1; 
     justify-content: space-between;
     align-items: flex-start;
-    gap: 24px;
+    gap: 32px; /* Einheitlicher Abstand auch hier */
     flex-wrap: wrap;
 }
 
-/* 1. SPALTE: Statement/Erklärung schmaler machen */
+/* 1. SPALTE: Statement/Erklärung schmal halten */
 .scene-text {
-    flex: 1 1 250px; /* Flex-Basis reduziert */
-    max-width: 300px; /* Max. Breite reduziert */
+    flex: 0 0 300px; /* Feste Breite 300px */
+    max-width: 300px; 
     position: relative;
     padding-bottom: 70px; 
 }
@@ -255,15 +255,15 @@ button:hover {
     z-index: 2;
 }
 
-/* 2. SPALTE: TV-Gehäuse vergrößern und dominant machen */
+/* 2. SPALTE: TV-Gehäuse vergrößern und dominant machen (550px) */
 .scene-image {
-    flex: 1 1 450px; /* Max. Breite erhöht */
+    flex: 0 0 550px; /* Feste Breite 550px */
     text-align: center;
     position: relative; 
     overflow: hidden; 
     
-    max-width: 450px; /* Max. Breite erhöht */
-    height: 338px; /* 4/3 Aspect Ratio von 450px */
+    max-width: 550px; 
+    height: 413px; /* 4/3 Aspect Ratio von 550px */
     
     aspect-ratio: 4/3; 
     align-self: flex-start;
@@ -297,7 +297,7 @@ button:hover {
     width: 100%;
     height: 100%;
     background-image: url('frame.png'); 
-    background-size: 100% 100%; /* Zwingt den Rahmen, die Ecken des Containers zu treffen */
+    background-size: 100% 100%; 
     background-position: center;
     background-repeat: no-repeat;
     z-index: 2; /* Liegt über dem Bild */
@@ -305,15 +305,15 @@ button:hover {
 }
 
 
-/* 3. SPALTE: Terminal schmaler machen */
+/* 3. SPALTE: Terminal schmal halten */
 .terminal {
-    flex: 0 0 300px; /* Breite reduziert */
+    flex: 0 0 300px; /* Feste Breite 300px */
     background-color: #1a1a1a; 
     border: 1px solid #333; 
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
     padding: 16px;
     font-size: 14px;
-    max-width: 300px; /* Max. Breite reduziert */
+    max-width: 300px; 
     display: flex;
     flex-direction: column;
     margin-top: 32px; 
@@ -363,6 +363,7 @@ button:hover {
         flex-direction: column;
         align-items: center;
         padding: 16px;
+        gap: 16px; /* Reduzierter Gap für Mobile */
     }
     
     /* Progress Bar wird auf Mobile wieder 100% breit und zentriert */
@@ -387,5 +388,10 @@ button:hover {
     
     .scene-image, .scene-text {
         max-width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .scene-image {
+        height: auto; /* Auf Mobile Höhe automatisch */
     }
 }
