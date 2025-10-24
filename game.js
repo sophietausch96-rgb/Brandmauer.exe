@@ -106,7 +106,7 @@ function showScene() {
   choices.innerHTML = "";
   const btn = document.createElement("button");
   btn.className = "choiceBtn";
-  btn.textContent = scene.answer;
+  btn.textContent = "Zerstöre das System: " + scene.answer;
   btn.onclick = () => nextScene();
   choices.appendChild(btn);
 
@@ -122,61 +122,5 @@ function nextScene() {
     gameScreen.classList.add("hidden");
     finishScreen.classList.remove("hidden");
     finishText.textContent = "Brandmauer.exe infiltriert. Konservative Narrative gebrochen. Zeit für Utopien.";
-  }
-}
-
-
-let current = 0;
-let score = 0;
-
-const startBtn = document.getElementById("startBtn");
-const restartBtn = document.getElementById("restartBtn");
-const startScreen = document.getElementById("startScreen");
-const gameScreen = document.getElementById("gameScreen");
-const finishScreen = document.getElementById("finishScreen");
-const sceneImage = document.getElementById("sceneImage");
-const situation = document.getElementById("situation");
-const choices = document.getElementById("choices");
-const explanationTitle = document.getElementById("explanationTitle");
-const explanationText = document.getElementById("explanationText");
-const terminalOutput = document.getElementById("terminalOutput");
-const barRightFill = document.getElementById("barRightFill");
-const finishText = document.getElementById("finishText");
-
-startBtn.onclick = () => {
-  startScreen.classList.add("hidden");
-  gameScreen.classList.remove("hidden");
-  showScene();
-};
-
-restartBtn.onclick = () => location.reload();
-
-function showScene() {
-  const scene = scenes[current];
-  sceneImage.src = scene.image;
-  situation.textContent = scene.text;
-  explanationTitle.textContent = "Analyse";
-  explanationText.textContent = scene.explanation;
-  terminalOutput.textContent += "> " + scene.terminalLog + "\n";
-
-  choices.innerHTML = "";
-  const btn = document.createElement("button");
-  btn.className = "choiceBtn";
-  btn.textContent = scene.answer;
-  btn.onclick = () => nextScene();
-  choices.appendChild(btn);
-
-  const percent = Math.round(((current + 1) / scenes.length) * 100);
-  barRightFill.style.width = percent + "%";
-}
-
-function nextScene() {
-  current++;
-  if (current < scenes.length) {
-    showScene();
-  } else {
-    gameScreen.classList.add("hidden");
-    finishScreen.classList.remove("hidden");
-    finishText.textContent = "Brandmauer.exe erfolgreich infiltriert. Die CDU schmilzt.";
   }
 }
