@@ -72,7 +72,7 @@ const scenes = [
 ];
 
 let currentScene = 0;
-let terminalLogHistory = ""; 
+let terminalLogHistory = ""; // Speichert den gesamten Log-Text (ohne HTML-Tags)
 
 
 // Typewriter Effekt Funktion
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("startScreen").style.display = "none";
             document.getElementById("mainWrapper").style.display = "flex"; 
             
-            // NEU: Titel anzeigen
+            // Titel anzeigen
             document.getElementById("permanentTitle").style.display = "block";
 
             startGame(); 
@@ -265,7 +265,7 @@ function showFinalScreen() {
         progressWrapper.style.display = 'none';
     }
 
-    // NEU: Titel ausblenden
+    // Titel ausblenden
     document.getElementById("permanentTitle").style.display = "none";
 
 
@@ -292,7 +292,9 @@ function showFinalScreen() {
     if (restartBtn) {
         restartBtn.addEventListener("click", () => {
             terminalLogHistory = ""; 
-            location.reload(true); 
+            // FIX: Verwendung von window.location.href, um das Neuladen zu erzwingen
+            // oder einfacher: Zuweisen der aktuellen URL neu
+            window.location.href = window.location.href; 
         });
     }
 }

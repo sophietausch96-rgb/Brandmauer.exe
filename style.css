@@ -15,7 +15,7 @@ body {
     border-bottom: 2px solid red;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
     width: 100%;
-    position: sticky; /* Hält den Titel beim Scrollen oben */
+    position: sticky; 
     top: 0;
     background-color: black;
     z-index: 1000;
@@ -26,7 +26,7 @@ body {
     color: red;
 }
 
-/* Button Styling (bleibt gleich) */
+/* Button Styling */
 button {
     font-family: monospace;
     background-color: red;
@@ -46,9 +46,13 @@ button {
     text-align: center; 
     font-size: 16px; 
     padding: 15px 20px; 
-    margin-top: 32px; 
     margin-bottom: 0; 
     animation: none; 
+    
+    /* ANPASSUNG: Button fest unten positionieren */
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 button:hover {
@@ -73,14 +77,15 @@ button:active {
     }
 }
 
-/* Startscreen Layout (bleibt gleich) */
+/* Startscreen Layout */
 .start-overlay {
     position: relative;
     width: 100%;
     height: 100vh;
     background-image: url('start.jpg');
     background-size: cover;
-    background-position: center;
+    /* ANPASSUNG: Focal Point an die Spitze des Bildes */
+    background-position: top center; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,7 +122,7 @@ button:active {
     to { opacity: 1; }
 }
 
-/* Progress Bar Container */
+/* Progress Bar Container (bleibt gleich) */
 #progressContainer {
     padding: 16px;
     max-width: 1280px;
@@ -125,7 +130,7 @@ button:active {
     min-height: auto; 
 }
 
-/* Progress Bar Styling (NEU: Satirisches Barometer) */
+/* Progress Bar Styling (bleibt gleich) */
 .progress-bar {
     width: 100%;
     max-width: 640px;
@@ -139,7 +144,6 @@ button:active {
 .bar-text {
     font-weight: bold;
     margin-bottom: 8px;
-    /* FIX: Satirische Aussage */
     color: red; 
     text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
 }
@@ -150,16 +154,13 @@ button:active {
     border: 2px solid red;
     background-color: #111;
     margin-top: 8px;
-    /* Rahmen und Hintergrund des leeren Balkens */
 }
 
 .fill {
     height: 100%;
-    /* FIX: Farbe wechselt von Grün (anfangs) zu Rot (am Ende) */
     background: linear-gradient(to right, limegreen 0%, orange 50%, red 100%);
     width: 0%;
     transition: width 1s ease-in-out;
-    /* FIX: Ein kleiner Schatten für den "Glow" */
     box-shadow: 0 0 8px red; 
     transform-origin: left;
 }
@@ -183,7 +184,7 @@ button:active {
     min-width: 500px;
 }
 
-/* Game Layout und Entrance Animation (bleibt gleich) */
+/* Game Layout und Entrance Animation */
 .scene-wrapper {
     display: flex;
     justify-content: space-between;
@@ -217,6 +218,9 @@ button:active {
 .scene-text {
     flex: 1 1 300px;
     max-width: 400px;
+    /* ANPASSUNG: Relative Positionierung für den absoluten Button */
+    position: relative;
+    padding-bottom: 70px; /* Platz für den Button am unteren Rand */
 }
 
 .scene-text .statement {
@@ -225,7 +229,7 @@ button:active {
     margin-bottom: 32px;
 }
 
-/* Styling für die Sprachblase (bleibt gleich) */
+/* Styling für die Sprachblase */
 .explanation-container {
     display: flex; 
     align-items: flex-start;
@@ -234,9 +238,10 @@ button:active {
     gap: 16px; 
 }
 
+/* ANPASSUNG: Icon-Größe */
 .explanation-icon {
-    width: 60px;
-    height: 60px;
+    width: 150px;
+    height: 150px;
     object-fit: contain;
     display: block;
     flex-shrink: 0;
@@ -288,7 +293,6 @@ button:active {
     max-width: 100%;
     height: auto;
     display: block;
-    /* FIX: Rahmen entfernt */
     border: none;
     box-shadow: none;
     transition: transform 0.3s ease;
@@ -353,7 +357,7 @@ button:active {
     margin-right: auto;
 }
 
-/* Glitch-Klassen (bleiben gleich) */
+/* Glitch-Klassen (bleibt gleich) */
 .glitch-transition {
     position: relative;
     animation: fade-glitch 0.6s ease-out forwards;
@@ -428,7 +432,7 @@ button:active {
     to { opacity: 0; }
 }
 
-/* Responsive (bleibt gleich) */
+/* Responsive (angepasst für den Button) */
 @media (max-width: 768px) {
     #mainWrapper {
         flex-direction: column;
@@ -448,6 +452,10 @@ button:active {
         flex-basis: auto;
     }
     
+    .scene-text {
+        padding-bottom: 70px; /* Platz für den festen Button unten */
+    }
+
     .terminal {
         max-width: 100%;
         flex: 1 1 100%; 
