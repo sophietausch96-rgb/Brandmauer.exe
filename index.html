@@ -10,7 +10,7 @@
 <body>
   <header id="titleBar">BRANDMAUER.EXE — Firewall Simulation</header>
 
-  <!-- Startscreen -->
+  <!-- Start -->
   <section id="startScreen" class="screen screen--start">
     <div class="overlay centered-box">
       <h2>Willkommen bei BRANDMAUER.EXE</h2>
@@ -24,16 +24,10 @@
 
   <!-- Game -->
   <section id="gameScreen" class="hidden">
-    <div id="sceneBg" aria-hidden="true">
-      <div class="bgLayer bgA"></div>
-      <div class="bgLayer bgB"></div>
-    </div>
-    <div id="vignette" aria-hidden="true"></div>
-    <div id="fxLayer" aria-hidden="true"></div>
-
     <div id="gameWrap">
-      <!-- Spielfeld: Szene -->
-      <div id="viewportBox">
+      
+      <!-- Linke Spalte -->
+      <div id="leftPanel">
         <div id="situation" class="situation"></div>
         <div id="choices" class="choices"></div>
         <div class="meter">
@@ -42,7 +36,12 @@
         </div>
       </div>
 
-      <!-- Terminal -->
+      <!-- Bildszene (mittig) -->
+      <div id="sceneBox">
+        <img id="sceneImage" src="" alt="Szene" />
+      </div>
+
+      <!-- Rechte Spalte: Terminal -->
       <aside class="terminal">
         <div class="term-titlebar">
           <span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span>
