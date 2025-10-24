@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameScreen = document.getElementById("gameScreen");
   const finishScreen = document.getElementById("finishScreen");
   const situationDiv = document.getElementById("situation");
-  const answerBtn = document.getElementById("answerBtn");
+  const choicesDiv = document.getElementById("choices");
   const terminalOut = document.getElementById("terminalOutput");
   const barRightFill = document.getElementById("barRightFill");
 
@@ -18,15 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let current = 0;
   let locked = false;
 
-  function log(text, type = "info") {
-    const div = document.createElement("div");
-    div.className = `log-${type}`;
-    div.textContent = "> " + text;
-    terminalOut.appendChild(div);
-    terminalOut.scrollTop = terminalOut.scrollHeight;
-  }
-
-  const situations = [...]; // <- Deine Szenen wie gehabt
+  const situations = [
+    {
+      text: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
+      bg: "szene-1.jpg",
+      answer: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
+      explain: "Gegenrede lädt Leitkultur als Ausschlussrahmen um und setzt Pluralität als Verfassungsprinzip. Risiko rechter Homogenitätsfantasien wird benannt."
+    },
+    {
+      text: "Parteitagsrede: 'Deutschland zuerst bei Sozialleistungen.'",
+      bg: "szene-5.jpg",
+      answer: "Widersprechen – Solidarität gilt bedarfsorientiert, nicht national.",
+      explain: "Sozialstaat als Menschenrecht, nicht Herkunftsprämie. 'Zuerst' frames Verteilungskampf nach rechts; Linke setzt Universalität entgegen."
+    }
+    // → weitere Szenen hier hinzufügen
+  ];
 
   preloadImages(situations.map(s => s.bg).concat(["start.jpg", "finish.jpg"]));
 
@@ -52,8 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (current >= situations.length) return endGame();
     const s = situations[current];
     situationDiv.textContent = s.text;
-    answerBtn.textContent = s.answer;
-    answerBtn.onclick = () => respond(s);
+    choicesDiv.innerHTML = "";
+    const btn = document.createElement("button");
+    btn.className = "choiceBtn";
+    btn.textContent = s.answer;
+    btn.onclick = () => respond(s);
+    choicesDiv.appendChild(btn);
     setSceneBg(s.bg);
     locked = false;
   }
@@ -64,9 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
     log(s.explain, "success");
     stats.right = Math.min(stats.right + 10, 100);
     updateBar();
-    shatterScene(s.bg);
-    current++;
     setTimeout(() => {
+      current++;
       if (current < situations.length) loadSituation();
       else endGame();
     }, 900);
@@ -79,10 +88,19 @@ document.addEventListener("DOMContentLoaded", () => {
   function endGame() {
     gameScreen.classList.add("hidden");
     finishScreen.classList.remove("hidden");
-    document.getElementById("finishText").textContent =
-      stats.right >= 80 ? "Brandmauer hält. Linke Werte verteidigt – Rechtsdrift eingedämmt." :
-      "System instabil – Gegenrede ausbaufähig.";
+    const text = stats.right >= 80
+      ? "Brandmauer hält. Linke Werte verteidigt – Rechtsdrift eingedämmt."
+      : "System instabil – Gegenrede ausbaufähig.";
+    document.getElementById("finishText").textContent = text;
     log("Analyse beendet. Protokoll gespeichert.");
+  }
+
+  function log(text, type = "info") {
+    const div = document.createElement("div");
+    div.className = `log-${type}`;
+    div.textContent = "> " + text;
+    terminalOut.appendChild(div);
+    terminalOut.scrollTop = terminalOut.scrollHeight;
   }
 
   function setSceneBg(url, instant = false) {
@@ -96,12 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
     bgToggle = !bgToggle;
   }
 
-  function shatterScene(bgUrl) {
-    fxLayer.innerHTML = "";
-    // [Optionale Implementierung oder leer lassen]
-  }
-
   function preloadImages(urls) {
-    urls.forEach(u => { const i = new Image(); i.src = u; });
+    urls.forEach(u => {
+      const i = new Image();
+      i.src = u;
+    });
   }
 });

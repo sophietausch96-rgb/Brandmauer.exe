@@ -1,4 +1,3 @@
-<!-- /index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -11,11 +10,14 @@
 <body>
   <header id="titleBar">BRANDMAUER.EXE — Firewall Simulation</header>
 
-  <!-- Start -->
+  <!-- Startscreen -->
   <section id="startScreen" class="screen screen--start">
     <div class="overlay centered-box">
       <h2>Willkommen bei BRANDMAUER.EXE</h2>
-      <p>Du bist der <b>Virus</b> in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br/>Erkenne Narrativ → kontere → zerlege die Szene.</p>
+      <p>
+        Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br/>
+        Erkenne Narrativ → kontere → zerlege die Szene.
+      </p>
       <button id="startBtn" class="button">Start</button>
     </div>
   </section>
@@ -30,10 +32,10 @@
     <div id="fxLayer" aria-hidden="true"></div>
 
     <div id="gameWrap">
-      <!-- Hauptbereich: Szene -->
+      <!-- Spielfeld -->
       <div id="viewportBox">
         <div id="situation" class="situation"></div>
-        <button id="answerBtn" class="choiceBtn"></button>
+        <div id="choices" class="choices"></div>
         <div id="barRightContainer">
           <div id="barRightFill"></div>
         </div>
