@@ -125,29 +125,45 @@ function nextScene() {
 }
 
 function explodeImage(container, callback) {
-  const imageUrl = container.getAttribute("data-img");
+  const img = container.querySelector("img");
+  const containerWidth = img.offsetWidth;
+  const containerHeight = img.offsetHeight;
+  const imageUrl = img.src;
+
+  // Leere Container danach
   container.innerHTML = "";
   container.style.position = "relative";
+  container.style.width = `${containerWidth}px`;
+  container.style.height = `${containerHeight}px`;
+
   const size = 10;
 
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       const piece = document.createElement("div");
       piece.className = "fragment";
+
+      const pieceWidth = containerWidth / size;
+      const pieceHeight = containerHeight / size;
+
+      piece.style.width = `${pieceWidth}px`;
+      piece.style.height = `${pieceHeight}px`;
       piece.style.backgroundImage = `url(${imageUrl})`;
-      piece.style.backgroundSize = `${size * 100}% ${size * 100}%`;
-      piece.style.backgroundPosition = `${-x * 100}% ${-y * 100}%`;
-      piece.style.left = `${(x / size) * 100}%`;
-      piece.style.top = `${(y / size) * 100}%`;
+      piece.style.backgroundSize = `${containerWidth}px ${containerHeight}px`;
+      piece.style.backgroundPosition = `-${x * pieceWidth}px -${y * pieceHeight}px`;
+      piece.style.left = `${x * pieceWidth}px`;
+      piece.style.top = `${y * pieceHeight}px`;
+
       container.appendChild(piece);
     }
   }
 
   const pieces = container.querySelectorAll(".fragment");
+
   setTimeout(() => {
     pieces.forEach(piece => {
       const angle = Math.random() * 2 * Math.PI;
-      const distance = 200 + Math.random() * 200;
+      const distance = 300 + Math.random() * 200;
       const rotate = Math.random() * 720 - 360;
 
       piece.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) rotate(${rotate}deg)`;
@@ -157,6 +173,7 @@ function explodeImage(container, callback) {
     setTimeout(callback, 1200);
   }, 50);
 }
+
 
 function showFinalScreen() {
   document.getElementById("progressWrapper").style.display = "none";

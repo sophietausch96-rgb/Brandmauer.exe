@@ -111,9 +111,11 @@ button {
   
 }
 
-.scene-image {
-  flex: 1 1 400px;
-  text-align: center;
+.scene-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+
 }
 
 .scene-image img {
