@@ -1,183 +1,182 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const startBtn = document.getElementById("startBtn");
-  const restartBtn = document.getElementById("restartBtn");
-  const startScreen = document.getElementById("startScreen");
-  const gameScreen = document.getElementById("gameScreen");
-  const finishScreen = document.getElementById("finishScreen");
-  const situationDiv = document.getElementById("situation");
-  const choicesDiv = document.getElementById("choices");
-  const terminalOut = document.getElementById("terminalOutput");
-  const barRightFill = document.getElementById("barRightFill");
-  const sceneImage = document.getElementById("sceneImage");
-
-  let stats = { right: 0 };
-  let current = 0;
-  let locked = false;
-
-  // === Szenenliste ===
-  const situations = [
-    {
-      text: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
-      bg: "szene-1.jpg",
-      answer: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
-      explain: "Gegenrede lädt Leitkultur als Ausschlussrahmen um und setzt Pluralität als Verfassungsprinzip. Risiko rechter Homogenitätsfantasien wird benannt."
-    },
-    {
-      text: "Innenpolitik: 'Schnellere Abschiebungen sind notwendig für Ordnung und Sicherheit.'",
-      bg: "szene-2.jpg",
-      answer: "Widersprechen – Menschenwürde vor Abschrecklogik.",
-      explain: "Ordnungspolitik ohne Rechtsgarantien kippt autoritär. Linke Argumentation priorisiert Grundrechte, faire Verfahren und Integration vor Repression."
-    },
-    {
-      text: "CDU will Obergrenzen bei Asylverfahren und restriktivere Familiennachzüge.",
-      bg: "szene-3.jpg",
-      answer: "Widersprechen – Schutzrechte sind nicht gedeckelt.",
-      explain: "Obergrenzen widersprechen Asylrecht. Gegenrede betont individuelle Prüfung, Familiennachzug als Integrationsmotor, statt Sanktionslogik."
-    },
-    {
-      text: "CDU schlägt Polizei-Befugnisse für präventive Überwachung vor.",
-      bg: "szene-4.jpg",
-      answer: "Widersprechen – Freiheit braucht starke Grundrechte.",
-      explain: "Prävention ohne Anlass verschiebt die Norm in Richtung Generalverdacht. Linke Position: Richtervorbehalt, enge Zwecke, Transparenz."
-    },
-    {
-      text: "Parteitagsrede: 'Deutschland zuerst bei Sozialleistungen.'",
-      bg: "szene-5.jpg",
-      answer: "Widersprechen – Solidarität gilt bedarfsorientiert, nicht national.",
-      explain: "Sozialstaat als Menschenrecht, nicht Herkunftsprämie. 'Zuerst' frames Verteilungskampf nach rechts; Linke setzt Universalität entgegen."
-    },
-    {
-      text: "CDU fordert härtere Strafen für 'Klima-Kleber' und Demonstrationsauflagen.",
-      bg: "szene-6.jpg",
-      answer: "Widersprechen – Versammlungsfreiheit statt Kriminalisierung.",
-      explain: "Krasse Strafverschärfungen sind chilling effects gegen Protest. Linke Argumentation: Verhältnismäßigkeit, Deeskalation, Schutz der Grundrechte."
-    },
-    {
-      text: "Programm: 'Deutschpflicht auf Schulhöfen' zur Integration.",
-      bg: "szene-7.jpg",
-      answer: "Widersprechen – Mehrsprachigkeit stärken statt überwachen.",
-      explain: "Zwang erzeugt Ausgrenzung. Linke Gegenrede: Ressourcen für Sprachförderung, Anerkennung der Lebensrealitäten statt Sprachpolicing."
-    },
-    {
-      text: "Forderung nach Grenzkontrollen im Inland per 'Schleierfahndung'.",
-      bg: "szene-8.jpg",
-      answer: "Widersprechen – Bewegungsfreiheit und Anti-Profiling.",
-      explain: "Verdachtsarme Kontrolle normalisiert Ausnahmezustände. Linke Position: klare Grenzen gegen Racial Profiling, evidenzbasierte Sicherheit."
-    },
-    {
-      text: "CDU will Gendern in Behörden untersagen.",
-      bg: "szene-9.jpg",
-      answer: "Widersprechen – Sprache frei halten, Sichtbarkeit sichern.",
-      explain: "Verbote sind Kulturkampf von oben. Linke Gegenrede: Leitfäden statt Verbote, Respekt für diverse Lebensrealitäten."
-    },
-    {
-      text: "Slogan: 'Illegale Migration stoppen – Grenzen dicht.'",
-      bg: "szene-10.jpg",
-      answer: "Widersprechen – Fluchtursachen bekämpfen, legale Wege schaffen.",
-      explain: "Entmenschlichende Sprache wird benannt. Linke Linie: Rechtsstaat, Resettlement, Kommunen stärken statt Abschottung."
-    }
-  ];
-
-  preloadImages(situations.map(s => s.bg).concat(["start.jpg", "finish.jpg"]));
-
-  // === Start-Button ===
-  startBtn.addEventListener("click", () => {
-    startScreen.classList.add("hidden");
-    gameScreen.classList.remove("hidden");
-    terminalOut.innerHTML = "";
-    current = 0;
-    locked = false;
-    stats.right = 0;
-    updateBar();
-    log("Systemstart... Firewall aktiviert.");
-    setSceneBg(situations[0].bg);
-    loadSituation();
-  });
-
-  // === Neustart-Button ===
-  restartBtn.addEventListener("click", () => {
-    finishScreen.classList.add("hidden");
-    startScreen.classList.remove("hidden");
-  });
-
-  // === Szene anzeigen ===
-  function loadSituation() {
-    if (current >= situations.length) return endGame();
-
-    const s = situations[current];
-    situationDiv.textContent = s.text;
-    choicesDiv.innerHTML = "";
-
-    const btn = document.createElement("button");
-    btn.className = "choiceBtn";
-    btn.textContent = s.answer;
-    btn.onclick = () => respond(s);
-    choicesDiv.appendChild(btn);
-
-    setSceneBg(s.bg);
-    locked = false;
+const scenes = [
+  {
+    image: "scene1.jpg",
+    text: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
+    answer: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
+    explanation: "Die CDU romantisiert eine einheitliche Kultur, die es nie gab. Vielfalt ist keine Bedrohung, sondern Realität.",
+    terminalLog: "Gegenrede dekonstruiert Kulturbegriff, betont Pluralität und kritisiert Ausgrenzung durch Normsetzung."
+  },
+  {
+    image: "scene2.jpg",
+    text: "Innenpolitik: 'Schnellere Abschiebungen sind notwendig für Ordnung und Sicherheit.'",
+    answer: "Widersprechen – Menschenwürde vor Abschrecklogik.",
+    explanation: "Wer Menschenrechte für 'Ordnung' opfert, opfert am Ende beides. Die CDU kriminalisiert Schutzsuchende.",
+    terminalLog: "Firewall erkennt autoritäre Abschiebefantasien. Humanismus aktiviert."
+  },
+  {
+    image: "scene3.jpg",
+    text: "Verbot von Gender-Sprache in Landesbehörden gefordert.",
+    answer: "Widersprechen – Sprache verändert sich, Unterdrückung nicht.",
+    explanation: "Die CDU kämpft gegen Sternchen statt gegen soziale Ungleichheit. Ein Kampf gegen Sichtbarkeit.",
+    terminalLog: "Reaktionäre Sprachpolitik blockiert. Firewall setzt Sprachfreiheit durch."
+  },
+  {
+    image: "scene4.jpg",
+    text: "'Migration ist die Mutter aller Probleme' – Aussage bleibt unwidersprochen.",
+    answer: "Widersprechen – Ursache liegt im System, nicht bei Menschen.",
+    explanation: "Rassismus wird zur Staatsräson, wenn man ihn nicht widerspricht. CDU bleibt auf Tauchstation.",
+    terminalLog: "Virus erkennt rechte Dogwhistles. Narrative-Scanner aktiv."
+  },
+  {
+    image: "scene5.jpg",
+    text: "CDU lehnt Klimakleber als 'kriminelle Vereinigung' ab – schweigt aber zu Lützerath-Räumung.",
+    answer: "Widersprechen – Ziviler Ungehorsam ist kein Extremismus.",
+    explanation: "Für die CDU ist Protest gefährlicher als Klimakollaps. Ordnung über Überleben.",
+    terminalLog: "Firewall meldet: selektive Empörung detektiert. Kontext geladen."
+  },
+  {
+    image: "scene6.jpg",
+    text: "Konzepte zur 'wehrhaften Demokratie' zielen auf linke Gruppen.",
+    answer: "Widersprechen – Wehret den Anfängen, nicht dem Antifaschismus.",
+    explanation: "Wer Antifaschismus kriminalisiert, schützt den Faschismus. CDU betreibt Täter-Opfer-Umkehr.",
+    terminalLog: "Schutzwall gegen Faschismus reaktiviert. Antifa.exe ausgeführt."
+  },
+  {
+    image: "scene7.jpg",
+    text: "Religiöse Symbole sollen aus Klassenzimmern verschwinden – christliche Kreuze bleiben unberührt.",
+    answer: "Widersprechen – Neutralität ist kein Einbahnstraßen-Gebot.",
+    explanation: "Kulturelle Hegemonie als 'Tradition' getarnt. CDU liebt Neutralität, solange sie christlich bleibt.",
+    terminalLog: "Firewall erkennt doppelte Standards. Kreuzzug-Modus deaktiviert."
+  },
+  {
+    image: "scene8.jpg",
+    text: "'Wir sind nicht das Sozialamt der Welt' – CDU-Politiker zur Geflüchtetenhilfe.",
+    answer: "Widersprechen – Solidarität endet nicht an Grenzen.",
+    explanation: "Menschenrechte sind kein Sparmodell. CDU verwechselt Staatshaushalt mit Mitmenschlichkeit.",
+    terminalLog: "Firewall setzt Budgetlogik außer Kraft. Humanität.exe gestartet."
+  },
+  {
+    image: "scene9.jpg",
+    text: "CDU sieht 'Frühsexualisierung' durch queere Bildungsinhalte.",
+    answer: "Widersprechen – Aufklärung ist Schutz, nicht Gefahr.",
+    explanation: "Die CDU schürt Panik statt Wissen. Queerfeindlichkeit im Bildungsschafspelz.",
+    terminalLog: "Desinformationsbombe neutralisiert. Faktenfilter aktiv."
+  },
+  {
+    image: "scene10.jpg",
+    text: "CDU will 'Remigration' nicht definieren – lehnt aber den Begriff nicht klar ab.",
+    answer: "Widersprechen – Wer schweigt, stimmt zu.",
+    explanation: "CDU tanzt mit der AfD, solange niemand hinsieht. Brandmauer? Eher Schwingtür.",
+    terminalLog: "Firewall erkennt gefährliche Nähe zur extremen Rechten. Systemwarnung ausgelöst."
   }
+];
 
-  // === Antwortverarbeitung ===
-  function respond(s) {
-    if (locked) return;
-    locked = true;
+let current = 0;
 
-    log(s.explain, "success");
-    stats.right = Math.min(stats.right + 10, 100); // +10 pro Antwort
-    updateBar();
+const startBtn = document.getElementById("startBtn");
+const restartBtn = document.getElementById("restartBtn");
+const startScreen = document.getElementById("startScreen");
+const gameScreen = document.getElementById("gameScreen");
+const finishScreen = document.getElementById("finishScreen");
+const sceneImage = document.getElementById("sceneImage");
+const situation = document.getElementById("situation");
+const choices = document.getElementById("choices");
+const explanationTitle = document.getElementById("explanationTitle");
+const explanationText = document.getElementById("explanationText");
+const terminalOutput = document.getElementById("terminalOutput");
+const barRightFill = document.getElementById("barRightFill");
+const finishText = document.getElementById("finishText");
 
-    setTimeout(() => {
-      current++;
-      if (current < situations.length) loadSituation();
-      else endGame();
-    }, 1000);
-  }
+startBtn.onclick = () => {
+  startScreen.classList.add("hidden");
+  gameScreen.classList.remove("hidden");
+  showScene();
+};
 
-  // === Fortschrittsbalken aktualisieren ===
-  function updateBar() {
-    barRightFill.style.width = `${stats.right}%`;
-  }
+restartBtn.onclick = () => location.reload();
 
-  // === Spielende ===
-  function endGame() {
+function showScene() {
+  const scene = scenes[current];
+  sceneImage.src = scene.image;
+  situation.textContent = scene.text;
+  explanationTitle.textContent = "Analyse";
+  explanationText.textContent = scene.explanation;
+  terminalOutput.textContent += "> " + scene.terminalLog + "\n";
+
+  choices.innerHTML = "";
+  const btn = document.createElement("button");
+  btn.className = "choiceBtn";
+  btn.textContent = scene.answer;
+  btn.onclick = () => nextScene();
+  choices.appendChild(btn);
+
+  const percent = Math.round(((current + 1) / scenes.length) * 100);
+  barRightFill.style.width = percent + "%";
+}
+
+function nextScene() {
+  current++;
+  if (current < scenes.length) {
+    showScene();
+  } else {
     gameScreen.classList.add("hidden");
     finishScreen.classList.remove("hidden");
-
-    const text = `Zwischen Leitkultur und Grenzzaun: Eure Firewall bröckelt.\nDoch wir debuggen weiter – pixel für pixel.`;
-    document.getElementById("finishText").textContent = text;
-
-    log("Analyse beendet. Protokoll gespeichert.");
+    finishText.textContent = "Brandmauer.exe infiltriert. Konservative Narrative gebrochen. Zeit für Utopien.";
   }
+}
 
-  // === Terminal-Ausgabe ===
-  function log(text, type = "info") {
-    const div = document.createElement("div");
-    div.className = `log-${type}`;
-    div.textContent = "> " + text;
-    terminalOut.appendChild(div);
-    terminalOut.scrollTop = terminalOut.scrollHeight;
+
+let current = 0;
+let score = 0;
+
+const startBtn = document.getElementById("startBtn");
+const restartBtn = document.getElementById("restartBtn");
+const startScreen = document.getElementById("startScreen");
+const gameScreen = document.getElementById("gameScreen");
+const finishScreen = document.getElementById("finishScreen");
+const sceneImage = document.getElementById("sceneImage");
+const situation = document.getElementById("situation");
+const choices = document.getElementById("choices");
+const explanationTitle = document.getElementById("explanationTitle");
+const explanationText = document.getElementById("explanationText");
+const terminalOutput = document.getElementById("terminalOutput");
+const barRightFill = document.getElementById("barRightFill");
+const finishText = document.getElementById("finishText");
+
+startBtn.onclick = () => {
+  startScreen.classList.add("hidden");
+  gameScreen.classList.remove("hidden");
+  showScene();
+};
+
+restartBtn.onclick = () => location.reload();
+
+function showScene() {
+  const scene = scenes[current];
+  sceneImage.src = scene.image;
+  situation.textContent = scene.text;
+  explanationTitle.textContent = "Analyse";
+  explanationText.textContent = scene.explanation;
+  terminalOutput.textContent += "> " + scene.terminalLog + "\n";
+
+  choices.innerHTML = "";
+  const btn = document.createElement("button");
+  btn.className = "choiceBtn";
+  btn.textContent = scene.answer;
+  btn.onclick = () => nextScene();
+  choices.appendChild(btn);
+
+  const percent = Math.round(((current + 1) / scenes.length) * 100);
+  barRightFill.style.width = percent + "%";
+}
+
+function nextScene() {
+  current++;
+  if (current < scenes.length) {
+    showScene();
+  } else {
+    gameScreen.classList.add("hidden");
+    finishScreen.classList.remove("hidden");
+    finishText.textContent = "Brandmauer.exe erfolgreich infiltriert. Die CDU schmilzt.";
   }
-
-  // === Szene-Bild setzen ===
-  function setSceneBg(url) {
-    sceneImage.src = url;
-  }
-
-  // === Bilder vorladen ===
-  function preloadImages(urls) {
-    urls.forEach(u => {
-      const img = new Image();
-      img.src = u;
-    });
-  }
-
-  // === Tastatursteuerung (Enter/Space) ===
-  document.addEventListener("keydown", (e) => {
-    if (gameScreen.classList.contains("hidden")) return;
-    if (e.key === "Enter" || e.key === " ") {
-      const btn = choicesDiv.querySelector("button");
-      if (btn) btn.click();
-    }
-  });
-});
+}

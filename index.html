@@ -1,47 +1,43 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>BRANDMAUER.EXE</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Kopfzeile -->
   <header>
     <h1>BRANDMAUER.EXE – Firewall Simulation</h1>
   </header>
 
-  <!-- Startscreen -->
   <section id="startScreen">
     <div class="centeredBox">
+      <img id="startImage" src="start.jpg" alt="Startbild" />
       <h2>Willkommen bei<br>BRANDMAUER.EXE</h2>
       <p>Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br>
-        Erkenne Narrativ → kontere → zerlege die Szene.</p>
+      Erkenne Narrativ → kontere → zerlege die Szene.</p>
       <button id="startBtn">Start</button>
     </div>
   </section>
 
-  <!-- Spielscreen -->
   <section id="gameScreen" class="hidden">
     <div id="gameWrap">
-      <!-- Links: Frage + Antwort + Balken -->
       <div id="leftPanel">
         <div id="situation" class="situation"></div>
+        <div id="explanationTitle" class="explanation-title"></div>
+        <div id="explanationText" class="explanation-text"></div>
+        <h3 class="answerTitle">Zerstöre das System:</h3>
         <div id="choices" class="choices"></div>
-        <div class="meter">
-          <span class="meter-label">🧠 CDU-Kernschmelze in Echtzeit</span>
+      </div>
+      <div id="sceneBox">
+        <div class="meter-wide">
+          <span class="meter-label-wide">🧠 CDU-Kernschmelze in Echtzeit</span>
           <div class="bar">
             <div id="barRightFill" class="fill"></div>
           </div>
         </div>
-      </div>
-
-      <!-- Mitte: Szenenbild -->
-      <div id="sceneBox">
         <img id="sceneImage" src="start.jpg" alt="Szene" />
       </div>
-
-      <!-- Rechts: Terminal -->
       <aside class="terminal">
         <div class="terminal-title">Terminal – Firewall.log</div>
         <div id="terminalOutput"></div>
@@ -49,11 +45,10 @@
     </div>
   </section>
 
-  <!-- Spielende -->
   <section id="finishScreen" class="hidden">
     <div class="centeredBox">
       <h2>Simulation abgeschlossen</h2>
-      <p id="finishText"></p>
+      <p id="finishText">Brandmauer erfolgreich unterwandert. Die CDU braucht ein Update.</p>
       <button id="restartBtn">Neu starten</button>
     </div>
   </section>

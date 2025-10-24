@@ -56,6 +56,12 @@ button:hover {
   line-height: 1.6;
 }
 
+#startImage {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
 #gameWrap {
   display: flex;
   justify-content: space-between;
@@ -76,30 +82,32 @@ button:hover {
 #sceneBox {
   flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 }
 
 #sceneImage {
-  max-height: 90vh;
+  max-height: 80vh;
   max-width: 100%;
   object-fit: contain;
 }
 
 .terminal {
   width: 30%;
-  background: rgba(0,0,0,0.85);
+  background: #1e1e1e;
   padding: 1rem;
   height: 90vh;
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--red);
-  box-shadow: 0 0 15px var(--red);
-  overflow: hidden;
+  border: 1px solid #444;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ff0000;
 }
 
 .terminal-title {
-  font-size: 0.7rem;
+  font-family: monospace;
+  font-size: 14px;
   margin-bottom: 0.5rem;
   color: #ccc;
   border-bottom: 1px solid #333;
@@ -108,34 +116,43 @@ button:hover {
 #terminalOutput {
   flex: 1;
   overflow-y: auto;
-  font-size: 0.6rem;
+  font-size: 14px;
   line-height: 1.4;
   color: #6f6;
   white-space: pre-wrap;
+  font-family: monospace;
+}
+
+.answerTitle {
+  font-size: 18px;
+  margin-top: 1rem;
 }
 
 .choiceBtn {
   width: 100%;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   background: var(--red);
   color: white;
   padding: 1rem;
   border: none;
   cursor: pointer;
+  margin-bottom: 0.5rem;
 }
 
 .choiceBtn:hover {
   background: #cc0000;
 }
 
-.meter {
-  margin-top: 1rem;
+.meter-wide {
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
-.meter-label {
+.meter-label-wide {
   font-size: 0.6rem;
   display: block;
   margin-bottom: 0.3rem;
+  text-align: center;
 }
 
 .bar {
@@ -151,4 +168,14 @@ button:hover {
   background: var(--green);
   width: 0%;
   transition: width 0.4s ease;
+}
+
+.explanation-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.explanation-text {
+  font-size: 16px;
+  color: #ccc;
 }
