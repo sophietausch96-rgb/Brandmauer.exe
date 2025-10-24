@@ -8,11 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const choicesDiv = document.getElementById("choices");
   const terminalOut = document.getElementById("terminalOutput");
   const barRightFill = document.getElementById("barRightFill");
-
-  const bgA = document.querySelector("#sceneBg .bgA");
-  const bgB = document.querySelector("#sceneBg .bgB");
-  const fxLayer = document.getElementById("fxLayer");
-  let bgToggle = false;
+  const sceneImage = document.getElementById("sceneImage");
 
   let stats = { right: 0 };
   let current = 0;
@@ -82,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
-  // === Bilder vorladen ===
   preloadImages(situations.map(s => s.bg).concat(["start.jpg", "finish.jpg"]));
 
   // === Start-Button ===
@@ -95,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     stats.right = 0;
     updateBar();
     log("Systemstart... Firewall aktiviert.");
-    setSceneBg(situations[0].bg, true);
+    setSceneBg(situations[0].bg);
     loadSituation();
   });
 
@@ -164,21 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
     terminalOut.scrollTop = terminalOut.scrollHeight;
   }
 
-  // === Hintergrundbild wechseln ===
-  function setSceneBg(url, instant = false) {
-    const show = bgToggle ? bgA : bgB;
-    const hide = bgToggle ? bgB : bgA;
-    show.style.backgroundImage = `url("${url}")`;
-    void show.offsetWidth;
-    show.classList.add("show");
-
-    if (!instant) hide.classList.remove("show");
-    else {
-      bgA.classList.add("show");
-      bgB.classList.remove("show");
-    }
-
-    bgToggle = !bgToggle;
+  // === Szene-Bild setzen ===
+  function setSceneBg(url) {
+    sceneImage.src = url;
   }
 
   // === Bilder vorladen ===
