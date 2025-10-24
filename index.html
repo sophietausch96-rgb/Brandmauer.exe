@@ -1,62 +1,60 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brandmauer.exe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <title>BRANDMAUER.EXE</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header id="titleBar">BRANDMAUER.EXE — Firewall Simulation</header>
+  <!-- Kopfzeile -->
+  <header>
+    <h1>BRANDMAUER.EXE – Firewall Simulation</h1>
+  </header>
 
-  <!-- Start -->
-  <section id="startScreen" class="screen screen--start">
-    <div class="overlay centered-box">
-      <h2>Willkommen bei BRANDMAUER.EXE</h2>
-      <p>
-        Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br/>
-        Erkenne Narrativ → kontere → zerlege die Szene.
-      </p>
-      <button id="startBtn" class="button">Start</button>
+  <!-- Startscreen -->
+  <section id="startScreen">
+    <div class="centeredBox">
+      <h2>Willkommen bei<br>BRANDMAUER.EXE</h2>
+      <p>Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br>
+        Erkenne Narrativ → kontere → zerlege die Szene.</p>
+      <button id="startBtn">Start</button>
     </div>
   </section>
 
-  <!-- Game -->
+  <!-- Spielscreen -->
   <section id="gameScreen" class="hidden">
     <div id="gameWrap">
-      
-      <!-- Linke Spalte -->
+      <!-- Links: Frage + Antwort + Balken -->
       <div id="leftPanel">
         <div id="situation" class="situation"></div>
         <div id="choices" class="choices"></div>
         <div class="meter">
           <span class="meter-label">🧠 CDU-Kernschmelze in Echtzeit</span>
-          <div class="bar"><div id="barRightFill" class="fill"></div></div>
+          <div class="bar">
+            <div id="barRightFill" class="fill"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Bildszene (mittig) -->
+      <!-- Mitte: Szenenbild -->
       <div id="sceneBox">
-        <img id="sceneImage" src="" alt="Szene" />
+        <img id="sceneImage" src="start.jpg" alt="Szene" />
       </div>
 
-      <!-- Rechte Spalte: Terminal -->
+      <!-- Rechts: Terminal -->
       <aside class="terminal">
-        <div class="term-titlebar">
-          <span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span>
-          <span class="term-title">Terminal — Firewall.log</span>
-        </div>
-        <div id="terminalOutput" class="terminal-output"></div>
+        <div class="terminal-title">Terminal – Firewall.log</div>
+        <div id="terminalOutput"></div>
       </aside>
     </div>
   </section>
 
-  <!-- Finish -->
-  <section id="finishScreen" class="screen screen--finish hidden">
-    <div class="overlay centered-box">
+  <!-- Spielende -->
+  <section id="finishScreen" class="hidden">
+    <div class="centeredBox">
+      <h2>Simulation abgeschlossen</h2>
       <p id="finishText"></p>
-      <button id="restartBtn" class="button">Neustart</button>
+      <button id="restartBtn">Neu starten</button>
     </div>
   </section>
 
