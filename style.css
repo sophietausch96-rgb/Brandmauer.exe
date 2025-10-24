@@ -356,6 +356,16 @@ button:active {
   background-repeat: no-repeat;
 }
 
+.fragment {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transition: transform 1.2s ease-out, opacity 1.2s ease-out;
+  z-index: 10;
+}
+
 
 
 
