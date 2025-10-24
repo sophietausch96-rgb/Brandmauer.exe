@@ -198,15 +198,14 @@ function showScene(index) {
 
             <div class="scene-image">
               <img src="${scene.image}" alt="Szene ${index + 1}" class="scene-img" />
-              <div class="tv-frame"></div> 
-            </div>
+              <div class="tv-frame"></div> </div>
         </div>
       </div>
     `;
     
     const logEl = document.getElementById("terminalLog");
     if (logEl) {
-        terminalLogHistory = logEl.textContent.trim(); // Aktuellen Log sichern
+        terminalLogHistory = logEl.textContent.trim(); 
         logEl.textContent = terminalLogHistory;
 
         const newLogLine = `\n> ${scene.log}`;
@@ -230,7 +229,6 @@ function showScene(index) {
 function nextScene() {
     const logEl = document.getElementById('terminalLog');
     if (logEl) {
-        // Sicherstellen, dass die History den letzten Eintrag enthält
         terminalLogHistory = logEl.textContent.trim(); 
     }
 
