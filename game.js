@@ -1,126 +1,128 @@
 const scenes = [
   {
-    image: "scene1.jpg",
-    text: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
-    answer: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
-    explanation: "Die CDU romantisiert eine einheitliche Kultur, die es nie gab. Vielfalt ist keine Bedrohung, sondern Realität.",
-    terminalLog: "Gegenrede dekonstruiert Kulturbegriff, betont Pluralität und kritisiert Ausgrenzung durch Normsetzung."
+    image: "szene-1.jpg",
+    statement: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
+    response: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
+    explanation: "Die CDU möchte kulturelle Homogenität als Bildungsziel. Wer nicht reinpasst, fällt durchs Raster. Willkommen im Werteunterricht 2.0.",
+    log: "Gegenrede lädt Leitkultur als Ausschlussrahmen um und setzt Pluralität als Verfassungsprinzip. Risiko rechter Homogenitätsfantasien wird benannt."
   },
   {
-    image: "scene2.jpg",
-    text: "Innenpolitik: 'Schnellere Abschiebungen sind notwendig für Ordnung und Sicherheit.'",
-    answer: "Widersprechen – Menschenwürde vor Abschrecklogik.",
-    explanation: "Wer Menschenrechte für 'Ordnung' opfert, opfert am Ende beides. Die CDU kriminalisiert Schutzsuchende.",
-    terminalLog: "Firewall erkennt autoritäre Abschiebefantasien. Humanismus aktiviert."
+    image: "szene-2.jpg",
+    statement: "Innenpolitik: 'Schnellere Abschiebungen sind notwendig für Ordnung und Sicherheit.'",
+    response: "Widersprechen – Menschenwürde vor Abschrecklogik.",
+    explanation: "Abschiebungen als Ordnungspolitik zu tarnen, ist nichts als Angstpolitik. Wer flieht, ist kein Sicherheitsrisiko.",
+    log: "Humanität wird aktiviert. CDU-Sicherheitsrhetorik wird als menschenrechtlich fragwürdig identifiziert."
   },
   {
-    image: "scene3.jpg",
-    text: "Verbot von Gender-Sprache in Landesbehörden gefordert.",
-    answer: "Widersprechen – Sprache verändert sich, Unterdrückung nicht.",
-    explanation: "Die CDU kämpft gegen Sternchen statt gegen soziale Ungleichheit. Ein Kampf gegen Sichtbarkeit.",
-    terminalLog: "Reaktionäre Sprachpolitik blockiert. Firewall setzt Sprachfreiheit durch."
+    image: "szene-3.jpg",
+    statement: "CDU sieht Gendern als ideologische Sprachverzerrung und lehnt es grundsätzlich ab.",
+    response: "Widersprechen – Sprache schafft Sichtbarkeit.",
+    explanation: "Gendern ist kein Zwang, sondern Widerstand gegen patriarchale Sprachgewohnheit. Die CDU bleibt lieber grammatikalisch männlich.",
+    log: "Sprache als Strukturmacht wird ins Bewusstsein geladen. CDU-Scheinneutralität enttarnt."
   },
   {
-    image: "scene4.jpg",
-    text: "'Migration ist die Mutter aller Probleme' – Aussage bleibt unwidersprochen.",
-    answer: "Widersprechen – Ursache liegt im System, nicht bei Menschen.",
-    explanation: "Rassismus wird zur Staatsräson, wenn man ihn nicht widerspricht. CDU bleibt auf Tauchstation.",
-    terminalLog: "Virus erkennt rechte Dogwhistles. Narrative-Scanner aktiv."
+    image: "szene-4.jpg",
+    statement: "Klimapolitik: CDU will Technologieoffenheit statt Verbote.",
+    response: "Widersprechen – Klima braucht Taten, nicht Floskeln.",
+    explanation: "Technologieoffenheit ist CDU-Kauderwelsch für Stillstand. Das Klima verhandelt nicht.",
+    log: "Phrasen-Dekonstruktion abgeschlossen. Technologieoffenheit als Ausweichstrategie identifiziert."
   },
   {
-    image: "scene5.jpg",
-    text: "CDU lehnt Klimakleber als 'kriminelle Vereinigung' ab – schweigt aber zu Lützerath-Räumung.",
-    answer: "Widersprechen – Ziviler Ungehorsam ist kein Extremismus.",
-    explanation: "Für die CDU ist Protest gefährlicher als Klimakollaps. Ordnung über Überleben.",
-    terminalLog: "Firewall meldet: selektive Empörung detektiert. Kontext geladen."
+    image: "szene-5.jpg",
+    statement: "Familienbild: CDU betont traditionelle Rollenverteilung als bewährtes Modell.",
+    response: "Widersprechen – Familie ist dort, wo Liebe wohnt.",
+    explanation: "CDU-Familienpolitik riecht nach 1950. Zwischen Herd, Trauschein und Pflichtbewusstsein bleibt kein Platz für Diversität.",
+    log: "Familienbild geöffnet. Vielfalt geladen. CDU-Norm aufgebrochen."
   },
   {
-    image: "scene6.jpg",
-    text: "Konzepte zur 'wehrhaften Demokratie' zielen auf linke Gruppen.",
-    answer: "Widersprechen – Wehret den Anfängen, nicht dem Antifaschismus.",
-    explanation: "Wer Antifaschismus kriminalisiert, schützt den Faschismus. CDU betreibt Täter-Opfer-Umkehr.",
-    terminalLog: "Schutzwall gegen Faschismus reaktiviert. Antifa.exe ausgeführt."
+    image: "szene-6.jpg",
+    statement: "CDU will Migration stärker an ökonomischen Interessen ausrichten.",
+    response: "Widersprechen – Menschen sind keine Humankapital-Akten.",
+    explanation: "Die CDU würde sogar die Würde tariflich staffeln, wenn es nach Arbeitskraft geht. Menschenrechte? Nur mit Produktivitätsnachweis.",
+    log: "Migration entökonomisiert. Menschenrecht ersetzt Verwertungslogik."
   },
   {
-    image: "scene7.jpg",
-    text: "Religiöse Symbole sollen aus Klassenzimmern verschwinden – christliche Kreuze bleiben unberührt.",
-    answer: "Widersprechen – Neutralität ist kein Einbahnstraßen-Gebot.",
-    explanation: "Kulturelle Hegemonie als 'Tradition' getarnt. CDU liebt Neutralität, solange sie christlich bleibt.",
-    terminalLog: "Firewall erkennt doppelte Standards. Kreuzzug-Modus deaktiviert."
+    image: "szene-7.jpg",
+    statement: "Die CDU spricht sich gegen ein Wahlrecht ab 16 aus.",
+    response: "Widersprechen – Demokratie kennt kein Haltbarkeitsdatum.",
+    explanation: "Jugendliche sollen laut CDU still bleiben, bis sie steuerlich verwertbar sind. Demokratie ist kein Ü18-Club.",
+    log: "Jugend aktiviert. CDU-Demokratieverständnis dekodiert."
   },
   {
-    image: "scene8.jpg",
-    text: "'Wir sind nicht das Sozialamt der Welt' – CDU-Politiker zur Geflüchtetenhilfe.",
-    answer: "Widersprechen – Solidarität endet nicht an Grenzen.",
-    explanation: "Menschenrechte sind kein Sparmodell. CDU verwechselt Staatshaushalt mit Mitmenschlichkeit.",
-    terminalLog: "Firewall setzt Budgetlogik außer Kraft. Humanität.exe gestartet."
+    image: "szene-8.jpg",
+    statement: "Die CDU nennt die Klimabewegung 'ideologisch verblendet'.",
+    response: "Widersprechen – Wissenschaft ist keine Ideologie.",
+    explanation: "Fakten stören die konservative Ruhe. Also wird die Realität diskreditiert. Ideologie? Das ist CDU-PR gegen die Zukunft.",
+    log: "Faktenresistenz offengelegt. CDU-Schutzbehauptung entfernt."
   },
   {
-    image: "scene9.jpg",
-    text: "CDU sieht 'Frühsexualisierung' durch queere Bildungsinhalte.",
-    answer: "Widersprechen – Aufklärung ist Schutz, nicht Gefahr.",
-    explanation: "Die CDU schürt Panik statt Wissen. Queerfeindlichkeit im Bildungsschafspelz.",
-    terminalLog: "Desinformationsbombe neutralisiert. Faktenfilter aktiv."
+    image: "szene-9.jpg",
+    statement: "CDU fordert Neutralitätspflicht für Lehrkräfte – politisches Engagement sei zu vermeiden.",
+    response: "Widersprechen – Bildung braucht Haltung, nicht Beliebigkeit.",
+    explanation: "Neutralität ist das Deckmäntelchen für schweigenden Konservatismus. Wer sich gegen rechts nicht positioniert, stellt sich auf ihre Seite.",
+    log: "Haltung geladen. CDU-Dogma neutralisiert."
   },
   {
-    image: "scene10.jpg",
-    text: "CDU will 'Remigration' nicht definieren – lehnt aber den Begriff nicht klar ab.",
-    answer: "Widersprechen – Wer schweigt, stimmt zu.",
-    explanation: "CDU tanzt mit der AfD, solange niemand hinsieht. Brandmauer? Eher Schwingtür.",
-    terminalLog: "Firewall erkennt gefährliche Nähe zur extremen Rechten. Systemwarnung ausgelöst."
+    image: "szene-10.jpg",
+    statement: "Digitalpolitik: CDU fordert 'digitale Souveränität' – ohne soziale Netzpolitik.",
+    response: "Widersprechen – Digitalisierung braucht Gerechtigkeit.",
+    explanation: "Souveränität ohne Solidarität ist neoliberale Netzpolitik. Die CDU installiert lieber Uploadfilter als Chancengleichheit.",
+    log: "Digitale Klassenverhältnisse offengelegt. CDU-Souveränitätsfaschismus enttarnt."
   }
 ];
 
-let current = 0;
+let currentScene = 0;
 
-const startBtn = document.getElementById("startBtn");
-const restartBtn = document.getElementById("restartBtn");
-const startScreen = document.getElementById("startScreen");
-const gameScreen = document.getElementById("gameScreen");
-const finishScreen = document.getElementById("finishScreen");
-const sceneImage = document.getElementById("sceneImage");
-const situation = document.getElementById("situation");
-const choices = document.getElementById("choices");
-const explanationTitle = document.getElementById("explanationTitle");
-const explanationText = document.getElementById("explanationText");
-const terminalOutput = document.getElementById("terminalOutput");
-const barRightFill = document.getElementById("barRightFill");
-const finishText = document.getElementById("finishText");
+function startGame() {
+  showScene(currentScene);
+}
 
-startBtn.onclick = () => {
-  startScreen.classList.add("hidden");
-  gameScreen.classList.remove("hidden");
-  showScene();
-};
-
-restartBtn.onclick = () => location.reload();
-
-function showScene() {
-  const scene = scenes[current];
-  sceneImage.src = scene.image;
-  situation.textContent = scene.text;
-  explanationTitle.textContent = "Analyse";
-  explanationText.textContent = scene.explanation;
-  terminalOutput.textContent += "> " + scene.terminalLog + "\n";
-
-  choices.innerHTML = "";
-  const btn = document.createElement("button");
-  btn.className = "choiceBtn";
-  btn.textContent = "Zerstöre das System: " + scene.answer;
-  btn.onclick = () => nextScene();
-  choices.appendChild(btn);
-
-  const percent = Math.round(((current + 1) / scenes.length) * 100);
-  barRightFill.style.width = percent + "%";
+function showScene(index) {
+  const scene = scenes[index];
+  document.getElementById("gameContainer").innerHTML = `
+    <div class="progress-bar">
+      🧠 CDU-Kernschmelze in Echtzeit
+      <div class="bar"><div class="fill" style="width: ${(index + 1) / scenes.length * 100}%;"></div></div>
+    </div>
+    <div class="scene-wrapper">
+      <div class="scene-text">
+        <p class="statement">${scene.statement}</p>
+        <h3 class="respond-title">Zerstöre das System:</h3>
+        <button onclick="nextScene()">${scene.response}</button>
+        <p class="explanation-title">Erklärung:</p>
+        <p class="explanation">${scene.explanation}</p>
+      </div>
+      <div class="scene-image">
+        <img src="szene-${index + 1}.jpg" alt="Szene ${index + 1}">
+      </div>
+      <div class="terminal">
+        <div class="terminal-header">Terminal – Firewall.log</div>
+        <div class="terminal-body">
+          <p class="terminal-line">> Systemstart... Firewall aktiviert.</p>
+          <p class="terminal-line">> ${scene.log}</p>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function nextScene() {
-  current++;
-  if (current < scenes.length) {
-    showScene();
+  currentScene++;
+  if (currentScene < scenes.length) {
+    showScene(currentScene);
   } else {
-    gameScreen.classList.add("hidden");
-    finishScreen.classList.remove("hidden");
-    finishText.textContent = "Brandmauer.exe infiltriert. Konservative Narrative gebrochen. Zeit für Utopien.";
+    showFinalScreen();
   }
+}
+
+function showFinalScreen() {
+  document.getElementById("gameContainer").innerHTML = `
+    <div class="final">
+      <img src="start.jpg" alt="Finish">
+      <h2>Firewall durchbrochen.</h2>
+      <p class="final-statement">
+        CDU-Politik ist kein Naturgesetz, sondern eine politische Entscheidung. Wer schweigt, stimmt zu. Wer widerspricht, hackt das System.
+      </p>
+    </div>
+  `;
 }

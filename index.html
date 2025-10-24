@@ -2,57 +2,37 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>BRANDMAUER.EXE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRANDMAUER.EXE – Firewall Simulation</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>BRANDMAUER.EXE – Firewall Simulation</h1>
-  </header>
-
-  <section id="startScreen">
-    <div class="centeredBox">
-      <img id="startImage" src="start.jpg" alt="Startbild" />
-      <h2>Willkommen bei<br>BRANDMAUER.EXE</h2>
-      <p>Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br>
-      Erkenne Narrativ → kontere → zerlege die Szene.</p>
-      <button id="startBtn">Start</button>
-    </div>
-  </section>
-
-  <section id="gameScreen" class="hidden">
-    <div id="gameWrap">
-      <div id="leftPanel">
-        <div id="situation" class="situation"></div>
-        <div id="explanationTitle" class="explanation-title"></div>
-        <div id="explanationText" class="explanation-text"></div>
-        <h3 class="answerTitle">Zerstöre das System:</h3>
-        <div id="choices" class="choices"></div>
+  <div id="startScreen" class="centered-screen">
+    <div class="start-content">
+      <img class="start-image" src="assets/images/scene0.jpg" alt="Startbild" />
+      <div class="start-box">
+        <h1>Willkommen bei<br><span class="brand">BRANDMAUER.EXE</span></h1>
+        <p>
+          Du bist der Virus in der Brandmauer.exe: linke Gegenrede gegen den Rechtsdrift.<br />
+          Erkenne Narrativ → kontere → zerlege die Szene.
+        </p>
+        <button id="startBtn">Start</button>
       </div>
-      <div id="sceneBox">
-        <div class="meter-wide">
-          <span class="meter-label-wide">🧠 CDU-Kernschmelze in Echtzeit</span>
-          <div class="bar">
-            <div id="barRightFill" class="fill"></div>
-          </div>
-        </div>
-        <img id="sceneImage" src="start.jpg" alt="Szene" />
-      </div>
-      <aside class="terminal">
-        <div class="terminal-title">Terminal – Firewall.log</div>
-        <div id="terminalOutput"></div>
-      </aside>
     </div>
-  </section>
+  </div>
 
-  <section id="finishScreen" class="hidden">
-    <div class="centeredBox">
-      <h2>Simulation abgeschlossen</h2>
-      <p id="finishText">Brandmauer erfolgreich unterwandert. Die CDU braucht ein Update.</p>
-      <button id="restartBtn">Neu starten</button>
-    </div>
-  </section>
+  <!-- Spielcontainer, wird später sichtbar -->
+  <div id="gameContainer" style="display: none;">
+    <!-- Weitere Elemente wie Szenenbilder, Texte, Buttons, etc. -->
+  </div>
 
-  <script src="game.js"></script>
+  <script>
+    document.getElementById("startBtn").addEventListener("click", function () {
+      document.getElementById("startScreen").style.display = "none";
+      document.getElementById("gameContainer").style.display = "block";
+      startGame(); // Funktion in script.js
+    });
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>
