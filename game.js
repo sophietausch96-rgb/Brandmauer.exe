@@ -1,10 +1,11 @@
 const scenes = [
+    // WICHTIG: Dateinamen auf szene-X.jpg korrigiert
     // SZENE 1 (Kriminalität)
     {
         statement: "Die Kriminalitätsrate steigt, weil wir zu lasch sind!",
         explanation: "Populistisches Framing. Kriminalität ist oft multi-kausal. Daten zeigen häufig nur leichte, komplexe Verschiebungen, die nicht durch einfache 'Härte' lösbar sind. Der Fokus auf Härte lenkt von sozialen Ursachen ab.",
         response: "Narrativ gekontert. Fokus auf Prävention und Ursachenforschung.",
-        image: "szene-1.jpg", // KORREKTUR des Dateinamens
+        image: "szene-1.jpg", 
         log: "Data Packet: 'Kriminalitäts-Härte-Rhetorik' abgewehrt."
     },
     
@@ -13,7 +14,7 @@ const scenes = [
         statement: "Innenpolitik: 'Schnellere Abschiebungen sind notwendig für Ordnung und Sicherheit.'",
         explanation: "Abschiebungen als Ordnungspolitik zu tarnen, ist nichts als Angstpolitik. Wer flieht, ist kein Sicherheitsrisiko.",
         response: "Widersprechen – Menschenwürde vor Abschrecktaktiken.",
-        image: "szene-2.jpg", // KORREKTUR des Dateinamens
+        image: "szene-2.jpg", 
         log: "Data Packet: 'CDU-Sicherheitsrhetorik' enttarnt."
     },
 
@@ -22,7 +23,7 @@ const scenes = [
         statement: "Die Migration überfordert unsere Kommunen und Sozialsysteme!",
         explanation: "Überforderung ist real, aber liegt oft an mangelnder Bundes- und Landesfinanzierung, nicht an der Zahl der Menschen. Fokus auf 'Überforderung' statt 'Infrastrukturdefizite' dient der politischen Mobilisierung.",
         response: "Infrastruktur-Defizite statt Migration thematisieren.",
-        image: "szene-3.jpg", // KORREKTUR des Dateinamens
+        image: "szene-3.jpg", 
         log: "Data Packet: 'System-Überlastung' umgeleitet auf 'Finanzierungs-Lücke'."
     },
     
@@ -31,7 +32,7 @@ const scenes = [
         statement: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
         explanation: "Die CDU möchte kulturelle Homogenität als Bildungsziel. Wer nicht reinpasst, fällt durchs Raster. Willkommen im Werteunterricht 2.0.",
         response: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
-        image: "szene-4.jpg", // KORREKTUR des Dateinamens
+        image: "szene-4.jpg", 
         log: "Data Packet: 'Leitkultur' als Ausschlussrahmen entlarvt."
     },
 
@@ -40,7 +41,7 @@ const scenes = [
         statement: "Der öffentlich-rechtliche Rundfunk ist ein links-grünes Propaganda-Instrument!",
         explanation: "Pauschale Diffamierung. Der ÖRR ist zu Transparenz verpflichtet und durch Gremien kontrolliert. Fehler sind möglich, aber die Forderung nach Abschaffung dient oft der Beseitigung kritischer Berichterstattung.",
         response: "Faktencheck: Kontrolle und gesetzliche Pflicht zur Objektivität betonen.",
-        image: "szene-5.jpg", // KORREKTUR des Dateinamens
+        image: "szene-5.jpg", 
         log: "Data Packet: 'Propaganda-Vorwurf' durch 'Kontrollmechanismen' neutralisiert."
     },
 
@@ -49,7 +50,7 @@ const scenes = [
         statement: "Wir müssen uns von der Klimahysterie befreien!",
         explanation: "Einsatz des Begriffs 'Hysterie' relativiert wissenschaftlichen Konsens. Klimawandel ist durch Daten belegt und erfordert entschlossenes Handeln, nicht panikfreie Untätigkeit.",
         response: "Kontern mit wissenschaftlichen Fakten und Notwendigkeit der Energiewende.",
-        image: "szene-6.jpg", // KORREKTUR des Dateinamens
+        image: "szene-6.jpg", 
         log: "Data Packet: 'Klimahysterie' entlarvt als 'Wissenschafts-Relativierung'."
     },
     
@@ -58,7 +59,7 @@ const scenes = [
         statement: "CDU sieht Gendern als ideologische Sprachverzerrung und lehnt es grundsätzlich ab.",
         explanation: "Gendern ist kein Zwang, sondern Widerstand gegen patriarchale Sprachgewohnheit. Die CDU bleibt lieber grammatikalisch männlich.",
         response: "Widersprechen – Sprache schafft Sichtbarkeit.",
-        image: "szene-7.jpg", // KORREKTUR des Dateinamens
+        image: "szene-7.jpg", 
         log: "Data Packet: Strukturmacht von Sprache betont. CDU-Scheinneutralität enttarnt."
     },
     
@@ -67,7 +68,7 @@ const scenes = [
         statement: "Gender-Ideologie zerstört die traditionelle Familie und unsere Kultur!",
         explanation: "Das Konzept 'Gender-Ideologie' ist ein Kampfbegriff, der Minderheitenrechte und Gleichstellung als Bedrohung darstellt. Es lenkt von tatsächlichen gesellschaftlichen Herausforderungen ab.",
         response: "Kontern: Fokus auf Gleichberechtigung und Minderheitenschutz legen.",
-        image: "szene-8.jpg", // KORREKTUR des Dateinamens
+        image: "szene-8.jpg", 
         log: "Data Packet: 'Kultur-Zersetzung' erfolgreich als 'Angriff auf Gleichstellung' identifiziert."
     },
 
@@ -76,7 +77,7 @@ const scenes = [
         statement: "Steuersenkungen müssen jetzt Priorität haben, um die Wirtschaft anzukurbeln.",
         explanation: "Steuersenkungen führen oft zu Kürzungen im Sozialbereich und bei Investitionen in Bildung und Infrastruktur. Ein sozial gerechter Staat braucht handlungsfähige Kommunen und Investitionen.",
         response: "Fokus auf öffentliche Investitionen und soziale Gerechtigkeit lenken.",
-        image: "szene-9.jpg", // KORREKTUR des Dateinamens
+        image: "szene-9.jpg", 
         log: "Data Packet: 'Steuersenkungs-Lobby' umgeleitet auf 'Öffentliche Handlungsfähigkeit'."
     },
 
@@ -85,7 +86,7 @@ const scenes = [
         statement: "Bürokratie ist der wahre Standortnachteil Deutschlands. Wir müssen sie radikal abbauen.",
         explanation: "Bürokratie dient oft dem Schutz von Verbrauchern, Arbeitnehmern oder der Umwelt. 'Radikaler Abbau' führt zu Qualitätsverlust und öffnet Tür und Tor für Missbrauch und Korruption.",
         response: "Kontern: Funktion von Regeln und Schutzstandards betonen.",
-        image: "szene-10.jpg", // KORREKTUR des Dateinamens
+        image: "szene-10.jpg", 
         log: "Data Packet: 'Deregulierungswunsch' entlarvt als 'Angriff auf Schutzstandards'."
     }
 ];
@@ -94,9 +95,8 @@ let currentScene = 0;
 let terminalLogHistory = ""; 
 
 
-// Typewriter Effekt Funktion (unverändert)
+// Typewriter Effekt Funktion
 function typeWriterEffect(elementId, text, speed, isTerminalLog = false) {
-    // ... (unverändert) ...
     let i = 0;
     const element = document.getElementById(elementId);
     
@@ -123,7 +123,7 @@ function typeWriterEffect(elementId, text, speed, isTerminalLog = false) {
 }
 
 
-// Event-Listener für den Startbutton (unverändert)
+// Event-Listener für den Startbutton
 document.addEventListener("DOMContentLoaded", function() {
     const startBtn = document.getElementById("startBtn");
     if (startBtn) {
@@ -138,7 +138,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// startGame Funktion (unverändert)
 function startGame() {
     currentScene = 0;
     terminalLogHistory = "> Systemstart... Firewall aktiviert."; 
@@ -167,7 +166,6 @@ function startGame() {
 }
 
 
-// showScene Funktion (enthält TV-Frame)
 function showScene(index) {
     const scene = scenes[index];
     const gameContainer = document.getElementById("gameContainer");
@@ -200,14 +198,15 @@ function showScene(index) {
 
             <div class="scene-image">
               <img src="${scene.image}" alt="Szene ${index + 1}" class="scene-img" />
-              <div class="tv-frame"></div> </div>
+              <div class="tv-frame"></div> 
+            </div>
         </div>
       </div>
     `;
     
     const logEl = document.getElementById("terminalLog");
     if (logEl) {
-        terminalLogHistory = terminalLogHistory.trim(); 
+        terminalLogHistory = logEl.textContent.trim(); // Aktuellen Log sichern
         logEl.textContent = terminalLogHistory;
 
         const newLogLine = `\n> ${scene.log}`;
@@ -227,11 +226,11 @@ function showScene(index) {
 }
 
 
-// nextScene Funktion (unverändert)
+// Funktion für den Glitch-Übergang
 function nextScene() {
-    // ... (unverändert) ...
     const logEl = document.getElementById('terminalLog');
     if (logEl) {
+        // Sicherstellen, dass die History den letzten Eintrag enthält
         terminalLogHistory = logEl.textContent.trim(); 
     }
 
@@ -260,9 +259,7 @@ function nextScene() {
 }
 
 
-// showFinalScreen Funktion (mit Neustart-Fix)
 function showFinalScreen() {
-    // ... (unverändert) ...
     const gameContainer = document.getElementById("gameContainer");
 
     const terminalEl = document.getElementById("terminalPermanent");

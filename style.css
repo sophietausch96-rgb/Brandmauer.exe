@@ -281,19 +281,19 @@ button:hover {
     transition: transform 0.3s ease;
 }
 
-/* TV-Rahmen Overlay */
+/* TV-Rahmen Overlay - FIX: 100% 100% für exakte Ecken-Ausrichtung */
 .tv-frame {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('frame.png'); /* Bildpfad */
-    background-size: cover; 
+    background-image: url('frame.png'); 
+    background-size: 100% 100%; /* Zwingt den Rahmen, exakt die Höhe und Breite einzunehmen */
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 2; /* Liegt über dem Bild */
-    pointer-events: none; /* Klicks gehen durch */
+    z-index: 2; 
+    pointer-events: none; 
 }
 
 
