@@ -368,6 +368,39 @@ button:active {
   z-index: 10;
 }
 
+.explanation-icon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Explosionseffekt */
+@keyframes explode {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1) rotate(5deg);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2) rotate(720deg);
+    filter: blur(8px);
+  }
+}
+
+.explode {
+  animation: explode 0.6s ease forwards;
+}
+
+
+
 
 
 
