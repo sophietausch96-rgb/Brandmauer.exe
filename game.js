@@ -1,78 +1,97 @@
 const scenes = [
+    // SZENE 1 (Kriminalität)
     {
-        image: "szene-1.jpg",
-        statement: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
-        response: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
-        explanation: "Die CDU möchte kulturelle Homogenität als Bildungsziel. Wer nicht reinpasst, fällt durchs Raster. Willkommen im Werteunterricht 2.0.",
-        log: "Leitkultur als Ausschlussrahmen entlarvt. Pluralität als Verfassungsprinzip gestärkt."
+        statement: "Die Kriminalitätsrate steigt, weil wir zu lasch sind!",
+        explanation: "Populistisches Framing. Kriminalität ist oft multi-kausal. Daten zeigen häufig nur leichte, komplexe Verschiebungen, die nicht durch einfache 'Härte' lösbar sind. Der Fokus auf Härte lenkt von sozialen Ursachen ab.",
+        response: "Narrativ gekontert. Fokus auf Prävention und Ursachenforschung.",
+        image: "scene1.jpg",
+        log: "Data Packet: 'Kriminalitäts-Härte-Rhetorik' abgewehrt."
     },
+    
+    // SZENE 2 (Abschiebungen)
     {
-        image: "szene-2.jpg",
         statement: "Innenpolitik: 'Schnellere Abschiebungen sind notwendig für Ordnung und Sicherheit.'",
-        response: "Widersprechen – Menschenwürde vor Abschrecklogik.",
         explanation: "Abschiebungen als Ordnungspolitik zu tarnen, ist nichts als Angstpolitik. Wer flieht, ist kein Sicherheitsrisiko.",
-        log: "Humanität aktiviert. CDU-Sicherheitsrhetorik enttarnt."
+        response: "Widersprechen – Menschenwürde vor Abschrecklogik.",
+        image: "scene2.jpg",
+        log: "Data Packet: 'CDU-Sicherheitsrhetorik' enttarnt."
     },
+
+    // SZENE 3 (Migration)
     {
-        image: "szene-3.jpg",
+        statement: "Die Migration überfordert unsere Kommunen und Sozialsysteme!",
+        explanation: "Überforderung ist real, aber liegt oft an mangelnder Bundes- und Landesfinanzierung, nicht an der Zahl der Menschen. Fokus auf 'Überforderung' statt 'Infrastrukturdefizite' dient der politischen Mobilisierung.",
+        response: "Infrastruktur-Defizite statt Migration thematisieren.",
+        image: "scene3.jpg",
+        log: "Data Packet: 'System-Überlastung' umgeleitet auf 'Finanzierungs-Lücke'."
+    },
+    
+    // SZENE 4 (Leitkultur)
+    {
+        statement: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
+        explanation: "Die CDU möchte kulturelle Homogenität als Bildungsziel. Wer nicht reinpasst, fällt durchs Raster. Willkommen im Werteunterricht 2.0.",
+        response: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
+        image: "scene4.jpg",
+        log: "Data Packet: 'Leitkultur' als Ausschlussrahmen entlarvt."
+    },
+
+    // SZENE 5 (ÖRR)
+    {
+        statement: "Der öffentlich-rechtliche Rundfunk ist ein links-grünes Propaganda-Instrument!",
+        explanation: "Pauschale Diffamierung. Der ÖRR ist zu Transparenz verpflichtet und durch Gremien kontrolliert. Fehler sind möglich, aber die Forderung nach Abschaffung dient oft der Beseitigung kritischer Berichterstattung.",
+        response: "Faktencheck: Kontrolle und gesetzliche Pflicht zur Objektivität betonen.",
+        image: "scene5.jpg",
+        log: "Data Packet: 'Propaganda-Vorwurf' durch 'Kontrollmechanismen' neutralisiert."
+    },
+
+    // SZENE 6 (Klima)
+    {
+        statement: "Wir müssen uns von der Klimahysterie befreien!",
+        explanation: "Einsatz des Begriffs 'Hysterie' relativiert wissenschaftlichen Konsens. Klimawandel ist durch Daten belegt und erfordert entschlossenes Handeln, nicht panikfreie Untätigkeit.",
+        response: "Kontern mit wissenschaftlichen Fakten und Notwendigkeit der Energiewende.",
+        image: "scene6.jpg",
+        log: "Data Packet: 'Klimahysterie' entlarvt als 'Wissenschafts-Relativierung'."
+    },
+    
+    // SZENE 7 (Gendern: Sprachverzerrung)
+    {
         statement: "CDU sieht Gendern als ideologische Sprachverzerrung und lehnt es grundsätzlich ab.",
-        response: "Widersprechen – Sprache schafft Sichtbarkeit.",
         explanation: "Gendern ist kein Zwang, sondern Widerstand gegen patriarchale Sprachgewohnheit. Die CDU bleibt lieber grammatikalisch männlich.",
-        log: "Strukturmacht von Sprache betont. CDU-Scheinneutralität enttarnt."
+        response: "Widersprechen – Sprache schafft Sichtbarkeit.",
+        image: "scene7.jpg",
+        log: "Data Packet: Strukturmacht von Sprache betont. CDU-Scheinneutralität enttarnt."
     },
+    
+    // SZENE 8 (Gendern: Kultur)
     {
-        image: "szene-4.jpg",
-        statement: "Klimapolitik: CDU will Technologieoffenheit statt Verbote.",
-        response: "Widersprechen – Klima braucht Taten, nicht Floskeln.",
-        explanation: "Technologieoffenheit ist CDU-Kauderwelsch für Stillstand. Das Klima verhandelt nicht.",
-        log: "Phrasen-Dekonstruktion abgeschlossen. Ausweichstrategie erkannt."
+        statement: "Gender-Ideologie zerstört die traditionelle Familie und unsere Kultur!",
+        explanation: "Das Konzept 'Gender-Ideologie' ist ein Kampfbegriff, der Minderheitenrechte und Gleichstellung als Bedrohung darstellt. Es lenkt von tatsächlichen gesellschaftlichen Herausforderungen ab.",
+        response: "Kontern: Fokus auf Gleichberechtigung und Minderheitenschutz legen.",
+        image: "scene8.jpg",
+        log: "Data Packet: 'Kultur-Zersetzung' erfolgreich als 'Angriff auf Gleichstellung' identifiziert."
     },
+
+    // SZENE 9 (Steuern)
     {
-        image: "szene-5.jpg",
-        statement: "Familienbild: CDU betont traditionelle Rollenverteilung als bewährtes Modell.",
-        response: "Widersprechen – Familie ist dort, wo Liebe wohnt.",
-        explanation: "CDU-Familienpolitik riecht nach 1950. Zwischen Herd, Trauschein und Pflichtbewusstsein bleibt kein Platz für Diversität.",
-        log: "Familienbild geöffnet. Vielfalt geladen. CDU-Norm aufgebrochen."
+        statement: "Steuersenkungen müssen jetzt Priorität haben, um die Wirtschaft anzukurbeln.",
+        explanation: "Steuersenkungen führen oft zu Kürzungen im Sozialbereich und bei Investitionen in Bildung und Infrastruktur. Ein sozial gerechter Staat braucht handlungsfähige Kommunen und Investitionen.",
+        response: "Fokus auf öffentliche Investitionen und soziale Gerechtigkeit lenken.",
+        image: "scene9.jpg",
+        log: "Data Packet: 'Steuersenkungs-Lobby' umgeleitet auf 'Öffentliche Handlungsfähigkeit'."
     },
+
+    // SZENE 10 (Bürokratie)
     {
-        image: "szene-6.jpg",
-        statement: "CDU will Migration stärker an ökonomischen Interessen ausrichten.",
-        response: "Widersprechen – Menschen sind keine Humankapital-Akten.",
-        explanation: "Die CDU würde sogar die Würde tariflich staffeln, wenn es nach Arbeitskraft geht. Menschenrechte? Nur mit Produktivitätsnachweis.",
-        log: "Migration entökonomisiert. Menschenrecht ersetzt Verwertungslogik."
-    },
-    {
-        image: "szene-7.jpg",
-        statement: "Die CDU spricht sich gegen ein Wahlrecht ab 16 aus.",
-        response: "Widersprechen – Demokratie kennt kein Haltbarkeitsdatum.",
-        explanation: "Jugendliche sollen laut CDU still bleiben, bis sie steuerlich verwertbar sind. Demokratie ist kein Ü18-Club.",
-        log: "Jugend aktiviert. CDU-Demokratieverständnis dekodiert."
-    },
-    {
-        image: "szene-8.jpg",
-        statement: "Die CDU nennt die Klimabewegung 'ideologisch verblendet'.",
-        response: "Widersprechen – Wissenschaft ist keine Ideologie.",
-        explanation: "Fakten stören die konservative Ruhe. Also wird die Realität diskreditiert. Ideologie? Das ist CDU-PR gegen die Zukunft.",
-        log: "Faktenresistenz offengelegt. CDU-Schutzbehauptung entfernt."
-    },
-    {
-        image: "szene-9.jpg",
-        statement: "CDU fordert Neutralitätspflicht für Lehrkräfte – politisches Engagement sei zu vermeiden.",
-        response: "Widersprechen – Bildung braucht Haltung, nicht Beliebigkeit.",
-        explanation: "Neutralität ist das Deckmäntelchen für schweigenden Konservatismus. Wer sich gegen rechts nicht positioniert, stellt sich auf ihre Seite.",
-        log: "Haltung geladen. CDU-Dogma neutralisiert."
-    },
-    {
-        image: "szene-10.jpg",
-        statement: "Digitalpolitik: CDU fordert 'digitale Souveränität' – ohne soziale Netzpolitik.",
-        response: "Widersprechen – Digitalisierung braucht Gerechtigkeit.",
-        explanation: "Souveränität ohne Solidarität ist neoliberale Netzpolitik. Die CDU installiert lieber Uploadfilter als Chancengleichheit.",
-        log: "Digitale Klassenverhältnisse offengelegt. CDU-Souveränitätsfaschismus enttarnt."
+        statement: "Bürokratie ist der wahre Standortnachteil Deutschlands. Wir müssen sie radikal abbauen.",
+        explanation: "Bürokratie dient oft dem Schutz von Verbrauchern, Arbeitnehmern oder der Umwelt. 'Radikaler Abbau' führt zu Qualitätsverlust und öffnet Tür und Tor für Missbrauch und Korruption.",
+        response: "Kontern: Funktion von Regeln und Schutzstandards betonen.",
+        image: "scene10.jpg",
+        log: "Data Packet: 'Deregulierungswunsch' entlarvt als 'Angriff auf Schutzstandards'."
     }
 ];
 
 let currentScene = 0;
-let terminalLogHistory = ""; // Speichert den gesamten Log-Text (ohne HTML-Tags)
+let terminalLogHistory = ""; 
 
 
 // Typewriter Effekt Funktion
@@ -82,19 +101,15 @@ function typeWriterEffect(elementId, text, speed, isTerminalLog = false) {
     
     if (!element) return; 
 
-    // Bei Terminal-Log: Initialen Text (History) beibehalten
     if (!isTerminalLog) {
         element.textContent = '';
     }
-    // Bei Terminal-Log: Startet das Tippen am aktuellen Ende des Textes
 
     function typing() {
         if (i < text.length) {
-            // Hängt den neuen Buchstaben an den textContent an.
             element.textContent += text.charAt(i);
             i++;
             
-            // Scrollen zum Ende des Terminal-Logs
             if (isTerminalLog) {
                 const terminalBody = document.querySelector('#terminalPermanent .terminal-body');
                 if (terminalBody) terminalBody.scrollTop = terminalBody.scrollHeight;
@@ -114,9 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
         startBtn.addEventListener("click", function () {
             document.getElementById("startScreen").style.display = "none";
             document.getElementById("mainWrapper").style.display = "flex"; 
-            
-            // Titel anzeigen
-            document.getElementById("permanentTitle").style.display = "block";
+            document.getElementById("permanentTitle").style.display = "flex";
 
             startGame(); 
         });
@@ -134,7 +147,6 @@ function startGame() {
         logEl.textContent = terminalLogHistory;
     }
     
-    // Terminal und Progress Bar anzeigen
     const terminalEl = document.getElementById("terminalPermanent");
     if(terminalEl) {
         terminalEl.style.display = "flex"; 
@@ -142,8 +154,10 @@ function startGame() {
     
     const progressWrapper = document.getElementById("progressWrapper");
     if (progressWrapper) {
-        progressWrapper.style.display = "block";
+        progressWrapper.style.display = "block"; 
+        
         document.getElementById("progressFill").style.width = "0%";
+        
         progressWrapper.classList.remove('fade-out-fast');
     }
 
@@ -155,15 +169,15 @@ function showScene(index) {
     const scene = scenes[index];
     const gameContainer = document.getElementById("gameContainer");
     
+    // Basis für 10 Szenen
     const targetProgressPercent = ((index + 1) / scenes.length) * 100;
     const startProgressPercent = (index / scenes.length) * 100;
     
-    // Progress Bar (Nur der Balken wird bewegt)
     const fill = document.getElementById("progressFill");
+    
     if (fill) fill.style.width = `${startProgressPercent}%`;
 
 
-    // gameContainer rendert die Szene
     gameContainer.innerHTML = `
       <div class="scene-wrapper" id="currentSceneWrapper">
         
@@ -184,24 +198,20 @@ function showScene(index) {
 
             <div class="scene-image">
               <img src="${scene.image}" alt="Szene ${index + 1}" class="scene-img" />
-            </div>
+              <div class="tv-frame"></div> </div>
         </div>
       </div>
     `;
     
-    // Terminal-Log aktualisieren
     const logEl = document.getElementById("terminalLog");
     if (logEl) {
-        // 1. Log-Historie setzen
         logEl.textContent = terminalLogHistory;
 
-        // 2. Neuen Eintrag mit Typewriter-Effekt hinzufügen
         const newLogLine = `\n> ${scene.log}`;
         typeWriterEffect('terminalLog', newLogLine, 30, true);
     }
 
 
-    // 1. Trigger Animation der Progressbar
     requestAnimationFrame(() => {
       if (fill) {
         requestAnimationFrame(() => {
@@ -210,14 +220,12 @@ function showScene(index) {
       }
     });
 
-    // 2. Starte den Typewriter-Effekt für die Sprechblase
     typeWriterEffect('explanationText', scene.explanation, 30); 
 }
 
 
 // Funktion für den Glitch-Übergang
 function nextScene() {
-    // 1. Log-Eintrag zur History hinzufügen 
     const logEl = document.getElementById('terminalLog');
     if (logEl) {
         terminalLogHistory = logEl.textContent.trim(); 
@@ -226,17 +234,14 @@ function nextScene() {
     const glitchWrapper = document.getElementById("glitchElementsWrapper"); 
     const progressWrapper = document.getElementById("progressWrapper"); 
 
-    // 2. Starte den Glitch-Effekt
     if (glitchWrapper) {
         glitchWrapper.classList.add('glitch-transition'); 
     }
     
-    // 3. Starte das Ausblenden der Progressbar
     if (progressWrapper) {
         progressWrapper.classList.add('fade-out-fast'); 
     }
 
-    // 4. Warte auf die Animation (600ms) und wechsle die Szene
     setTimeout(() => {
         currentScene++;
         if (currentScene < scenes.length) {
@@ -254,7 +259,6 @@ function nextScene() {
 function showFinalScreen() {
     const gameContainer = document.getElementById("gameContainer");
 
-    // Terminal und Progress Bar ausblenden
     const terminalEl = document.getElementById("terminalPermanent");
     if(terminalEl) {
         terminalEl.style.display = "none";
@@ -265,11 +269,10 @@ function showFinalScreen() {
         progressWrapper.style.display = 'none';
     }
 
-    // Titel ausblenden
     document.getElementById("permanentTitle").style.display = "none";
 
 
-    // Zeigt den Final Screen im Game Container an
+    // Final Screen HTML
     gameContainer.innerHTML = `
         <div class="final">
             <img src="finish.jpg" alt="Finalscreen">
@@ -287,14 +290,14 @@ function showFinalScreen() {
         </div>
     `;
     
-    // Event Listener für den Neustart-Button
     const restartBtn = document.getElementById("restartBtn");
     if (restartBtn) {
         restartBtn.addEventListener("click", () => {
-            terminalLogHistory = ""; 
-            // FIX: Verwendung von window.location.href, um das Neuladen zu erzwingen
-            // oder einfacher: Zuweisen der aktuellen URL neu
-            window.location.href = window.location.href; 
+            // KORREKTUR: Container wieder anzeigen und Spiel neu starten
+            document.getElementById("mainWrapper").style.display = "flex";
+            document.getElementById("permanentTitle").style.display = "flex";
+            
+            startGame(); 
         });
     }
 }

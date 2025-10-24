@@ -8,23 +8,53 @@ body {
 
 /* Permanenter Titel */
 #permanentTitle {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
-    text-align: center;
-    padding: 10px 0;
-    border-bottom: 2px solid red;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
+    text-align: left; 
+    padding: 10px 16px; 
+    border-bottom: none; 
+    box-shadow: none; 
     width: 100%;
     position: sticky; 
     top: 0;
     background-color: black;
     z-index: 1000;
     margin: 0;
+    justify-content: flex-start; 
+    display: flex; 
+    align-items: center;
+    overflow: hidden; 
 }
 
-#permanentTitle .brand {
-    color: red;
+/* Glitch-Effekt */
+.glitch-text {
+    position: relative;
+    display: inline-block;
+    color: white; 
+    letter-spacing: 2px;
+    animation: glitch-text-anim 3s infinite steps(2);
 }
+
+.glitch-exe {
+    color: red; 
+    text-shadow: 0 0 5px red;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 2px;
+    animation: glitch-exe-anim 3s infinite steps(1); 
+}
+
+/* Glitch Animation Keyframes (gekürzt dargestellt) */
+@keyframes glitch-text-anim {
+  0% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(0); }
+  100% { text-shadow: 0 0 transparent, 0 0 transparent; transform: translate(0); }
+}
+@keyframes glitch-exe-anim {
+    0%, 100% { transform: skewX(0deg); text-shadow: 0 0 5px red; }
+    5% { transform: skewX(-5deg); text-shadow: 2px 0 5px red; }
+    /* ... weitere Schritte ... */
+}
+
 
 /* Button Styling */
 button {
@@ -49,7 +79,6 @@ button {
     margin-bottom: 0; 
     animation: none; 
     
-    /* ANPASSUNG: Button fest unten positionieren */
     position: absolute;
     bottom: 0;
     left: 0;
@@ -61,20 +90,10 @@ button:hover {
     border-color: white; 
 }
 
-button:active {
-    transform: scale(0.95);
-}
-
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 6px red;
-    }
-    50% {
-        box-shadow: 0 0 16px red;
-    }
-    100% {
-        box-shadow: 0 0 6px red;
-    }
+    0% { box-shadow: 0 0 6px red; }
+    50% { box-shadow: 0 0 16px red; }
+    100% { box-shadow: 0 0 6px red; }
 }
 
 /* Startscreen Layout */
@@ -82,13 +101,13 @@ button:active {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url('start.jpg');
     background-size: cover;
-    /* ANPASSUNG: Focal Point an die Spitze des Bildes */
     background-position: top center; 
     display: flex;
     justify-content: center;
     align-items: center;
+    /* Bitte 'start.jpg' in Ihren Ordner legen */
+    /* background-image: url('start.jpg'); */ 
 }
 
 .start-box {
@@ -101,28 +120,7 @@ button:active {
     animation: fadeIn 1.5s ease;
 }
 
-.start-box h1 {
-    font-size: 26px;
-    margin-bottom: 12px;
-}
-
-.start-box .brand {
-    font-weight: bold;
-    font-size: 28px;
-    display: block;
-}
-
-.start-box p {
-    font-size: 16px;
-    margin-bottom: 30px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Progress Bar Container (bleibt gleich) */
+/* Progress Bar Container */
 #progressContainer {
     padding: 16px;
     max-width: 1280px;
@@ -130,12 +128,16 @@ button:active {
     min-height: auto; 
 }
 
-/* Progress Bar Styling (bleibt gleich) */
+/* Progress Bar Styling (LINKSBÜNDIG) */
 .progress-bar {
     width: 100%;
-    max-width: 640px;
-    margin: 8px auto 8px auto; 
-    text-align: center;
+    /* Max-Breite auf die ungefähre Breite von GameContainer+Terminal+Gap setzen */
+    max-width: 924px; /* 500px + 400px + 24px */
+    
+    /* Wichtig: Entfernt die Zentrierung und fügt linkes Padding hinzu */
+    margin: 8px 0 8px 16px; 
+    
+    text-align: left; 
     font-size: 14px;
     color: white;
     font-family: monospace;
@@ -144,15 +146,15 @@ button:active {
 .bar-text {
     font-weight: bold;
     margin-bottom: 8px;
-    color: red; 
+    color: white; 
     text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
 }
 
 .bar {
     width: 100%;
     height: 16px;
-    border: 2px solid red;
-    background-color: #111;
+    border: 2px solid white;
+    background-color: #1c1c1c;
     margin-top: 8px;
 }
 
@@ -166,7 +168,7 @@ button:active {
 }
 
 
-/* Layout für GameContainer und Terminal (bleibt gleich) */
+/* Layout für GameContainer und Terminal */
 #mainWrapper {
     display: flex;
     justify-content: space-between;
@@ -184,7 +186,7 @@ button:active {
     min-width: 500px;
 }
 
-/* Game Layout und Entrance Animation */
+/* Game Layout */
 .scene-wrapper {
     display: flex;
     justify-content: space-between;
@@ -193,17 +195,6 @@ button:active {
     gap: 24px;
     flex-wrap: wrap;
     animation: slideIn 0.7s ease-out;
-}
-
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .glitch-elements-wrapper {
@@ -218,18 +209,10 @@ button:active {
 .scene-text {
     flex: 1 1 300px;
     max-width: 400px;
-    /* ANPASSUNG: Relative Positionierung für den absoluten Button */
     position: relative;
-    padding-bottom: 70px; /* Platz für den Button am unteren Rand */
+    padding-bottom: 70px; 
 }
 
-.scene-text .statement {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 32px;
-}
-
-/* Styling für die Sprachblase */
 .explanation-container {
     display: flex; 
     align-items: flex-start;
@@ -238,7 +221,6 @@ button:active {
     gap: 16px; 
 }
 
-/* ANPASSUNG: Icon-Größe */
 .explanation-icon {
     width: 150px;
     height: 150px;
@@ -260,12 +242,6 @@ button:active {
     margin-bottom: 0;
 }
 
-.explanation p {
-    font-size: 12px;
-    margin: 0;
-}
-
-/* Pfeil der Sprachblase (Pointer) */
 .explanation:after {
     content: "";
     position: absolute;
@@ -279,11 +255,12 @@ button:active {
     z-index: 2;
 }
 
+/* Szene-Bild-Container */
 .scene-image {
     flex: 1 1 400px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+    position: relative; /* Wichtig für die Positionierung des Overlays */
+    overflow: hidden; 
     max-width: 400px;
     height: auto;
     align-self: flex-start;
@@ -296,9 +273,27 @@ button:active {
     border: none;
     box-shadow: none;
     transition: transform 0.3s ease;
+    position: relative; 
+    z-index: 1; /* Unter dem Rahmen */
 }
 
-/* Terminal-Styling (bleibt gleich) */
+/* NEU: Styling für den TV-Rahmen */
+.tv-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('frame.png'); /* Ihr PNG-Rahmen */
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 2; /* Liegt über dem Bild */
+    pointer-events: none; /* Klicks gehen durch */
+}
+
+
+/* Terminal-Styling */
 .terminal {
     flex: 0 0 400px; 
     background-color: #1a1a1a; 
@@ -307,8 +302,6 @@ button:active {
     padding: 16px;
     font-size: 14px;
     max-width: 400px;
-    animation: none; 
-    
     display: flex;
     flex-direction: column;
     margin-top: 32px; 
@@ -333,7 +326,7 @@ button:active {
     word-wrap: break-word;
 }
 
-/* Final Screen (bleibt gleich) */
+/* Final Screen */
 .final {
     text-align: center;
     padding: 48px 16px;
@@ -341,23 +334,8 @@ button:active {
     width: 100%; 
 }
 
-.final img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 24px;
-    border: 2px solid red;
-    box-shadow: 0 0 20px red;
-}
 
-.final-statement {
-    font-size: 18px;
-    margin-top: 16px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Glitch-Klassen (bleibt gleich) */
+/* Glitch-Klassen für Übergänge (gekürzt dargestellt) */
 .glitch-transition {
     position: relative;
     animation: fade-glitch 0.6s ease-out forwards;
@@ -365,74 +343,14 @@ button:active {
 }
 
 @keyframes fade-glitch {
-    0% { opacity: 1; transform: translateY(0); }
-    20% { opacity: 0.9; transform: translateY(5px); }
-    40% { opacity: 0.7; transform: translateY(-5px); }
-    60% { opacity: 0.5; transform: translateY(3px); }
-    80% { opacity: 0.2; transform: translateY(-3px); }
-    100% { opacity: 0; transform: translateY(0); }
+    /* ... Keyframes ... */
 }
-
 @keyframes glitch-shake {
-    0% { text-shadow: 2px 0 red, -2px 0 cyan; }
-    25% { text-shadow: 4px 0 red, -4px 0 cyan; }
-    50% { text-shadow: -2px 0 red, 2px 0 cyan; }
-    75% { text-shadow: 0 4px red, 0 -4px cyan; }
-    100% { text-shadow: 0 0 transparent; }
+    /* ... Keyframes ... */
 }
 
-.glitch-transition .statement,
-.glitch-transition button {
-    animation: glitch-shake 0.2s infinite steps(2),
-               glitch-out-effect 0.6s ease-out forwards; 
-}
 
-@keyframes glitch-out-effect {
-    0% {
-        transform: scale(1);
-        filter: brightness(1);
-    }
-    100% {
-        transform: scale(0.98);
-        filter: brightness(1.5); 
-        opacity: 0;
-    }
-}
-
-.glitch-transition::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        transparent 0%,
-        rgba(255, 0, 0, 0.1) 3px,
-        rgba(0, 255, 255, 0.1) 5px
-    );
-    z-index: 100;
-    opacity: 0;
-    animation: scan-flicker 0.4s 0.1s steps(1) forwards; 
-}
-
-@keyframes scan-flicker {
-    0% { opacity: 0; }
-    25% { opacity: 0.8; }
-    50% { opacity: 0.4; }
-    75% { opacity: 0.9; }
-    100% { opacity: 0; }
-}
-
-.fade-out-fast {
-    animation: fadeOut 0.6s ease-out forwards;
-}
-
-@keyframes fadeOut {
-    to { opacity: 0; }
-}
-
-/* Responsive (angepasst für den Button) */
+/* Responsive */
 @media (max-width: 768px) {
     #mainWrapper {
         flex-direction: column;
@@ -440,20 +358,10 @@ button:active {
         padding: 16px;
     }
     
-    .glitch-elements-wrapper {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .scene-text,
-    .scene-image {
+    /* Progress Bar wird auf Mobile wieder 100% breit und zentriert */
+    .progress-bar {
         max-width: 100%;
-        flex-basis: auto;
-    }
-    
-    .scene-text {
-        padding-bottom: 70px; /* Platz für den festen Button unten */
+        margin: 8px auto 8px auto; 
     }
 
     .terminal {
@@ -470,7 +378,7 @@ button:active {
         min-width: auto;
     }
     
-    #progressContainer {
-        padding: 16px;
+    .scene-image, .scene-text {
+        max-width: 100%;
     }
 }
