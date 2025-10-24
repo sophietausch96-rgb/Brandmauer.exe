@@ -198,7 +198,8 @@ function showScene(index) {
 
             <div class="scene-image">
               <img src="${scene.image}" alt="Szene ${index + 1}" class="scene-img" />
-              <div class="tv-frame"></div> </div>
+              <div class="tv-frame"></div> 
+            </div>
         </div>
       </div>
     `;

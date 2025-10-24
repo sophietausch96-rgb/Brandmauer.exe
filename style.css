@@ -166,25 +166,26 @@ button:hover {
 }
 
 
-/* Layout für GameContainer und Terminal */
+/* Layout für GameContainer und Terminal - ANPASSUNG DES GAP */
 #mainWrapper {
     display: flex;
     justify-content: space-between;
     padding: 0 16px 16px 16px; 
     max-width: 1280px;
     margin: 0 auto;
-    gap: 24px;
+    gap: 16px; /* Kleinerer Abstand für kompakteres Design */
     flex-wrap: wrap;
     align-items: flex-start; 
     min-height: auto; 
 }
 
 #gameContainer {
+    /* Lässt den Container sich ausdehnen */
     flex: 1; 
     min-width: 500px;
 }
 
-/* Game Layout */
+/* Game Layout - Anpassung der inneren Breiten */
 .scene-wrapper {
     display: flex;
     justify-content: space-between;
@@ -204,9 +205,10 @@ button:hover {
     flex-wrap: wrap;
 }
 
+/* 1. SPALTE: Statement/Erklärung schmaler machen */
 .scene-text {
-    flex: 1 1 300px;
-    max-width: 400px;
+    flex: 1 1 250px; /* Flex-Basis reduziert */
+    max-width: 300px; /* Max. Breite reduziert */
     position: relative;
     padding-bottom: 70px; 
 }
@@ -253,15 +255,15 @@ button:hover {
     z-index: 2;
 }
 
-/* KORRIGIERTER BILD-CONTAINER (Gesamtgröße des TV-Gehäuses) */
+/* 2. SPALTE: TV-Gehäuse vergrößern und dominant machen */
 .scene-image {
-    flex: 1 1 350px; 
+    flex: 1 1 450px; /* Max. Breite erhöht */
     text-align: center;
-    position: relative; /* Wichtig für absolute Kinder */
+    position: relative; 
     overflow: hidden; 
     
-    max-width: 350px; 
-    height: 263px; 
+    max-width: 450px; /* Max. Breite erhöht */
+    height: 338px; /* 4/3 Aspect Ratio von 450px */
     
     aspect-ratio: 4/3; 
     align-self: flex-start;
@@ -269,8 +271,8 @@ button:hover {
 
 .scene-image img {
     /* FIX: Bild auf 90% der Containergröße skalieren */
-    width: 85%; 
-    height: 85%;
+    width: 90%; 
+    height: 90%;
     
     object-fit: cover; 
     display: block;
@@ -287,7 +289,7 @@ button:hover {
     transition: transform 0.3s ease;
 }
 
-/* TV-Rahmen Overlay - WIEDER AKTIVIERT UND PERFEKT ABGEDECKT */
+/* TV-Rahmen Overlay */
 .tv-frame {
     position: absolute;
     top: 0;
@@ -303,15 +305,15 @@ button:hover {
 }
 
 
-/* Terminal-Styling */
+/* 3. SPALTE: Terminal schmaler machen */
 .terminal {
-    flex: 0 0 400px; 
+    flex: 0 0 300px; /* Breite reduziert */
     background-color: #1a1a1a; 
     border: 1px solid #333; 
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
     padding: 16px;
     font-size: 14px;
-    max-width: 400px;
+    max-width: 300px; /* Max. Breite reduziert */
     display: flex;
     flex-direction: column;
     margin-top: 32px; 
