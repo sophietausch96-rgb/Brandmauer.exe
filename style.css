@@ -44,7 +44,7 @@ body::after {
 
 /* Permanenter Titel und Glitch-Styles */
 #permanentTitle {
-    font-size: 45px; /* Angepasst von 28px auf 45px */
+    font-size: 45px;
     font-weight: bold;
     text-align: left; 
     padding: 10px 0; 
@@ -421,35 +421,52 @@ button:hover {
     /* NEU: TV-Störungseffekte direkt auf das Bild anwenden */
     filter: saturate(1.2) contrast(1.1); /* Leicht verstärkte Farben */
     animation: tv-static-noise 0.2s steps(4) infinite,
-               tv-scanlines 0.3s steps(4) infinite,
-               tv-flicker 2s steps(10) infinite; 
+               tv-flicker 3s steps(10) infinite; /* Flackern langsamer und dezenter */
 }
 
 /* NEU: Keyframe-Animationen für den TV-Störungseffekt */
-@keyframes tv-static-noise {
-    0% { clip-path: inset(0 0 100% 0); }
-    25% { clip-path: inset(0 0 0 0); }
-    50% { clip-path: inset(50% 0 0 0); }
-    75% { clip-path: inset(20% 0 30% 0); }
-    100% { clip-path: inset(0 0 100% 0); }
-}
-
-@keyframes tv-scanlines {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 100%; }
-}
-
+/* 1. Subtiles Flackern (Opazität) */
 @keyframes tv-flicker {
     0%, 100% { opacity: 1; }
-    5% { opacity: 0.95; }
-    10% { opacity: 1; }
-    15% { opacity: 0.9; }
-    20% { opacity: 1; }
-    25% { opacity: 0.97; }
-    30% { opacity: 1; }
-    70% { opacity: 1; }
-    75% { opacity: 0.85; }
-    80% { opacity: 1; }
+    30% { opacity: 0.99; } /* Sehr dezente Opazitätsänderung */
+    70% { opacity: 1.01; }
+    80% { opacity: 0.98; }
+}
+
+/* 2. Statisches Rauschen/Verzerrung (Clip-Path) */
+@keyframes tv-static-noise {
+    0% { clip-path: inset(0 0 100% 0); } /* Start: Oben verdeckt */
+    25% { clip-path: inset(5% 0 5% 0); } /* Leichte Verschiebung */
+    50% { clip-path: inset(10% 0 10% 0); } /* Stärkere, aber kurzzeitige Verzerrung */
+    75% { clip-path: inset(2% 0 2% 0); }
+    100% { clip-path: inset(0 0 0 0); } /* Volles Bild */
+}
+
+/* 3. Scanlines (Hinzufügen des Scanline-Hintergrunds im Pseudo-Element) */
+.scene-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    
+    /* Hintergrund für Scanlines: Dunkle Linien, die sich nach oben bewegen */
+    background: repeating-linear-gradient(
+        transparent 0,
+        transparent 1px,
+        rgba(0, 0, 0, 0.1) 2px
+    );
+    background-size: 100% 4px; /* Linienhöhe definieren */
+    animation: scanlines-move 0.8s linear infinite; /* Bewegung der Scanlines */
+}
+
+/* Neue Keyframe-Animation für die Scanlines-Bewegung */
+@keyframes scanlines-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 -4px; } /* Bewegt die Linien um 4px (Linienhöhe) nach oben */
 }
 
 
@@ -467,7 +484,6 @@ button:hover {
     pointer-events: none; 
     
     /* Optional: Ein leichter Überlagerungs-Effekt für die TV-Glasfläche */
-    /* Fügt eine dezente Reflektion oder Textur hinzu */
     &::before {
         content: '';
         position: absolute;

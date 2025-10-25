@@ -100,7 +100,6 @@ const DOM = {
     mainWrapper: document.getElementById("mainWrapper"),
     permanentTitle: document.getElementById("permanentTitle"),
     startBtn: document.getElementById("startBtn"),
-    gameContainer: document.getElementById("gameContainer"),
     terminalLogContent: document.getElementById("terminalLogContent"),
     terminalPermanent: document.getElementById("terminalPermanent"),
     // ProgressWrapper/ProgressFill 
@@ -113,7 +112,6 @@ const DOM = {
     sceneImage: document.getElementById("sceneImage"),
     actionButton: document.getElementById("sceneActionButton"),
     glitchWrapper: document.getElementById("glitchElementsWrapper"),
-    // Szene Titel (ENTFERNT, da nicht mehr im HTML)
 };
 
 
@@ -186,8 +184,7 @@ function startGame() {
 
     // Sicherstellen, dass die Szene-Struktur sichtbar ist 
     const sceneWrapper = document.getElementById("currentSceneWrapper");
-    if(sceneWrapper) sceneWrapper.style.display = "flex";
-
+    if(sceneWrapper) sceneWrapper.style.display = "block"; // Der Wrapper muss nicht flex sein, nur der innere Container
 
     showScene(currentScene);
 }
@@ -200,7 +197,6 @@ function showScene(index) {
     const targetProgressPercent = ((index + 1) / scenes.length) * 100;
 
     // 1. Inhalte aktualisieren
-    // Titel-Setzung entfernt
     DOM.statementText.textContent = scene.statement;
     DOM.sceneImage.src = scene.image;
     DOM.sceneImage.alt = `Szene ${index + 1}`;
@@ -283,17 +279,25 @@ function nextScene() {
 function showFinalScreen() {
     // Anzeigen der Hauptstruktur als Block für den zentrierten Abschlussbildschirm
     DOM.mainWrapper.style.display = "block";
-    DOM.terminalPermanent.style.display = "none";
     
+    // Die Szene-Wrapper und der TerminalPermanent werden versteckt
+    const currentSceneWrapper = document.getElementById("currentSceneWrapper");
+    if(currentSceneWrapper) currentSceneWrapper.style.display = "none";
+
     if (DOM.progressWrapper) {
         DOM.progressWrapper.style.display = 'none';
     }
     DOM.permanentTitle.style.display = "none";
+    
+    // Verstecke den Terminal der Hauptszene
+    if(DOM.terminalPermanent) {
+        DOM.terminalPermanent.style.display = "none";
+    }
 
     const finalLogText = terminalLogHistory.map(log => `<div class="log-entry">${log}</div>`).join('');
 
-    // Der Titel im Final Screen ist hier noch "Firewall durchbrochen.", wie im Original-Code
-    DOM.gameContainer.innerHTML = `
+    // WICHTIGE KORREKTUR: Setze den Inhalt in den DOM.mainWrapper
+    DOM.mainWrapper.innerHTML = `
         <div class="final">
             <img src="finish.jpg" alt="Finalscreen">
             <h2>Firewall durchbrochen.</h2>
