@@ -100,6 +100,7 @@ const DOM = {
     mainWrapper: document.getElementById("mainWrapper"),
     permanentTitle: document.getElementById("permanentTitle"),
     startBtn: document.getElementById("startBtn"),
+    // gameContainer wurde aus dem HTML entfernt, daher Referenz entfernen!
     terminalLogContent: document.getElementById("terminalLogContent"),
     terminalPermanent: document.getElementById("terminalPermanent"),
     // ProgressWrapper/ProgressFill 
@@ -148,18 +149,14 @@ function typeWriterEffect(element, text, speed) {
 }
 
 
-// Event-Listener für den Startbutton (KORRIGIERT)
+// Event-Listener für den Startbutton
 document.addEventListener("DOMContentLoaded", function() {
     if (DOM.startBtn) {
         DOM.startBtn.addEventListener("click", function () {
-            // Verstecke den Startbildschirm
             DOM.startScreen.style.display = "none";
-            
-            // Zeige die Hauptstrukturen an (wichtig: display: flex für das Hauptlayout)
             DOM.mainWrapper.style.display = "flex"; 
             DOM.permanentTitle.style.display = "flex";
 
-            // Starte das Spiel (setzt currentScene = 0 und ruft showScene(0) auf)
             startGame(); 
         });
     }
@@ -178,6 +175,7 @@ function startGame() {
     }
     
     if(DOM.terminalPermanent) {
+        // Muss auf flex bleiben, da es Teil der Flex-Struktur ist
         DOM.terminalPermanent.style.display = "flex"; 
     }
     
@@ -321,12 +319,9 @@ function showFinalScreen() {
     const restartBtn = document.getElementById("restartBtn");
     if (restartBtn) {
         restartBtn.addEventListener("click", () => {
-            // Wichtig: Startscreen muss wieder flex sein, um zentriert zu werden
-            DOM.startScreen.style.display = "flex"; 
+            DOM.startScreen.style.display = "flex";
             DOM.mainWrapper.style.display = "none";
             DOM.permanentTitle.style.display = "none";
-            // Seite neu laden (optional, aber sauberste Lösung)
-            window.location.reload(); 
         });
     }
 }
