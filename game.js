@@ -90,7 +90,7 @@ const scenes = [
     }
 ];
 
-// NEU: Sarkastischer Text für die Intro-Szene mit <br><br> und <b> für Abstände/Fettschrift
+// Stark strukturierter Text für die Intro-Szene mit <br><br> und <b>
 const introText = [
     "> brandmauer.exe v1.0 geladen.",
     "> CDU-Kernsäge auf Skalierungs-Faktor $AFD_ZONE kalibriert.",
@@ -118,12 +118,11 @@ const introText = [
 
 let currentScene = 0;
 let terminalLogHistory = []; 
-let typingTimer = null; // Für Typewriter-Kontrolle
+let typingTimer = null; 
 
-// *** DOM-Referenzen cachen (Performance) ***
+// *** DOM-Referenzen cachen ***
 const DOM = {
     startScreen: document.getElementById("startScreen"),
-    // Intro Scene Elemente
     introScene: document.getElementById("introScene"),
     introVideo: document.getElementById("introVideo"),
     introTerminalContent: document.getElementById("introTerminalContent"),
@@ -135,11 +134,9 @@ const DOM = {
     
     terminalLogContent: document.getElementById("terminalLogContent"),
     terminalPermanent: document.getElementById("terminalPermanent"),
-    // ProgressWrapper/ProgressFill 
     progressWrapper: document.getElementById("progressWrapper"), 
     progressFill: document.getElementById("progressFill"),
     
-    // Elemente innerhalb der Szene-Struktur
     statementText: document.getElementById("statementText"),
     explanationText: document.getElementById("explanationText"),
     sceneImage: document.getElementById("sceneImage"),
@@ -148,22 +145,23 @@ const DOM = {
 };
 
 
-// Typewriter Effekt Funktion (mit HTML-Tag-Verarbeitung)
+// KORRIGIERTE Typewriter Effekt Funktion (mit Pausen-Erkennung für <br><br>)
 function typeWriterEffect(element, text, speed, callback = () => {}) {
     let i = 0;
-    // Bei HTML-Text im Intro müssen wir innerHTML behalten, ansonsten textContent
-    if (element === DOM.explanationText) {
-        element.textContent = ''; 
-    } else {
-        element.innerHTML = '';
-    }
-
-    // Wenn Array übergeben, zusammenfügen (für introText)
+    
+    // Setze innerHTML, da wir HTML-Tags (<b>) zulassen
+    element.innerHTML = ''; 
+    
+    // 1. Text vorbereiten: <br><br> durch speziellen Platzhalter ersetzen
     let sourceText = Array.isArray(text) ? text.join('') : text; 
+    // Ersetze alle <br><br> durch den Platzhalter (wichtig für die Pausen-Erkennung)
+    sourceText = sourceText.replace(/<br><br>/g, '¤BR¤'); 
     
     let characters = sourceText.split('');
-    let isInsideTag = false; // Flag, um zu erkennen, ob wir uns in einem HTML-Tag befinden
+    let isInsideTag = false; 
+    let tagContent = ''; // Speichert Inhalt des HTML-Tags
     
+    // Für das Auto-Scrollen im Terminal
     const terminalBody = element.closest('.terminal-body');
 
     if (typingTimer) {
@@ -175,34 +173,31 @@ function typeWriterEffect(element, text, speed, callback = () => {}) {
             
             let char = characters[i];
 
-            if (char === '<') {
+            if (char === '<' || isInsideTag) {
+                // FALL 1: HTML-Tag
+                tagContent += char;
                 isInsideTag = true;
-                // Füge den öffnenden Tag-Teil hinzu
-                element.innerHTML += char;
-            } else if (char === '>') {
-                // Füge den schließenden Tag-Teil hinzu und beende den Tag-Modus
-                element.innerHTML += char;
-                isInsideTag = false;
-                i++; // Gehe zum nächsten Zeichen außerhalb des Tags
-                typingTimer = setTimeout(typing, 1); // springe schnell weiter
-                return;
-            } else if (isInsideTag) {
-                // Wenn wir uns innerhalb eines Tags befinden, fügen wir einfach den Inhalt hinzu
-                element.innerHTML += char;
-                i++;
-                typingTimer = setTimeout(typing, 1); // springe schnell weiter
-                return;
-            } else {
-                // Standard: Füge das Zeichen als reinen Text hinzu
-                // Wir müssen textContent und innerHTML kombinieren, um den Typewriter-Effekt 
-                // in einem Element zu simulieren, das bereits HTML enthält.
-                // ACHTUNG: Das ist der schwierigste Teil. Wir müssen das letzte Text-Node des Elements finden.
-                
-                // Für Einfachheit (da wir nur Text am Ende hinzufügen): 
-                // Wir müssen innerHTML nutzen und Text-Inhalte mit charCodes codieren,
-                // wenn wir nicht in einem Tag sind, oder einfach textContent/innerHTML mixen.
 
-                // Da wir primär im Intro-Terminal Text und Tags tippen:
+                if (char === '>') {
+                    // Ende des Tags erreicht: Füge den Tag sofort ein
+                    element.innerHTML += tagContent;
+                    tagContent = '';
+                    isInsideTag = false;
+                    i++;
+                    typingTimer = setTimeout(typing, 1); // Sehr schneller Sprung
+                    return;
+                }
+            } else if (char === '¤' && characters.slice(i, i + 4).join('') === '¤BR¤') {
+                 // FALL 2: Spezieller Zeilenumbruch-Platzhalter gefunden
+                element.innerHTML += '<br><br>'; // Füge das tatsächliche HTML ein
+                i += 4; // Überspringe die 4 Zeichen des Platzhalters (¤BR¤)
+                
+                // Füge eine PAUSE ein, um die Abschnitte zu trennen
+                typingTimer = setTimeout(typing, 300); // Pause von 300ms
+                return;
+            } 
+            else {
+                // FALL 3: Normales Zeichen
                 element.innerHTML += char; 
             }
             
@@ -228,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (DOM.startBtn) {
         DOM.startBtn.addEventListener("click", function () {
             DOM.startScreen.style.display = "none";
-            showIntroScene(); // Startet die Intro-Szene
+            showIntroScene(); 
         });
     }
 
@@ -239,22 +234,19 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// Zeigt die Intro-Szene an
+// showIntroScene Funktion (Typewriter für das Intro-Terminal wieder aktiviert)
 function showIntroScene() {
     DOM.introScene.style.display = "flex";
     
-    // Video-Quelle setzen und starten
     if (DOM.introVideo) {
         DOM.introVideo.src = "start-scene.mp4";
-        // .play() muss im Klick-Event des Users aufgerufen werden
         DOM.introVideo.play().catch(e => console.log("Video konnte nicht automatisch abgespielt werden:", e));
     }
     
-    DOM.introSkipBtn.disabled = true; // Button anfangs deaktivieren
-    DOM.introTerminalContent.innerHTML = ''; // Inhalt leeren
+    DOM.introSkipBtn.disabled = true; 
+    DOM.introTerminalContent.innerHTML = ''; 
 
-    // Text mit Typewriter-Effekt schreiben
-    // introText ist ein Array, wird von der Funktion gejoined
+    // Typewriter-Effekt starten (speed 10 ist schnell, 30 ist angenehm)
     typeWriterEffect(DOM.introTerminalContent, introText, 10, () => {
         // Callback: Wenn das Tippen fertig ist, Button aktivieren
         DOM.introSkipBtn.disabled = false;
@@ -267,7 +259,7 @@ function startMainGame() {
     // Intro-Szene ausblenden
     DOM.introScene.style.display = "none";
     
-    // Video stoppen und Quelle leeren (optional)
+    // Video stoppen und Quelle leeren
     if (DOM.introVideo) {
         DOM.introVideo.pause();
         DOM.introVideo.removeAttribute('src'); 
@@ -280,27 +272,23 @@ function startMainGame() {
 
     currentScene = 0;
     terminalLogHistory = [
-        // Start-Log von der Intro-Szene
         `> brandmauer.exe v1.0 geladen.`,
         "> Systemstart... Firewall aktiviert."
     ]; 
     
     if (DOM.terminalLogContent) {
-        // Log-Einträge ohne Typewriter beim Start
         DOM.terminalLogContent.innerHTML = terminalLogHistory.map(log => `<div class="log-entry">${log}</div>`).join('');
     }
     
     if(DOM.terminalPermanent) {
-        // Muss auf flex bleiben, da es Teil der Flex-Struktur ist
         DOM.terminalPermanent.style.display = "flex"; 
     }
     
     if (DOM.progressWrapper) {
-        DOM.progressWrapper.style.display = "flex"; // Muss Flex sein
+        DOM.progressWrapper.style.display = "flex"; 
         DOM.progressFill.style.width = "0%";
     }
 
-    // Sicherstellen, dass die Szene-Struktur sichtbar ist 
     const sceneWrapper = document.getElementById("currentSceneWrapper");
     if(sceneWrapper) sceneWrapper.style.display = "block";
 
@@ -311,7 +299,6 @@ function startMainGame() {
 function showScene(index) {
     const scene = scenes[index];
 
-    // Fortschrittsberechnung
     const targetProgressPercent = ((index + 1) / scenes.length) * 100;
 
     // 1. Inhalte aktualisieren
@@ -320,17 +307,15 @@ function showScene(index) {
     DOM.sceneImage.alt = `Szene ${index + 1}`;
     
     DOM.actionButton.textContent = scene.response;
-    DOM.actionButton.disabled = false; // Button wieder aktivieren
+    DOM.actionButton.disabled = false; 
     
-    // Event-Handler neu setzen
     DOM.actionButton.onclick = function() { handleAction(DOM.actionButton); };
 
-    // 2. Typewriter-Effekt starten
-    DOM.explanationText.textContent = ''; // Vorher leeren
-    // Erklärungstext enthält keine HTML-Tags, daher wird er als reiner Text behandelt
+    // 2. Typewriter-Effekt für die Erklärung (reiner Text)
+    DOM.explanationText.textContent = ''; 
     typeWriterEffect(DOM.explanationText, scene.explanation, 30);
     
-    // 3. Übergang/Glitch-Klasse entfernen (falls vorhanden)
+    // 3. Übergang/Glitch-Klasse entfernen
     if (DOM.glitchWrapper) {
         DOM.glitchWrapper.classList.remove('glitch-transition');
     }
@@ -347,17 +332,14 @@ function showScene(index) {
 function logToTerminal(message, delay = 0) {
     if (!DOM.terminalLogContent) return;
 
-    // Fügen Sie den neuen Eintrag zur Historie hinzu
     terminalLogHistory.push(`> ${message}`);
 
-    // Erstellen Sie einen neuen div-Eintrag für den Typewriter-Effekt
     const newLogEntry = document.createElement('div');
     newLogEntry.classList.add('log-entry');
     DOM.terminalLogContent.appendChild(newLogEntry);
 
     setTimeout(() => {
-        // Nur den letzten Eintrag mit Typewriter schreiben
-        // Hier wird reiner Text erwartet, keine HTML-Tags
+        // Nur den letzten Eintrag mit Typewriter schreiben (reiner Text)
         newLogEntry.textContent = '';
         typeWriterEffect(newLogEntry, `> ${message}`, 15);
     }, delay);
@@ -368,25 +350,22 @@ function handleAction(button) {
     const newLogEntry = scenes[currentScene].log;
     logToTerminal(newLogEntry, 100); 
 
-    // 2. Button deaktivieren, um Doppel-Klicks während des Wechsels zu verhindern
+    // 2. Button deaktivieren
     button.disabled = true;
 
-    // 3. Nach einer kurzen Pause zur nächsten Szene springen
+    // 3. Zur nächsten Szene springen
     setTimeout(() => {
         nextScene();
     }, 800); 
 }
 
 
-// Funktion für den Glitch-Übergang
 function nextScene() {
     
-    // Glitch-Klasse hinzufügen, um die CSS-Animation zu starten
     if (DOM.glitchWrapper) {
         DOM.glitchWrapper.classList.add('glitch-transition'); 
     }
     
-    // Nach der Dauer der CSS-Animation zur nächsten Szene springen
     setTimeout(() => {
         currentScene++;
         if (currentScene < scenes.length) {
@@ -394,15 +373,15 @@ function nextScene() {
         } else {
             showFinalScreen();
         }
-    }, 600); // Passt zur Dauer der 'scene-glitch' Animation in CSS
+    }, 600); 
 }
 
 
+// KORRIGIERTE FUNKTION: Final Screen ohne Bild, mit umrahmtem Statement (start-box Stil)
 function showFinalScreen() {
-    // Anzeigen der Hauptstruktur als Block für den zentrierten Abschlussbildschirm
+    
     DOM.mainWrapper.style.display = "block";
     
-    // Die Szene-Wrapper und der TerminalPermanent werden versteckt
     const currentSceneWrapper = document.getElementById("currentSceneWrapper");
     if(currentSceneWrapper) currentSceneWrapper.style.display = "none";
 
@@ -411,36 +390,38 @@ function showFinalScreen() {
     }
     DOM.permanentTitle.style.display = "none";
     
-    // Verstecke den Terminal der Hauptszene
     if(DOM.terminalPermanent) {
         DOM.terminalPermanent.style.display = "none";
     }
 
     const finalLogText = terminalLogHistory.map(log => `<div class="log-entry">${log}</div>`).join('');
 
-    // WICHTIGE KORREKTUR: Setze den Inhalt in den DOM.mainWrapper
+    // NEU: Final Screen Layout mit umrahmtem Statement (start-box Stil)
     DOM.mainWrapper.innerHTML = `
         <div class="final">
-            <img src="finish.jpg" alt="Finalscreen">
-            <h2>Firewall durchbrochen.</h2>
-            <p class="final-statement">
-                CDU-Politik ist kein Naturgesetz, sondern eine politische Entscheidung. Wer schweigt, stimmt zu. Wer widerspricht, hackt das System.
-            </p>
+            
+            <div class="start-box" style="max-width: 600px; margin: 40px auto; animation: none;">
+                <h2>Firewall durchbrochen.</h2>
+                <p style="font-size: 18px; line-height: 1.6; margin: 0;">
+                    CDU-Politik ist kein Naturgesetz, sondern eine politische Entscheidung. Wer schweigt, stimmt zu. Wer widerspricht, hackt das System.
+                </p>
+            </div>
+            
+            <button id="restartBtn">Neustart</button>
+            
             <div class="terminal" style="margin-top: 40px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; height: auto;">
                 <div class="terminal-header">Terminal – brandmauer.log</div>
                 <div class="terminal-body" style="height: 300px; overflow-y: auto; padding: 16px;">
                     <div class="terminal-log-content">${finalLogText}</div>
                 </div>
             </div>
-            <button id="restartBtn">Neustart</button>
+            
         </div>
     `;
     
     const restartBtn = document.getElementById("restartBtn");
-    // Da wir DOM.mainWrapper.innerHTML neu gesetzt haben, müssen wir den Event-Listener neu setzen
     if (restartBtn) {
         restartBtn.addEventListener("click", () => {
-            // Seite neu laden für einen sauberen Neustart
             window.location.reload(); 
         });
     }
