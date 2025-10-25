@@ -1,190 +1,111 @@
- /* Global Styles */
+/* Global Styles */
 
 body {
-
     margin: 0;
-
     background-color: #171717; 
-
     color: white;
-
     font-family: monospace;
-
     min-height: 100vh;
-
     
-
     /* BESSERE PLATZNUTZUNG: Dezentes Gittermuster im Hintergrund */
-
     background-image: linear-gradient(to right, #2a2a2a 1px, transparent 1px),
-
                       linear-gradient(to bottom, #2a2a2a 1px, transparent 1px);
-
     background-size: 20px 20px; 
-
     background-attachment: fixed;
-
 }
 
 
 .brand {
-
     color: red;
-
 }
 
 
 /* Optischer Scanline/Flicker-Effekt für das gesamte Spiel-Overlay */
 
 body::after {
-
     content: '';
-
     position: fixed;
-
     top: 0;
-
     left: 0;
-
     width: 100%;
-
     height: 100%;
-
     pointer-events: none;
-
     background: repeating-linear-gradient(
-
         transparent 0,
-
         rgba(0, 0, 0, 0.2) 1px,
-
         transparent 2px
-
     );
-
     z-index: 9999;
-
     opacity: 0.5;
-
     animation: flicker 0.1s infinite alternate;
-
 }
 
 
 @keyframes flicker {
-
     0% { opacity: 0.5; }
-
     50% { opacity: 0.55; }
-
     100% { opacity: 0.5; }
-
 }
 
 
 /* Permanenter Titel und Glitch-Styles */
 
 #permanentTitle {
-
     font-size: 45px;
-
     font-weight: bold;
-
     text-align: left; 
-
     padding: 10px 0; 
-
     border-bottom: none; 
-
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
-
     width: 100%;
-
     position: sticky; 
-
     top: 0;
-
     background-color: #171717; 
-
     z-index: 1000;
-
     margin: 0;
-
     justify-content: space-between; 
-
     display: flex; 
-
     align-items: center;
-
     overflow: hidden; 
-
 }
 
 #titleWrapper {
-
     display: flex; 
-
     align-items: center;
-
     gap: 0; 
-
     padding-left: 16px; 
-
 }
 
 
 .glitch-text {
-
     position: relative;
-
     display: inline-block;
-
     color: white; 
-
     letter-spacing: 2px;
-
     animation: glitch-text-anim 3s infinite steps(2);
-
 }
 
 .glitch-exe {
-
     color: red; 
-
     text-shadow: 0 0 5px red;
-
     position: relative;
-
     display: inline-block;
-
     letter-spacing: 2px;
-
     animation: glitch-exe-anim 3s infinite steps(1); 
-
 }
 
 @keyframes glitch-text-anim {
-
     0% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(0); }
-
     20% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-2px); }
-
     40% { text-shadow: 4px 0 #ff0000, -4px 0 #00ffff; transform: translate(4px); }
-
     60% { text-shadow: -4px 0 #ff0000, 4px 0 #00ffff; transform: translate(-4px); }
-
     80% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(2px); }
-
     100% { text-shadow: 0 0 transparent, 0 0 transparent; transform: translate(0); }
-
 }
 
 @keyframes glitch-exe-anim {
-
     0%, 100% { transform: skewX(0deg); text-shadow: 0 0 5px red; }
-
     5% { transform: skewX(-5deg); text-shadow: 2px 0 5px red; }
-
 }
 
 
@@ -192,79 +113,56 @@ body::after {
 /* Button Styling (Allgemein) */
 
 button {
-
     font-family: monospace;
-
     background-color: red;
-
     color: white;
-
     border: 2px solid red; 
-
     padding: 10px 20px;
-
     font-size: 16px;
-
     cursor: pointer;
-
     animation: pulse 2s infinite; 
-
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-
 }
 
 
 /* Action Button: UNTER dem Browser-Fenster */
 
 #sceneActionButton {
-
     display: block; 
-
     width: 100%; 
-
     text-align: center; 
-
     font-size: 16px; 
-
     padding: 15px 20px; 
-
     
-
     margin-top: 0; 
-
     
-
     box-sizing: border-box; 
-
     border-radius: 0 0 6px 6px; 
-
     
-
     animation: none; 
-
     flex-shrink: 0; 
-
 }
 
 
 button:hover {
-
     box-shadow: 0 0 12px red;
-
     transform: scale(1.02); 
-
     border-color: white; 
+}
 
+button:disabled {
+    background-color: #555555;
+    border-color: #555555;
+    box-shadow: none;
+    cursor: default;
+    animation: none;
+    transform: none;
 }
 
 @keyframes pulse {
-
     0% { box-shadow: 0 0 6px red; }
-
     50% { box-shadow: 0 0 16px red; }
-
     100% { box-shadow: 0 0 6px red; }
-
 }
 
 
@@ -272,144 +170,136 @@ button:hover {
 /* Startscreen Layout */
 
 .start-overlay {
-
     position: relative;
-
     width: 100%;
-
     height: 100vh;
-
     background-size: cover;
-
     background-position: top center; 
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
 }
 
 .start-box {
-
     background-color: rgba(0, 0, 0, 0.9);
-
     padding: 32px;
-
     border: 2px solid red;
-
     box-shadow: 0 0 24px red;
-
     text-align: center;
-
     max-width: 600px;
-
     animation: fadeIn 1.5s ease;
-
 }
 
+/* NEU: Intro Scene Styling */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    background-color: #000;
+}
+
+.intro-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.intro-terminal-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* GEÄNDERT: Breite von 400px auf 600px erhöht */
+    max-width: 600px; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.intro-terminal {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    background-color: rgba(51, 51, 51, 0.7); /* 70% Opazität */
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+}
+
+.intro-log {
+    color: #00ff00; /* Hacker-Grün für den Intro-Text */
+    text-shadow: 0 0 5px #00ff00;
+}
 
 
 /* Progress Bar Container (Health Bar) */
 
 #progressContainer {
-
     margin: 0; 
-
     padding: 0; 
-
     width: auto; 
-
     flex-shrink: 1; 
-
     display: flex; 
-
     align-items: center; 
-
     justify-content: flex-end; 
-
     gap: 10px; 
-
     padding-right: 16px;
-
 }
 
 
 /* Wrapper für den Text und die eigentliche Bar */
 
 #progressWrapper {
-
     display: flex !important; 
-
     align-items: center;
-
     gap: 10px; 
-
     width: auto; 
-
     max-width: none;
-
     margin-left: auto; 
-
 }
 
 
 .bar-text {
-
     font-weight: bold;
-
     color: white; 
-
     text-shadow: none; 
-
     white-space: nowrap; 
-
     margin-bottom: 0; 
-
     font-size: 16px; 
-
 }
 
 
 /* Die eigentliche Health-Bar */
 
 .bar {
-
     width: 150px; 
-
     height: 16px;
-
     border: none; 
-
     background-color: #555555; 
-
     margin-top: 0;
-
     flex-shrink: 0; 
-
     border-radius: 8px; 
-
     overflow: hidden; 
-
 }
 
 .fill {
-
     height: 100%;
-
     background: linear-gradient(to right, limegreen 0%, orange 50%, red 100%);
-
     width: 0%;
-
     transition: width 1s ease-in-out;
-
     box-shadow: 0 0 8px red; 
-
     transform-origin: left;
-
     border-radius: 8px; 
-
 }
 
 
@@ -417,37 +307,21 @@ button:hover {
 /* HAUPT LAYOUT */
 
 #mainWrapper {
-
     display: flex;
-
     justify-content: center; /* FIX: Center anstatt space-between, um es perfekt mittig zu halten */
-
     
-
     /* Vertikale Zentrierung */
-
     min-height: calc(100vh - 58px); 
-
     align-items: center; 
-
     
-
     padding: 16px 16px; 
-
     /* Max. Breite angepasst für 350px + 550px + 350px + 2*32px gap = 1314px */
-
     max-width: 1350px; 
-
     margin: 0 auto; 
-
     gap: 0; /* Gap auf 0, da wir es in der inneren Struktur definieren */
-
     
-
     /* FIX: Flex-wrap auf nowrap, damit die Spalten nicht umbrechen */
-
     flex-wrap: nowrap; 
-
 }
 
 
@@ -455,45 +329,30 @@ button:hover {
 /* Scene Wrapper ist nun der Flex-Container für die 3 Spalten */
 
 .scene-wrapper {
-
     width: 100%;
-
     height: 100%; 
-
     margin-top: 0; 
-
 }
 
 
 /* Glitch Elements Wrapper ist der 3-Spalten-Container */
 
 .glitch-elements-wrapper {
-
     display: flex;
-
     flex-grow: 1; 
-
     justify-content: space-between;
-
     align-items: flex-start;
-
     /* Hier definieren wir den Abstand zwischen den Spalten */
-
     gap: 32px; 
-
     flex-wrap: nowrap;
-
     height: 445px; /* FIXE HÖHE */
-
 }
 
 
 /* Szene Titel entfernt */
 
 .scene-title {
-
     display: none; 
-
 }
 
 
@@ -501,21 +360,14 @@ button:hover {
 /* Glitch-Animation für den Szenenwechsel */
 
 .glitch-transition {
-
     animation: scene-glitch 0.6s linear;
-
 }
 
 @keyframes scene-glitch {
-
     0% { transform: translate(0); opacity: 1; }
-
     30% { transform: translate(5px, 0); filter: hue-rotate(90deg); opacity: 0.8; }
-
     60% { transform: translate(-10px, 0); filter: hue-rotate(-90deg); opacity: 0.4; }
-
     100% { transform: translate(0); opacity: 1; }
-
 }
 
 
@@ -523,233 +375,131 @@ button:hover {
 /* BROWSER-FENSTER-WRAPPER (Linke Spalte) */
 
 .browser-window-container {
-
     /* Breite auf 350px erhöht */
-
     flex: 0 0 350px; 
-
     max-width: 350px; 
-
     
-
     height: 100%; 
-
     
-
     background-color: #171717; 
-
     border: 1px solid #555555; 
-
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); 
-
     border-radius: 6px; 
-
     
-
     display: flex;
-
     flex-direction: column; 
-
     position: relative; 
-
     box-sizing: border-box;
-
 }
 
 
 .browser-header {
-
     height: 40px; 
-
     background-color: #e0e0e0; 
-
     border-bottom: 1px solid #ccc;
-
     display: flex;
-
     align-items: center;
-
     padding: 0 10px;
-
     position: relative;
-
     flex-shrink: 0; 
-
     border-radius: 6px 6px 0 0;
-
 }
 
 .browser-address {
-
     flex-grow: 1;
-
     text-align: center;
-
     background-color: #f7f7f7; 
-
     color: #444;
-
     font-size: 12px;
-
     font-family: sans-serif;
-
     padding: 4px 10px;
-
     border-radius: 4px;
-
     border: 1px solid #ddd;
-
     margin: 0 50px 0 50px; 
-
     overflow: hidden;
-
     white-space: nowrap;
-
 }
 
 
 /* 1. SPALTE: Statement/Erklärung (Body des Fensters) */
 
 .scene-text {
-
     flex-grow: 1; 
-
     position: relative; 
-
     padding: 16px; 
-
     box-sizing: border-box; 
-
     
-
     background-color: white; 
-
     color: black; 
-
     
-
     /* Höhe korrigiert für Button am Ende */
-
     height: auto;
-
     max-height: calc(100% - 40px - 53px); 
-
     overflow-y: auto; 
-
 }
 
 
 .statement {
-
     font-size: 14px; 
-
     font-weight: bold;
-
     margin-bottom: 20px;
-
     color: black;
-
 }
 
 
 .explanation-container {
-
     display: flex; 
-
     align-items: flex-start;
-
     margin-top: 0; 
-
     margin-bottom: 32px; 
-
     gap: 16px; 
-
 }
 
 .explanation-icon {
-
     width: 80px; 
-
     height: 80px;
-
     object-fit: contain;
-
     display: block;
-
     flex-shrink: 0;
-
 }
 
 .explanation {
-
     position: relative;
-
     background: #f0f0f0; 
-
     color: black;
-
     padding: 11px;
-
     border-radius: 8px;
-
     border: none; 
-
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); 
-
     line-height: 1.4;
-
     flex-grow: 1;
-
     margin-bottom: 0;
-
     
-
     background-image: repeating-linear-gradient(
-
         0deg,
-
         rgba(0, 0, 0, 0.05),
-
         rgba(0, 0, 0, 0.05) 1px,
-
         transparent 1px,
-
         transparent 2px
-
     );
-
 }
 
 .explanation p {
-
     color: black; 
-
     margin: 0;
-
 }
 
 .explanation:after {
-
     content: "";
-
     position: absolute;
-
     top: 15px;
-
     left: -10px; 
-
     width: 0;
-
     height: 0;
-
     border-top: 10px solid transparent;
-
     border-bottom: 10px solid transparent;
-
     border-right: 10px solid #f0f0f0; 
-
     z-index: 2;
-
 }
 
 
@@ -757,79 +507,45 @@ button:hover {
 /* 2. SPALTE: TV-Gehäuse */
 
 .scene-image {
-
     flex: 1 1 auto; 
-
     text-align: center;
-
     position: relative; 
-
     overflow: hidden; 
-
     max-width: 550px; 
-
     /* FIXE HÖHE (vom 445px Container) */
-
     height: 445px; 
-
     aspect-ratio: 4/3; 
-
     align-self: flex-start;
-
 }
 
 
 .scene-img {
-
     /* BEIBEHALTEN der 85% Größe */
-
     width: 85%;
-
     height: 85%;
-
     object-fit: cover; 
-
     display: block;
-
     z-index: 1;
-
     position: absolute;
-
     /* ZENTRIERUNG des 85%-großen Bildes */
-
     top: 50%;
-
     left: 50%;
-
     transform: translate(-50%, -50%); 
-
 }
 
 
 .tv-frame {
-
     position: absolute;
-
     top: 0;
-
     left: 0;
-
     width: 100%;
-
     height: 100%;
-
     background-image: url('frame.png'); 
-
     background-size: 100% 100%; 
-
     background-position: center;
-
     background-repeat: no-repeat;
-
     z-index: 2; 
-
     pointer-events: none; 
-
 }
 
 
@@ -837,98 +553,64 @@ button:hover {
 /* 3. SPALTE: Terminal - Mac-Style */
 
 .terminal {
-
     /* Breite auf 350px erhöht */
-
     flex: 0 0 350px; 
-
     background-color: #333333; 
-
     border: 1px solid #555555; 
-
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
-
     padding: 0; 
-
     font-size: 14px;
-
     max-width: 350px; 
-
     display: flex;
-
     flex-direction: column;
-
     /* FIXE HÖHE */
-
     height: 445px; 
-
     margin-top: 0; 
-
     border-radius: 6px; 
-
     overflow: hidden; 
+}
 
+.intro-terminal {
+    flex: none; /* Überschreibt die 350px-Breite für die Intro-Szene */
+    max-width: none;
+    height: auto;
 }
 
 
 /* Terminal Header und Body unverändert */
 
 .terminal-header {
-
     font-weight: bold;
-
     color: #cccccc; 
-
     background-color: #444444; 
-
     padding: 8px 16px;
-
     text-align: center;
-
     position: relative;
-
     font-size: 12px;
-
     margin-bottom: 0; 
-
     flex-shrink: 0; 
-
 }
 
 /* Ampel-Buttons Container */
 
 .terminal-controls {
-
     position: absolute;
-
     top: 50%;
-
     left: 8px;
-
     transform: translateY(-50%);
-
     display: flex;
-
     gap: 6px;
-
 }
 
 /* Styling für die Mac-Buttons (Ampel) */
 
 .control-dot {
-
     width: 12px;
-
     height: 12px;
-
     border-radius: 50%;
-
     border: none;
-
     cursor: default; 
-
     opacity: 0.8;
-
 }
 
 .control-dot.close { background-color: #ff6058; }
@@ -941,141 +623,79 @@ button:hover {
 /* Terminal Body für den Log-Inhalt */
 
 .terminal-body {
-
     overflow-y: auto; 
-
     flex-grow: 1; 
-
     padding: 16px; 
-
     height: auto; 
-
 }
 
 .terminal-log-content { 
-
     color: white;
-
     font-family: monospace;
-
     white-space: pre-wrap; 
-
     word-wrap: break-word;
-
 }
 
 .log-entry {
-
     margin: 12px 0;
-
 }
 
 
 /* Final Screen */
 
 .final {
-
     text-align: center;
-
     padding: 48px 16px;
-
     animation: fadeIn 2s ease;
-
     width: 100%; 
-
 }
 
 
 /* Responsive */
 
 @media (max-width: 768px) {
-
     #permanentTitle {
-
         flex-direction: column;
-
         align-items: flex-start;
-
         gap: 8px; 
-
         padding: 10px 0;
-
     }
-
     #titleWrapper {
-
         padding-left: 16px;
-
     }
-
     #progressContainer {
-
         width: 100%; 
-
         justify-content: space-between; 
-
         padding-right: 16px; 
-
     }
-
     
-
     .browser-window-container, .scene-image, .terminal {
-
         max-width: 100%;
-
         flex: 1 1 100%;
-
         height: auto !important; 
-
         min-height: auto !important;
-
     }
-
     
-
     .scene-text {
-
         max-height: none;
-
     }
-
     
-
     #sceneActionButton {
-
         width: 100%;
-
         max-width: 100%;
-
         margin-top: 10px;
-
     }
-
     
-
     #progressWrapper {
-
         flex-direction: row; 
-
         justify-content: flex-end;
-
     }
-
     .bar {
-
         width: 120px;
-
     }
-
     
-
     #mainWrapper {
-
         align-items: flex-start;
-
         min-height: auto;
-
     }
-
-} 
+}

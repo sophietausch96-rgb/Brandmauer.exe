@@ -19,6 +19,30 @@
         </div>
     </div>
 
+    <div id="introScene" class="intro-overlay" style="display: none;">
+        <video id="introVideo" class="intro-video" loop muted playsinline></video>
+        
+        <div class="intro-terminal-container">
+            <div class="terminal intro-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-controls">
+                        <div class="control-dot close"></div>
+                        <div class="control-dot minimize"></div>
+                        <div class="control-dot maximize"></div>
+                    </div>
+                    Terminal – $INIT_BRANDMAUER.sh
+                </div>
+                <div class="terminal-body" style="overflow-y: auto;">
+                    <div class="terminal-log-content intro-log" id="introTerminalContent">
+                        </div>
+                    <button id="introSkipBtn" style="margin-top: 20px;">
+                        [ KONTINUIERE ]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h1 id="permanentTitle" style="display: none;">
         <div id="titleWrapper">
             <span class="glitch-text" data-text="brandmauer.">BRANDMAUER.</span><span class="brand glitch-exe" data-text="EXE">EXE</span>
@@ -74,7 +98,7 @@
                             <div class="control-dot minimize"></div>
                             <div class="control-dot maximize"></div>
                         </div>
-                        Terminal – brandmauer.log 
+                        Terminal – brandmauer.log    
                     </div>
                     <div class="terminal-body">
                         <div class="terminal-log-content" id="terminalLogContent">
