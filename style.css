@@ -418,17 +418,23 @@ button:hover {
 }
 
 .scene-img {
+    /* BEIBEHALTEN deiner gewünschten Größe (85%) */
     width: 85%;
     height: 85%;
-    object-fit: cover;
+    
+    object-fit: cover; 
     display: block;
     z-index: 1;
     position: absolute;
-    top: 0;
-    left: 0;
+    
+    /* KORREKTUR: Zentrierung des 85%-großen Bildes */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
 }
 
 .tv-frame {
+    /* ... (bleibt unverändert, da es den 100%-Rahmen liefert) ... */
     position: absolute;
     top: 0;
     left: 0;
@@ -441,8 +447,6 @@ button:hover {
     z-index: 2; 
     pointer-events: none; 
 }
-
-
 /* 3. SPALTE: Terminal - Mac-Style */
 .terminal {
     flex: 0 0 300px; 
