@@ -113,6 +113,7 @@ const DOM = {
     sceneImage: document.getElementById("sceneImage"),
     actionButton: document.getElementById("sceneActionButton"),
     glitchWrapper: document.getElementById("glitchElementsWrapper"),
+    // Szene Titel (ENTFERNT, da nicht mehr im HTML)
 };
 
 
@@ -199,6 +200,7 @@ function showScene(index) {
     const targetProgressPercent = ((index + 1) / scenes.length) * 100;
 
     // 1. Inhalte aktualisieren
+    // Titel-Setzung entfernt
     DOM.statementText.textContent = scene.statement;
     DOM.sceneImage.src = scene.image;
     DOM.sceneImage.alt = `Szene ${index + 1}`;

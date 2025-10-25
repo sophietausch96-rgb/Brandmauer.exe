@@ -34,56 +34,57 @@
     
     <div id="mainWrapper" style="display: none;">
         
-        <div id="gameContainer">
-            <div class="scene-wrapper" id="currentSceneWrapper">
-                <div class="glitch-elements-wrapper" id="glitchElementsWrapper">
+        <div class="scene-wrapper" id="currentSceneWrapper">
+            <div class="glitch-elements-wrapper" id="glitchElementsWrapper">
+                
+                <div class="browser-window-container">
+                    <div class="browser-header">
+                        <div class="terminal-controls">
+                            <div class="control-dot close"></div>
+                            <div class="control-dot minimize"></div>
+                            <div class="control-dot maximize"></div>
+                        </div>
+                        <div class="browser-address">https://www.brandmauer.exe/konter-politik</div>
+                    </div>
                     
-                    <div class="browser-window-container">
-                        <div class="browser-header">
-                            <div class="terminal-controls">
-                                <div class="control-dot close"></div>
-                                <div class="control-dot minimize"></div>
-                                <div class="control-dot maximize"></div>
-                            </div>
-                            <div class="browser-address">https://www.brandmauer.exe/konter-politik</div>
-                        </div>
+                    <div class="scene-text">
+                        <p class="statement" id="statementText"></p>
                         
-                        <div class="scene-text">
-                            <p class="statement" id="statementText"></p>
-                            
-                            <div class="explanation-container">
-                                <img src="erklaerung.png" alt="Erklärung" class="explanation-icon" />
-                                <div class="explanation">
-                                    <p id="explanationText" class="typed-text"></p>
-                                </div>
+                        <div class="explanation-container">
+                            <img src="erklaerung.png" alt="Erklärung" class="explanation-icon" />
+                            <div class="explanation">
+                                <p id="explanationText" class="typed-text"></p>
                             </div>
                         </div>
-                        
-                        <button id="sceneActionButton"></button>
-                        
                     </div>
-                    <div class="scene-image">
-                        <img src="" alt="Szene Bild" class="scene-img" id="sceneImage" />
-                        <div class="tv-frame"></div>    
+                    
+                    <button id="sceneActionButton"></button>
+                    
+                </div>
+                
+                <div class="scene-image">
+                    <img src="" alt="Szene Bild" class="scene-img" id="sceneImage" />
+                    <div class="tv-frame"></div>    
+                </div>
+                
+                <div class="terminal" id="terminalPermanent">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <div class="control-dot close"></div>
+                            <div class="control-dot minimize"></div>
+                            <div class="control-dot maximize"></div>
+                        </div>
+                        Terminal – brandmauer.log 
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-log-content" id="terminalLogContent">
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </div>
-
-        <div class="terminal" id="terminalPermanent">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <div class="control-dot close"></div>
-                    <div class="control-dot minimize"></div>
-                    <div class="control-dot maximize"></div>
-                </div>
-                Terminal – brandmauer.log 
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-log-content" id="terminalLogContent">
-                </div>
-            </div>
-        </div>
+        
     </div>
     
     <script src="game.js"></script>
