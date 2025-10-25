@@ -7,7 +7,7 @@ body {
     font-family: monospace;
     min-height: 100vh;
     
-    /* BESSERE PLATZNUTZUNG: Dezentes Gittermuster im Hintergrund */
+    /* Dezentes Gittermuster im Hintergrund */
     background-image: linear-gradient(to right, #2a2a2a 1px, transparent 1px),
                       linear-gradient(to bottom, #2a2a2a 1px, transparent 1px);
     background-size: 20px 20px; 
@@ -190,7 +190,7 @@ button:disabled {
     animation: fadeIn 1.5s ease;
 }
 
-/* NEU: Intro Scene Styling */
+/* Intro Scene Styling */
 .intro-overlay {
     position: fixed;
     top: 0;
@@ -212,7 +212,7 @@ button:disabled {
     top: 0;
     left: 0;
     z-index: 1;
-    opacity: 0.7;
+    opacity: 0.9; /* Video Opazität erhöht */
 }
 
 .intro-terminal-container {
@@ -222,7 +222,6 @@ button:disabled {
     justify-content: center;
     align-items: center;
     width: 100%;
-    /* GEÄNDERT: Breite von 400px auf 600px erhöht */
     max-width: 600px; 
     padding: 20px;
     box-sizing: border-box;
@@ -232,7 +231,8 @@ button:disabled {
     width: 100%;
     height: auto;
     max-height: 80vh;
-    background-color: rgba(51, 51, 51, 0.7); /* 70% Opazität */
+    /* Alpha auf 0.3 (30% Deckkraft) für maximale Durchsichtigkeit */
+    background-color: rgba(51, 51, 51, 0.3); 
     box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
 }
 
@@ -304,7 +304,7 @@ button:disabled {
 
 
 
-/* HAUPT LAYOUT */
+/* HAUPT LAYOUT (Desktop) */
 
 #mainWrapper {
     display: flex;
@@ -323,9 +323,6 @@ button:disabled {
 }
 
 
-
-/* Scene Wrapper ist nun der Flex-Container für die 3 Spalten */
-
 .scene-wrapper {
     width: 100%;
     height: 100%; 
@@ -343,13 +340,13 @@ button:disabled {
     gap: 32px; 
     flex-wrap: nowrap;
     height: 445px; 
+    position: relative; /* Wichtig für mobiles Overlay */
 }
 
 
 .scene-title {
     display: none; 
 }
-
 
 
 /* Glitch-Animation für den Szenenwechsel */
@@ -366,8 +363,7 @@ button:disabled {
 }
 
 
-
-/* BROWSER-FENSTER-WRAPPER (Linke Spalte) */
+/* BROWSER-FENSTER-WRAPPER (Linke Spalte - Desktop) */
 
 .browser-window-container {
     flex: 0 0 350px; 
@@ -497,7 +493,7 @@ button:disabled {
 
 
 
-/* 2. SPALTE: TV-Gehäuse */
+/* 2. SPALTE: TV-Gehäuse (Desktop) */
 
 .scene-image {
     flex: 1 1 auto; 
@@ -539,8 +535,7 @@ button:disabled {
 }
 
 
-
-/* 3. SPALTE: Terminal - Mac-Style */
+/* 3. SPALTE: Terminal - Mac-Style (Desktop) */
 
 .terminal {
     flex: 0 0 350px; 
@@ -574,7 +569,7 @@ button:disabled {
     padding: 8px 16px;
     text-align: center;
     position: relative;
-    font-size: 10px;
+    font-size: 12px;
     margin-bottom: 0; 
     flex-shrink: 0; 
 }
@@ -642,51 +637,144 @@ button:disabled {
 }
 
 
-/* Responsive */
+/* Responsive (Mobilgeräte) */
 
 @media (max-width: 768px) {
+    /* SCROLLEN VERHINDERN */
+    body {
+        overflow: hidden;
+    }
+    
+    /* 1. Permanenter Titel (BRANDMAUER.EXE) kleiner skalieren */
     #permanentTitle {
+        font-size: 28px; 
+        padding: 8px 0;
         flex-direction: column;
         align-items: flex-start;
         gap: 8px; 
-        padding: 10px 0;
     }
     #titleWrapper {
-        padding-left: 16px;
+        padding-left: 10px; 
     }
+    
+    /* Fortschrittsanzeige */
     #progressContainer {
         width: 100%; 
-        justify-content: space-between; 
-        padding-right: 16px; 
+        justify-content: flex-start; 
+        padding-right: 10px; 
+        padding-left: 10px; 
     }
-    
-    .browser-window-container, .scene-image, .terminal {
-        max-width: 100%;
-        flex: 1 1 100%;
-        height: auto !important; 
-        min-height: auto !important;
-    }
-    
-    .scene-text {
-        max-height: none;
-    }
-    
-    #sceneActionButton {
-        width: 100%;
-        max-width: 100%;
-        margin-top: 10px;
-    }
-    
     #progressWrapper {
-        flex-direction: row; 
-        justify-content: flex-end;
+        width: 100%; 
+        justify-content: space-between;
+    }
+    .bar-text {
+        font-size: 14px; 
     }
     .bar {
-        width: 120px;
+        width: 100px; 
+        height: 12px;
+    }
+
+    /* HAUPT LAYOUT: SCROLLEN VERHINDERN */
+    #mainWrapper {
+        flex-direction: column; 
+        align-items: center; 
+        min-height: calc(100vh - 58px); 
+        padding: 0; 
+        overflow: hidden; 
     }
     
-    #mainWrapper {
+    /* 2. Glitch Elements Wrapper ist das Haupt-Overlay */
+    .glitch-elements-wrapper {
+        flex-direction: column; 
+        gap: 0; 
+        width: 100%; 
+        height: 100%; 
+        max-width: none; 
+        position: relative; 
+        overflow: hidden; 
+        margin-top: 0;
+        padding: 0 10px; 
+    }
+
+    /* 3. Szenen-Bild (Hintergrund-Element) */
+    .scene-image {
+        order: 1; 
+        width: 100%;
+        max-width: 100%; 
+        height: 100%; 
+        position: absolute; 
+        top: 0;
+        left: 0;
+        z-index: 1; 
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .scene-img, .tv-frame {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; 
+        position: static;
+        transform: none;
+    }
+
+    /* 4. BROWSER-FENSTER (Wird über das Bild geblendet) */
+    .browser-window-container {
+        order: 2; 
+        width: 90%; 
+        max-width: 350px;
+        height: auto; 
+        position: absolute; /* Über das Bild blenden */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        z-index: 3; /* Vor dem Bild */
+        box-sizing: border-box;
+        transition: opacity 0.5s ease; /* Ermöglicht das Ein-/Ausblenden mit JS */
+    }
+    
+    /* 5. TERMINAL: IM HAUPTSPIEL KOMPLETT AUSBLENDEN */
+    .terminal {
+        display: none !important; 
+    }
+
+    /* 6. Action Button (Wird als Teil des Browsers behandelt) */
+    #sceneActionButton {
+        padding: 12px 15px; 
+        font-size: 14px;
+        border-radius: 0 0 6px 6px !important; 
+    }
+
+    /* 7. Anpassungen für die Größen im Browser-Fenster */
+    .scene-text {
+        max-height: none; 
+        height: auto;
+        padding: 10px;
+    }
+    .statement {
+        font-size: 13px; 
+        margin-bottom: 10px;
+    }
+    .explanation-container {
+        flex-direction: row; 
         align-items: flex-start;
-        min-height: auto;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    .explanation-icon {
+        width: 40px; 
+        height: 40px;
+        margin-top: 5px;
+    }
+    .explanation {
+        font-size: 13px; 
+        padding: 8px;
+        text-align: left; 
+    }
+    .explanation:after {
+        content: none; 
     }
 }

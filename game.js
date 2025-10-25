@@ -90,7 +90,7 @@ const scenes = [
     }
 ];
 
-// Stark strukturierter Text für die Intro-Szene mit <br><br> und <b>
+// Stark strukturierter Text für die Intro-Szene
 const introText = [
     "> brandmauer.exe v1.0 geladen.",
     "> CDU-Kernsäge auf Skalierungs-Faktor $AFD_ZONE kalibriert.",
@@ -133,7 +133,7 @@ const DOM = {
     startBtn: document.getElementById("startBtn"),
     
     terminalLogContent: document.getElementById("terminalLogContent"),
-    terminalPermanent: document.getElementById("terminalPermanent"),
+    terminalMain: document.getElementById("terminalPermanent"), // Hauptterminal
     progressWrapper: document.getElementById("progressWrapper"), 
     progressFill: document.getElementById("progressFill"),
     
@@ -142,26 +142,25 @@ const DOM = {
     sceneImage: document.getElementById("sceneImage"),
     actionButton: document.getElementById("sceneActionButton"),
     glitchWrapper: document.getElementById("glitchElementsWrapper"),
+
+    // Für das Glitch-Overlay (Browser-Fenster)
+    browserWindow: document.querySelector('.browser-window-container'),
 };
 
 
-// KORRIGIERTE Typewriter Effekt Funktion (mit Pausen-Erkennung für <br><br>)
+// Typewriter Effekt Funktion (mit Pausen-Erkennung für <br><br>)
 function typeWriterEffect(element, text, speed, callback = () => {}) {
     let i = 0;
     
-    // Setze innerHTML, da wir HTML-Tags (<b>) zulassen
     element.innerHTML = ''; 
     
-    // 1. Text vorbereiten: <br><br> durch speziellen Platzhalter ersetzen
     let sourceText = Array.isArray(text) ? text.join('') : text; 
-    // Ersetze alle <br><br> durch den Platzhalter (wichtig für die Pausen-Erkennung)
     sourceText = sourceText.replace(/<br><br>/g, '¤BR¤'); 
     
     let characters = sourceText.split('');
     let isInsideTag = false; 
-    let tagContent = ''; // Speichert Inhalt des HTML-Tags
+    let tagContent = ''; 
     
-    // Für das Auto-Scrollen im Terminal
     const terminalBody = element.closest('.terminal-body');
 
     if (typingTimer) {
@@ -174,25 +173,23 @@ function typeWriterEffect(element, text, speed, callback = () => {}) {
             let char = characters[i];
 
             if (char === '<' || isInsideTag) {
-                // FALL 1: HTML-Tag
+                // FALL 1: HTML-Tag (schnell einfügen)
                 tagContent += char;
                 isInsideTag = true;
 
                 if (char === '>') {
-                    // Ende des Tags erreicht: Füge den Tag sofort ein
                     element.innerHTML += tagContent;
                     tagContent = '';
                     isInsideTag = false;
                     i++;
-                    typingTimer = setTimeout(typing, 1); // Sehr schneller Sprung
+                    typingTimer = setTimeout(typing, 1); 
                     return;
                 }
             } else if (char === '¤' && characters.slice(i, i + 4).join('') === '¤BR¤') {
-                 // FALL 2: Spezieller Zeilenumbruch-Platzhalter gefunden
-                element.innerHTML += '<br><br>'; // Füge das tatsächliche HTML ein
-                i += 4; // Überspringe die 4 Zeichen des Platzhalters (¤BR¤)
+                 // FALL 2: Spezieller Zeilenumbruch-Platzhalter (Pause)
+                element.innerHTML += '<br><br>'; 
+                i += 4; 
                 
-                // Füge eine PAUSE ein, um die Abschnitte zu trennen
                 typingTimer = setTimeout(typing, 300); // Pause von 300ms
                 return;
             } 
@@ -234,7 +231,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// showIntroScene Funktion (Typewriter für das Intro-Terminal wieder aktiviert)
 function showIntroScene() {
     DOM.introScene.style.display = "flex";
     
@@ -246,27 +242,21 @@ function showIntroScene() {
     DOM.introSkipBtn.disabled = true; 
     DOM.introTerminalContent.innerHTML = ''; 
 
-    // Typewriter-Effekt starten (speed 10 ist schnell, 30 ist angenehm)
     typeWriterEffect(DOM.introTerminalContent, introText, 10, () => {
-        // Callback: Wenn das Tippen fertig ist, Button aktivieren
         DOM.introSkipBtn.disabled = false;
     });
 }
 
 
-// startMainGame() startet das eigentliche Spiel nach dem Intro
 function startMainGame() {
-    // Intro-Szene ausblenden
     DOM.introScene.style.display = "none";
     
-    // Video stoppen und Quelle leeren
     if (DOM.introVideo) {
         DOM.introVideo.pause();
         DOM.introVideo.removeAttribute('src'); 
         DOM.introVideo.load();
     }
     
-    // Hauptspiel-Elemente anzeigen
     DOM.mainWrapper.style.display = "flex"; 
     DOM.permanentTitle.style.display = "flex";
 
@@ -276,12 +266,19 @@ function startMainGame() {
         "> Systemstart... Firewall aktiviert."
     ]; 
     
-    if (DOM.terminalLogContent) {
-        DOM.terminalLogContent.innerHTML = terminalLogHistory.map(log => `<div class="log-entry">${log}</div>`).join('');
-    }
-    
-    if(DOM.terminalPermanent) {
-        DOM.terminalPermanent.style.display = "flex"; 
+    // Terminal im Desktop-Modus anzeigen
+    if (window.innerWidth > 768) {
+        if (DOM.terminalLogContent) {
+            DOM.terminalLogContent.innerHTML = terminalLogHistory.map(log => `<div class="log-entry">${log}</div>`).join('');
+        }
+        if(DOM.terminalMain) {
+            DOM.terminalMain.style.display = "flex"; 
+        }
+    } else {
+        // Auf Mobilgeräten Terminal-Anzeige im Hauptspiel unterdrücken
+        if(DOM.terminalMain) {
+            DOM.terminalMain.style.display = "none"; 
+        }
     }
     
     if (DOM.progressWrapper) {
@@ -293,6 +290,28 @@ function startMainGame() {
     if(sceneWrapper) sceneWrapper.style.display = "block";
 
     showScene(currentScene);
+}
+
+
+// NEU/GEÄNDERT: Funktion zum Ein-/Ausblenden der Browser-Inhalte
+function toggleMainContentVisibility(isVisible) {
+    if (window.innerWidth <= 768) {
+        // Mobile Geräte: Glitch-Steuerung über dem Bild
+        if (DOM.browserWindow) {
+            DOM.browserWindow.style.opacity = isVisible ? '1' : '0';
+            DOM.browserWindow.style.pointerEvents = isVisible ? 'auto' : 'none'; 
+        }
+    } else {
+        // Desktop-Geräte: Alles ist sichtbar
+        if (DOM.browserWindow) {
+            DOM.browserWindow.style.opacity = '1';
+            DOM.browserWindow.style.pointerEvents = 'auto';
+        }
+        if (DOM.terminalMain) {
+             DOM.terminalMain.style.opacity = '1';
+             DOM.terminalMain.style.pointerEvents = 'auto';
+        }
+    }
 }
 
 
@@ -311,7 +330,7 @@ function showScene(index) {
     
     DOM.actionButton.onclick = function() { handleAction(DOM.actionButton); };
 
-    // 2. Typewriter-Effekt für die Erklärung (reiner Text)
+    // 2. Typewriter-Effekt für die Erklärung 
     DOM.explanationText.textContent = ''; 
     typeWriterEffect(DOM.explanationText, scene.explanation, 30);
     
@@ -320,7 +339,14 @@ function showScene(index) {
         DOM.glitchWrapper.classList.remove('glitch-transition');
     }
 
-    // 4. Progress Bar aktualisieren
+    // 4. Sichtbarkeit steuern: Auf Mobile ist der Inhalt zuerst AUSGEBLENDET
+    if (window.innerWidth <= 768) {
+        toggleMainContentVisibility(false); 
+    } else {
+        toggleMainContentVisibility(true); 
+    }
+
+    // 5. Progress Bar aktualisieren
     requestAnimationFrame(() => {
         if (DOM.progressFill) {
             DOM.progressFill.style.width = `${targetProgressPercent}%`;
@@ -330,7 +356,7 @@ function showScene(index) {
 
 
 function logToTerminal(message, delay = 0) {
-    if (!DOM.terminalLogContent) return;
+    if (!DOM.terminalLogContent || window.innerWidth <= 768) return; // Kein Log auf Mobile
 
     terminalLogHistory.push(`> ${message}`);
 
@@ -339,9 +365,13 @@ function logToTerminal(message, delay = 0) {
     DOM.terminalLogContent.appendChild(newLogEntry);
 
     setTimeout(() => {
-        // Nur den letzten Eintrag mit Typewriter schreiben (reiner Text)
-        newLogEntry.textContent = '';
-        typeWriterEffect(newLogEntry, `> ${message}`, 15);
+        newLogEntry.textContent = ''; 
+        typeWriterEffect(newLogEntry, `> ${message}`, 15, () => {
+            const terminalBody = DOM.terminalLogContent.closest('.terminal-body');
+            if (terminalBody) {
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
     }, delay);
 }
 
@@ -352,6 +382,11 @@ function handleAction(button) {
 
     // 2. Button deaktivieren
     button.disabled = true;
+
+    // NEU: Für mobile Ansicht: Browser-Fenster einblenden nach Aktion
+    if (window.innerWidth <= 768) {
+        toggleMainContentVisibility(true);
+    }
 
     // 3. Zur nächsten Szene springen
     setTimeout(() => {
@@ -366,6 +401,11 @@ function nextScene() {
         DOM.glitchWrapper.classList.add('glitch-transition'); 
     }
     
+    // NEU: Für mobile Ansicht: Inhalt vor Glitch ausblenden
+    if (window.innerWidth <= 768) {
+        toggleMainContentVisibility(false); // Browserfenster/Statement ausblenden
+    }
+
     setTimeout(() => {
         currentScene++;
         if (currentScene < scenes.length) {
@@ -377,7 +417,7 @@ function nextScene() {
 }
 
 
-// KORRIGIERTE FUNKTION: Final Screen ohne Bild, mit umrahmtem Statement (start-box Stil)
+// Final Screen Funktion
 function showFinalScreen() {
     
     DOM.mainWrapper.style.display = "block";
@@ -390,13 +430,13 @@ function showFinalScreen() {
     }
     DOM.permanentTitle.style.display = "none";
     
-    if(DOM.terminalPermanent) {
-        DOM.terminalPermanent.style.display = "none";
+    if(DOM.terminalMain) {
+        DOM.terminalMain.style.display = "none"; // Terminal im Final Screen (falls Desktop) ausblenden
     }
 
     const finalLogText = terminalLogHistory.map(log => `<div class="log-entry">${log}</div>`).join('');
 
-    // NEU: Final Screen Layout mit umrahmtem Statement (start-box Stil)
+    // Final Screen Layout
     DOM.mainWrapper.innerHTML = `
         <div class="final">
             
