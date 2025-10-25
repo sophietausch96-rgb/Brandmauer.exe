@@ -3,42 +3,85 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FIREWALL.EXE – Firewall Simulation</title>
+    <title>Brandmauer.exe</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
     <div id="startScreen" class="start-overlay">
         <div class="start-box">
-            <h1>Willkommen bei<br><span class="brand">FIREWALL.EXE</span></h1>
+            <h1>Willkommen bei<br><span class="brand">BRANDMAUER.EXE</span></h1>
             <p>
                 Die CDU hält ihre Firewall nach rechts. Aber nur, um sich beim Übersteigen nicht die Füße schmutzig zu machen.
                 Kontere die Narrative, bevor das Christlich-Konservative Lager endgültig in der AfD-Zone ankommt.
             </p>
-            <button id="startBtn">Spiel starten</button>
+            <button id="startBtn">SPIEL STARTEN</button>
         </div>
     </div>
 
-    
-<h1 id="permanentTitle" style="display: none;">
-        <span class="glitch-text" data-text="FIREWALL.">FIREWALL.</span><span class="brand glitch-exe" data-text="EXE">EXE</span>
-    </h1>
-
-    <div id="progressContainer">
-        <div class="progress-bar" id="progressWrapper" style="display: none;">
-            <div class="bar-text" id="barText">CDU-Kernsäge schlägt rechts aus</div>
-            <div class="bar"><div class="fill" id="progressFill" style="width: 0%;"></div></div>
+    <h1 id="permanentTitle" style="display: none;">
+        <div id="titleWrapper">
+            <span class="glitch-text" data-text="brandmauer.">BRANDMAUER.</span><span class="brand glitch-exe" data-text="EXE">EXE</span>
         </div>
-    </div>
-
-    <div id="mainWrapper" style="display: none;">
-        <div id="gameContainer">
+        
+        <div id="progressContainer">
+            <div class="progress-bar" id="progressWrapper" style="display: none;">
+                <div class="bar-text" id="barText">CDU-Kernsäge schlägt rechts aus</div>
+                <div class="bar"><div class="fill" id="progressFill" style="width: 0%;"></div></div>
             </div>
+        </div>
+    </h1>
+    
+    <div id="mainWrapper" style="display: none;">
+        
+        <div id="gameContainer">
+            <div class="scene-wrapper" id="currentSceneWrapper">
+                <div class="glitch-elements-wrapper" id="glitchElementsWrapper">
+                    
+                    <div class="browser-window-container">
+                        <div class="browser-header">
+                            <div class="terminal-controls">
+                                <div class="control-dot close"></div>
+                                <div class="control-dot minimize"></div>
+                                <div class="control-dot maximize"></div>
+                            </div>
+                            <div class="browser-address">https://www.brandmauer.exe/konter-politik</div>
+                        </div>
+                        
+                        <div class="scene-text">
+                            <p class="statement" id="statementText"></p>
+                            
+                            <div class="explanation-container">
+                                <img src="erklaerung.png" alt="Erklärung" class="explanation-icon" />
+                                <div class="explanation">
+                                    <p id="explanationText" class="typed-text"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="sceneActionButton"></button>
+                        
+                    </div>
+                    <div class="scene-image">
+                        <img src="" alt="Szene Bild" class="scene-img" id="sceneImage" />
+                        <div class="tv-frame"></div>    
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="terminal" id="terminalPermanent">
-            <div class="terminal-header">Terminal – Firewall.log</div>
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <div class="control-dot close"></div>
+                    <div class="control-dot minimize"></div>
+                    <div class="control-dot maximize"></div>
+                </div>
+                Terminal – brandmauer.log 
+            </div>
             <div class="terminal-body">
-                <p class="terminal-log" id="terminalLog"></p>
+                <div class="terminal-log-content" id="terminalLogContent">
+                </div>
             </div>
         </div>
     </div>

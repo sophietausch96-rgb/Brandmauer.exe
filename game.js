@@ -1,9 +1,8 @@
 const scenes = [
-    // WICHTIG: Dateinamen auf szene-X.jpg korrigiert
     // SZENE 1 (Kriminalität)
     {
         statement: "Die Kriminalitätsrate steigt, weil wir zu lasch sind!",
-        explanation: "Populistisches Framing. Kriminalität ist oft multi-kausal. Daten zeigen häufig nur leichte, komplexe Verschiebungen, die nicht durch einfache 'Härte' lösbar sind. Der Fokus auf Härte lenkt von sozialen Ursachen ab.",
+        explanation: "Populistisches Framing. Kriminalität ist multikausal. 'Härte' lenkt von sozialen Ursachen ab.",
         response: "Narrativ gekontert. Fokus auf Prävention und Ursachenforschung.",
         image: "szene-1.jpg", 
         log: "Data Packet: 'Kriminalitäts-Härte-Rhetorik' abgewehrt."
@@ -12,8 +11,8 @@ const scenes = [
     // SZENE 2 (Abschiebungen)
     {
         statement: "Innenpolitik: 'Schnellere Abschiebungen sind notwendig für Ordnung und Sicherheit.'",
-        explanation: "Abschiebungen als Ordnungspolitik zu tarnen, ist nichts als Angstpolitik. Wer flieht, ist kein Sicherheitsrisiko.",
-        response: "Widersprechen – Menschenwürde vor Abschrecktaktiken.",
+        explanation: "Abschiebungen als Ordnungspolitik sind Angstpolitik. Menschenwürde geht vor reiner Abschrecklogik.",
+        response: "Widersprechen – Menschenwürde vor Abschrecklogik.",
         image: "szene-2.jpg", 
         log: "Data Packet: 'CDU-Sicherheitsrhetorik' enttarnt."
     },
@@ -21,7 +20,7 @@ const scenes = [
     // SZENE 3 (Migration/Systemüberlastung)
     {
         statement: "Die Migration überfordert unsere Kommunen und Sozialsysteme!",
-        explanation: "Überforderung ist real, aber liegt oft an mangelnder Bundes- und Landesfinanzierung, nicht an der Zahl der Menschen. Fokus auf 'Überforderung' statt 'Infrastrukturdefizite' dient der politischen Mobilisierung.",
+        explanation: "Überforderung resultiert aus mangelnder Finanzierung, nicht der Migration. Fokus dient der politischen Mobilisierung.",
         response: "Infrastruktur-Defizite statt Migration thematisieren.",
         image: "szene-3.jpg", 
         log: "Data Packet: 'System-Überlastung' umgeleitet auf 'Finanzierungs-Lücke'."
@@ -30,7 +29,7 @@ const scenes = [
     // SZENE 4 (Leitkultur)
     {
         statement: "CDU fordert 'Leitkultur' als Integrationsmaßstab und will sie in Schulen verankern.",
-        explanation: "Die CDU möchte kulturelle Homogenität als Bildungsziel. Wer nicht reinpasst, fällt durchs Raster. Willkommen im Werteunterricht 2.0.",
+        explanation: "Die Forderung nach Homogenität ist ein Bildungsziel mit Ausschlusskriterien. Es ist Werteunterricht 2.0.",
         response: "Widersprechen – Kultur ist Vielfalt, nicht Norm.",
         image: "szene-4.jpg", 
         log: "Data Packet: 'Leitkultur' als Ausschlussrahmen entlarvt."
@@ -39,7 +38,7 @@ const scenes = [
     // SZENE 5 (ÖRR)
     {
         statement: "Der öffentlich-rechtliche Rundfunk ist ein links-grünes Propaganda-Instrument!",
-        explanation: "Pauschale Diffamierung. Der ÖRR ist zu Transparenz verpflichtet und durch Gremien kontrolliert. Fehler sind möglich, aber die Forderung nach Abschaffung dient oft der Beseitigung kritischer Berichterstattung.",
+        explanation: "Pauschale Diffamierung. Der ÖRR ist zu Objektivität verpflichtet. Der Vorwurf dient der Beseitigung kritischer Berichterstattung.",
         response: "Faktencheck: Kontrolle und gesetzliche Pflicht zur Objektivität betonen.",
         image: "szene-5.jpg", 
         log: "Data Packet: 'Propaganda-Vorwurf' durch 'Kontrollmechanismen' neutralisiert."
@@ -48,7 +47,7 @@ const scenes = [
     // SZENE 6 (Klima)
     {
         statement: "Wir müssen uns von der Klimahysterie befreien!",
-        explanation: "Einsatz des Begriffs 'Hysterie' relativiert wissenschaftlichen Konsens. Klimawandel ist durch Daten belegt und erfordert entschlossenes Handeln, nicht panikfreie Untätigkeit.",
+        explanation: "Der Begriff 'Hysterie' relativiert wissenschaftlichen Konsens. Klimawandel ist real und erfordert entschlossenes Handeln.",
         response: "Kontern mit wissenschaftlichen Fakten und Notwendigkeit der Energiewende.",
         image: "szene-6.jpg", 
         log: "Data Packet: 'Klimahysterie' entlarvt als 'Wissenschafts-Relativierung'."
@@ -57,7 +56,7 @@ const scenes = [
     // SZENE 7 (Gendern: Sprachverzerrung)
     {
         statement: "CDU sieht Gendern als ideologische Sprachverzerrung und lehnt es grundsätzlich ab.",
-        explanation: "Gendern ist kein Zwang, sondern Widerstand gegen patriarchale Sprachgewohnheit. Die CDU bleibt lieber grammatikalisch männlich.",
+        explanation: "Gendern schafft Sichtbarkeit gegen patriarchale Gewohnheiten. Die CDU entscheidet sich für die männliche Norm.",
         response: "Widersprechen – Sprache schafft Sichtbarkeit.",
         image: "szene-7.jpg", 
         log: "Data Packet: Strukturmacht von Sprache betont. CDU-Scheinneutralität enttarnt."
@@ -66,7 +65,7 @@ const scenes = [
     // SZENE 8 (Gendern: Kultur)
     {
         statement: "Gender-Ideologie zerstört die traditionelle Familie und unsere Kultur!",
-        explanation: "Das Konzept 'Gender-Ideologie' ist ein Kampfbegriff, der Minderheitenrechte und Gleichstellung als Bedrohung darstellt. Es lenkt von tatsächlichen gesellschaftlichen Herausforderungen ab.",
+        explanation: "Der Kampfbegriff 'Gender-Ideologie' diffamiert Gleichstellung als Bedrohung. Er lenkt von den eigentlichen Problemen ab.",
         response: "Kontern: Fokus auf Gleichberechtigung und Minderheitenschutz legen.",
         image: "szene-8.jpg", 
         log: "Data Packet: 'Kultur-Zersetzung' erfolgreich als 'Angriff auf Gleichstellung' identifiziert."
@@ -75,7 +74,7 @@ const scenes = [
     // SZENE 9 (Steuern)
     {
         statement: "Steuersenkungen müssen jetzt Priorität haben, um die Wirtschaft anzukurbeln.",
-        explanation: "Steuersenkungen führen oft zu Kürzungen im Sozialbereich und bei Investitionen in Bildung und Infrastruktur. Ein sozial gerechter Staat braucht handlungsfähige Kommunen und Investitionen.",
+        explanation: "Steuersenkungen führen zu Kürzungen (Sozialbereich/Investitionen). Ein gerechter Staat braucht handlungsfähige Kommunen.",
         response: "Fokus auf öffentliche Investitionen und soziale Gerechtigkeit lenken.",
         image: "szene-9.jpg", 
         log: "Data Packet: 'Steuersenkungs-Lobby' umgeleitet auf 'Öffentliche Handlungsfähigkeit'."
@@ -84,7 +83,7 @@ const scenes = [
     // SZENE 10 (Bürokratie)
     {
         statement: "Bürokratie ist der wahre Standortnachteil Deutschlands. Wir müssen sie radikal abbauen.",
-        explanation: "Bürokratie dient oft dem Schutz von Verbrauchern, Arbeitnehmern oder der Umwelt. 'Radikaler Abbau' führt zu Qualitätsverlust und öffnet Tür und Tor für Missbrauch und Korruption.",
+        explanation: "Bürokratie schützt Verbraucher und Umwelt. 'Radikaler Abbau' öffnet Tür für Missbrauch und Korruption.",
         response: "Kontern: Funktion von Regeln und Schutzstandards betonen.",
         image: "szene-10.jpg", 
         log: "Data Packet: 'Deregulierungswunsch' entlarvt als 'Angriff auf Schutzstandards'."
@@ -92,18 +91,42 @@ const scenes = [
 ];
 
 let currentScene = 0;
-let terminalLogHistory = ""; 
+let terminalLogHistory = []; 
+let typingTimer = null; // Für Typewriter-Kontrolle
 
-
-// Typewriter Effekt Funktion
-function typeWriterEffect(elementId, text, speed, isTerminalLog = false) {
-    let i = 0;
-    const element = document.getElementById(elementId);
+// *** DOM-Referenzen cachen (Performance) ***
+const DOM = {
+    startScreen: document.getElementById("startScreen"),
+    mainWrapper: document.getElementById("mainWrapper"),
+    permanentTitle: document.getElementById("permanentTitle"),
+    startBtn: document.getElementById("startBtn"),
+    gameContainer: document.getElementById("gameContainer"),
+    terminalLogContent: document.getElementById("terminalLogContent"),
+    terminalPermanent: document.getElementById("terminalPermanent"),
+    // ProgressWrapper/ProgressFill 
+    progressWrapper: document.getElementById("progressWrapper"), 
+    progressFill: document.getElementById("progressFill"),
     
-    if (!element) return; 
+    // NEU: Elemente innerhalb der Szene-Struktur
+    statementText: document.getElementById("statementText"),
+    explanationText: document.getElementById("explanationText"),
+    sceneImage: document.getElementById("sceneImage"),
+    actionButton: document.getElementById("sceneActionButton"),
+    glitchWrapper: document.getElementById("glitchElementsWrapper"),
+};
 
-    if (!isTerminalLog) {
-        element.textContent = '';
+
+// Typewriter Effekt Funktion (Performance-optimiert)
+function typeWriterEffect(element, text, speed) {
+    let i = 0;
+    element.textContent = '';
+    
+    // Terminal-Scroll-Referenz außerhalb der Schleife cachen
+    const terminalBody = DOM.terminalPermanent ? DOM.terminalPermanent.querySelector('.terminal-body') : null;
+
+    // Bestehenden Timer stoppen (falls vorhanden, verhindert Überschneidungen)
+    if (typingTimer) {
+        clearTimeout(typingTimer);
     }
 
     function typing() {
@@ -111,26 +134,28 @@ function typeWriterEffect(elementId, text, speed, isTerminalLog = false) {
             element.textContent += text.charAt(i);
             i++;
             
-            if (isTerminalLog) {
-                const terminalBody = document.querySelector('#terminalPermanent .terminal-body');
-                if (terminalBody) terminalBody.scrollTop = terminalBody.scrollHeight;
+            // Scrollen nur bei Terminal-Einträgen
+            if (terminalBody) {
+                terminalBody.scrollTop = terminalBody.scrollHeight;
             }
             
-            setTimeout(typing, speed);
+            typingTimer = setTimeout(typing, speed);
+        } else {
+            typingTimer = null;
         }
     }
+    
     typing();
 }
 
 
 // Event-Listener für den Startbutton
 document.addEventListener("DOMContentLoaded", function() {
-    const startBtn = document.getElementById("startBtn");
-    if (startBtn) {
-        startBtn.addEventListener("click", function () {
-            document.getElementById("startScreen").style.display = "none";
-            document.getElementById("mainWrapper").style.display = "flex"; 
-            document.getElementById("permanentTitle").style.display = "flex";
+    if (DOM.startBtn) {
+        DOM.startBtn.addEventListener("click", function () {
+            DOM.startScreen.style.display = "none";
+            DOM.mainWrapper.style.display = "flex"; 
+            DOM.permanentTitle.style.display = "flex";
 
             startGame(); 
         });
@@ -140,27 +165,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function startGame() {
     currentScene = 0;
-    terminalLogHistory = "> Systemstart... Firewall aktiviert."; 
+    terminalLogHistory = [
+        "> Systemstart... Firewall aktiviert."
+    ]; 
     
-    const logEl = document.getElementById("terminalLog");
-    
-    if (logEl) {
-        logEl.textContent = terminalLogHistory;
+    if (DOM.terminalLogContent) {
+        // Log-Einträge ohne Typewriter beim Start
+        DOM.terminalLogContent.innerHTML = terminalLogHistory.map(log => `<div class="log-entry">${log}</div>`).join('');
     }
     
-    const terminalEl = document.getElementById("terminalPermanent");
-    if(terminalEl) {
-        terminalEl.style.display = "flex"; 
+    if(DOM.terminalPermanent) {
+        DOM.terminalPermanent.style.display = "flex"; 
     }
     
-    const progressWrapper = document.getElementById("progressWrapper");
-    if (progressWrapper) {
-        progressWrapper.style.display = "block"; 
-        
-        document.getElementById("progressFill").style.width = "0%";
-        
-        progressWrapper.classList.remove('fade-out-fast');
+    if (DOM.progressWrapper) {
+        DOM.progressWrapper.style.display = "flex"; // Muss Flex sein
+        DOM.progressFill.style.width = "0%";
     }
+
+    // Sicherstellen, dass die Szene-Struktur sichtbar ist 
+    const sceneWrapper = document.getElementById("currentSceneWrapper");
+    if(sceneWrapper) sceneWrapper.style.display = "flex";
+
 
     showScene(currentScene);
 }
@@ -168,124 +194,114 @@ function startGame() {
 
 function showScene(index) {
     const scene = scenes[index];
-    const gameContainer = document.getElementById("gameContainer");
-    
+
+    // Fortschrittsberechnung
     const targetProgressPercent = ((index + 1) / scenes.length) * 100;
-    const startProgressPercent = (index / scenes.length) * 100;
+
+    // 1. Inhalte aktualisieren
+    DOM.statementText.textContent = scene.statement;
+    DOM.sceneImage.src = scene.image;
+    DOM.sceneImage.alt = `Szene ${index + 1}`;
     
-    const fill = document.getElementById("progressFill");
+    DOM.actionButton.textContent = scene.response;
+    DOM.actionButton.disabled = false; // Button wieder aktivieren
     
-    if (fill) fill.style.width = `${startProgressPercent}%`;
+    // Event-Handler neu setzen
+    DOM.actionButton.onclick = function() { handleAction(DOM.actionButton); };
 
-
-    gameContainer.innerHTML = `
-      <div class="scene-wrapper" id="currentSceneWrapper">
-        
-        <div class="glitch-elements-wrapper" id="glitchElementsWrapper">
-            <div class="scene-text">
-              <p class="statement">${scene.statement}</p>
-              
-              <div class="explanation-container">
-                <img src="erklaerung.png" alt="Erklärung" class="explanation-icon" />
-                <div class="explanation">
-                    <p id="explanationText" class="typed-text"></p>
-                </div>
-              </div>
-              
-              <button onclick="nextScene()">${scene.response}</button>
-              
-            </div>
-
-            <div class="scene-image">
-              <img src="${scene.image}" alt="Szene ${index + 1}" class="scene-img" />
-              <div class="tv-frame"></div> 
-            </div>
-        </div>
-      </div>
-    `;
+    // 2. Typewriter-Effekt starten
+    typeWriterEffect(DOM.explanationText, scene.explanation, 30);
     
-    const logEl = document.getElementById("terminalLog");
-    if (logEl) {
-        terminalLogHistory = logEl.textContent.trim(); 
-        logEl.textContent = terminalLogHistory;
-
-        const newLogLine = `\n> ${scene.log}`;
-        typeWriterEffect('terminalLog', newLogLine, 30, true);
+    // 3. Übergang/Glitch-Klasse entfernen (falls vorhanden)
+    if (DOM.glitchWrapper) {
+        DOM.glitchWrapper.classList.remove('glitch-transition');
     }
 
-
+    // 4. Progress Bar aktualisieren
     requestAnimationFrame(() => {
-      if (fill) {
-        requestAnimationFrame(() => {
-          fill.style.width = `${targetProgressPercent}%`;
-        });
-      }
+        if (DOM.progressFill) {
+            DOM.progressFill.style.width = `${targetProgressPercent}%`;
+        }
     });
+}
 
-    typeWriterEffect('explanationText', scene.explanation, 30); 
+
+function logToTerminal(message, delay = 0) {
+    if (!DOM.terminalLogContent) return;
+
+    // Fügen Sie den neuen Eintrag zur Historie hinzu
+    terminalLogHistory.push(`> ${message}`);
+
+    // Erstellen Sie einen neuen div-Eintrag für den Typewriter-Effekt
+    const newLogEntry = document.createElement('div');
+    newLogEntry.classList.add('log-entry');
+    DOM.terminalLogContent.appendChild(newLogEntry);
+
+    setTimeout(() => {
+        // Nur den letzten Eintrag mit Typewriter schreiben
+        typeWriterEffect(newLogEntry, `> ${message}`, 15);
+    }, delay);
+}
+
+function handleAction(button) {
+    // 1. Terminal Log aktualisieren
+    const newLogEntry = scenes[currentScene].log;
+    logToTerminal(newLogEntry, 100); 
+
+    // 2. Button deaktivieren, um Doppel-Klicks während des Wechsels zu verhindern
+    button.disabled = true;
+
+    // 3. Nach einer kurzen Pause zur nächsten Szene springen
+    setTimeout(() => {
+        nextScene();
+    }, 800); 
 }
 
 
 // Funktion für den Glitch-Übergang
 function nextScene() {
-    const logEl = document.getElementById('terminalLog');
-    if (logEl) {
-        terminalLogHistory = logEl.textContent.trim(); 
-    }
-
-    const glitchWrapper = document.getElementById("glitchElementsWrapper"); 
-    const progressWrapper = document.getElementById("progressWrapper"); 
-
-    if (glitchWrapper) {
-        glitchWrapper.classList.add('glitch-transition'); 
+    
+    // Glitch-Klasse hinzufügen, um die CSS-Animation zu starten
+    if (DOM.glitchWrapper) {
+        DOM.glitchWrapper.classList.add('glitch-transition'); 
     }
     
-    if (progressWrapper) {
-        progressWrapper.classList.add('fade-out-fast'); 
-    }
-
+    // Nach der Dauer der CSS-Animation zur nächsten Szene springen
     setTimeout(() => {
         currentScene++;
         if (currentScene < scenes.length) {
-            if (progressWrapper) {
-                progressWrapper.classList.remove('fade-out-fast');
-            }
             showScene(currentScene);
         } else {
             showFinalScreen();
         }
-    }, 600); 
+    }, 600); // Passt zur Dauer der 'scene-glitch' Animation in CSS
 }
 
 
 function showFinalScreen() {
-    const gameContainer = document.getElementById("gameContainer");
-
-    const terminalEl = document.getElementById("terminalPermanent");
-    if(terminalEl) {
-        terminalEl.style.display = "none";
+    // Anzeigen der Hauptstruktur als Block für den zentrierten Abschlussbildschirm
+    DOM.mainWrapper.style.display = "block";
+    DOM.terminalPermanent.style.display = "none";
+    
+    if (DOM.progressWrapper) {
+        DOM.progressWrapper.style.display = 'none';
     }
+    DOM.permanentTitle.style.display = "none";
 
-    const progressWrapper = document.getElementById("progressWrapper");
-    if(progressWrapper) {
-        progressWrapper.style.display = 'none';
-    }
+    const finalLogText = terminalLogHistory.map(log => `<div class="log-entry">${log}</div>`).join('');
 
-    document.getElementById("permanentTitle").style.display = "none";
-
-
-    // Final Screen HTML
-    gameContainer.innerHTML = `
+    // Der Titel im Final Screen ist hier noch "Firewall durchbrochen.", wie im Original-Code
+    DOM.gameContainer.innerHTML = `
         <div class="final">
             <img src="finish.jpg" alt="Finalscreen">
             <h2>Firewall durchbrochen.</h2>
             <p class="final-statement">
                 CDU-Politik ist kein Naturgesetz, sondern eine politische Entscheidung. Wer schweigt, stimmt zu. Wer widerspricht, hackt das System.
             </p>
-            <div class="terminal" style="margin-top: 40px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
-                <div class="terminal-header">Final Log Report</div>
-                <div class="terminal-body">
-                    <p class="terminal-log">${terminalLogHistory.trim().replace(/\n/g, '<br>')}</p>
+            <div class="terminal" style="margin-top: 40px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; height: auto;">
+                <div class="terminal-header">Terminal – brandmauer.log</div>
+                <div class="terminal-body" style="height: 300px; overflow-y: auto; padding: 16px;">
+                    <div class="terminal-log-content">${finalLogText}</div>
                 </div>
             </div>
             <button id="restartBtn">Neustart</button>
@@ -295,11 +311,9 @@ function showFinalScreen() {
     const restartBtn = document.getElementById("restartBtn");
     if (restartBtn) {
         restartBtn.addEventListener("click", () => {
-            // FIX: Container wieder anzeigen und Spiel neu starten
-            document.getElementById("mainWrapper").style.display = "flex";
-            document.getElementById("permanentTitle").style.display = "flex";
-            
-            startGame(); 
+            DOM.startScreen.style.display = "flex";
+            DOM.mainWrapper.style.display = "none";
+            DOM.permanentTitle.style.display = "none";
         });
     }
 }

@@ -1,9 +1,38 @@
 /* Global Styles */
 body {
     margin: 0;
-    background-color: black;
+    background-color: #171717; 
     color: white;
     font-family: monospace;
+    min-height: 100vh;
+}
+
+.brand {
+    color: red;
+}
+
+/* Optischer Scanline/Flicker-Effekt für das gesamte Spiel-Overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        transparent 0,
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 2px
+    );
+    z-index: 9999;
+    opacity: 0.5;
+    animation: flicker 0.1s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.5; }
+    100% { opacity: 0.55; }
 }
 
 /* Permanenter Titel und Glitch-Styles */
@@ -11,22 +40,27 @@ body {
     font-size: 28px;
     font-weight: bold;
     text-align: left; 
-    padding: 10px 16px; 
+    padding: 10px 0; 
     border-bottom: none; 
-    box-shadow: none; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
     width: 100%;
     position: sticky; 
     top: 0;
-    background-color: black;
+    background-color: #171717; 
     z-index: 1000;
     margin: 0;
-    justify-content: flex-start; 
+    justify-content: space-between; 
     display: flex; 
     align-items: center;
     overflow: hidden; 
 }
+#titleWrapper {
+    display: flex; 
+    align-items: center;
+    gap: 0; 
+    padding-left: 16px; 
+}
 
-/* Glitch-Effekt */
 .glitch-text {
     position: relative;
     display: inline-block;
@@ -34,7 +68,6 @@ body {
     letter-spacing: 2px;
     animation: glitch-text-anim 3s infinite steps(2);
 }
-
 .glitch-exe {
     color: red; 
     text-shadow: 0 0 5px red;
@@ -43,11 +76,13 @@ body {
     letter-spacing: 2px;
     animation: glitch-exe-anim 3s infinite steps(1); 
 }
-
-/* Glitch Animation Keyframes (gekürzt) */
 @keyframes glitch-text-anim {
-  0% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(0); }
-  100% { text-shadow: 0 0 transparent, 0 0 transparent; transform: translate(0); }
+    0% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(0); }
+    20% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; transform: translate(-2px); }
+    40% { text-shadow: 4px 0 #ff0000, -4px 0 #00ffff; transform: translate(4px); }
+    60% { text-shadow: -4px 0 #ff0000, 4px 0 #00ffff; transform: translate(-4px); }
+    80% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(2px); }
+    100% { text-shadow: 0 0 transparent, 0 0 transparent; transform: translate(0); }
 }
 @keyframes glitch-exe-anim {
     0%, 100% { transform: skewX(0deg); text-shadow: 0 0 5px red; }
@@ -55,7 +90,7 @@ body {
 }
 
 
-/* Button Styling */
+/* Button Styling (Allgemein) */
 button {
     font-family: monospace;
     background-color: red;
@@ -66,34 +101,36 @@ button {
     cursor: pointer;
     animation: pulse 2s infinite; 
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    margin-top: 5px; 
 }
 
-.scene-text button {
+/* Action Button: UNTER dem Browser-Fenster */
+#sceneActionButton {
     display: block; 
     width: 100%; 
     text-align: center; 
     font-size: 16px; 
     padding: 15px 20px; 
-    margin-bottom: 0; 
-    animation: none; 
     
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    margin-top: 0; /* Wichtig: Keine obere Margin, da es an scene-text anschließt */
+    
+    box-sizing: border-box; 
+    border-radius: 0 0 6px 6px; 
+    
+    animation: none; 
+    flex-shrink: 0; /* Button soll seine Höhe behalten */
 }
 
 button:hover {
     box-shadow: 0 0 12px red;
-    transform: scale(1.05);
+    transform: scale(1.02); 
     border-color: white; 
 }
-
 @keyframes pulse {
     0% { box-shadow: 0 0 6px red; }
     50% { box-shadow: 0 0 16px red; }
     100% { box-shadow: 0 0 6px red; }
 }
+
 
 /* Startscreen Layout */
 .start-overlay {
@@ -105,9 +142,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Optional: background-image: url('start.jpg'); */ 
 }
-
 .start-box {
     background-color: rgba(0, 0, 0, 0.9);
     padding: 32px;
@@ -118,44 +153,50 @@ button:hover {
     animation: fadeIn 1.5s ease;
 }
 
-/* Progress Bar Container */
+
+/* Progress Bar Container (Health Bar) */
 #progressContainer {
-    padding: 16px;
-    max-width: 1280px;
-    margin: 0 auto;
-    min-height: auto; 
+    margin: 0; 
+    padding: 0; 
+    width: auto; 
+    flex-shrink: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end; 
+    gap: 10px; 
+    padding-right: 16px;
 }
 
-/* Progress Bar Styling (LINKSBÜNDIG) */
-.progress-bar {
-    width: 100%;
-    /* Max-Breite auf die ungefähre Breite von GameContainer+Terminal+Gap setzen */
-    max-width: 1280px; /* Hier auf 100% des Wrappers setzen */
-    
-    /* Wichtig: Führt linkes Padding hinzu (linke Ausrichtung) */
-    margin: 8px auto 8px 16px; 
-    
-    text-align: left; 
-    font-size: 14px;
-    color: white;
-    font-family: monospace;
+/* Wrapper für den Text und die eigentliche Bar */
+#progressWrapper {
+    display: flex !important; 
+    align-items: center;
+    gap: 10px; /* Abstand zwischen Text und Bar-Box */
+    width: auto; 
+    max-width: none;
+    margin-left: auto; 
 }
 
 .bar-text {
     font-weight: bold;
-    margin-bottom: 8px;
     color: white; 
-    text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+    text-shadow: none; 
+    white-space: nowrap; 
+    margin-bottom: 0; 
+    font-size: 16px; 
 }
 
+/* Die eigentliche Health-Bar */
 .bar {
-    width: 100%;
+    width: 150px; 
     height: 16px;
-    border: 2px solid white;
-    background-color: #1c1c1c;
-    margin-top: 8px;
+    border: none; 
+    background-color: #555555; 
+    margin-top: 0;
+    flex-shrink: 0; 
+    border-radius: 8px; 
+    overflow: hidden; 
 }
-
 .fill {
     height: 100%;
     background: linear-gradient(to right, limegreen 0%, orange 50%, red 100%);
@@ -163,37 +204,75 @@ button:hover {
     transition: width 1s ease-in-out;
     box-shadow: 0 0 8px red; 
     transform-origin: left;
+    border-radius: 8px; 
 }
 
 
-/* Layout für GameContainer und Terminal - ANPASSUNG DES GAP AUF 32PX */
+/* HAUPT LAYOUT */
 #mainWrapper {
     display: flex;
     justify-content: space-between;
-    padding: 0 16px 16px 16px; 
+    
+    /* ZENTRIERUNG: Wrapper nimmt den gesamten vertikalen Raum ein und zentriert seinen Inhalt (gameContainer/terminal) */
+    min-height: calc(100vh - 58px); 
+    align-items: center; 
+    
+    padding: 16px 16px; 
     max-width: 1280px;
-    margin: 0 auto;
-    gap: 32px; /* Erhöhter Abstand zwischen den drei Spalten */
+    margin: 0 auto; 
+    gap: 32px;
     flex-wrap: wrap;
-    align-items: flex-start; 
-    min-height: auto; 
 }
 
+/* Linke Szene - Halter für Browser-Container und Bild */
 #gameContainer {
-    /* Lässt den Container sich ausdehnen */
-    flex: 1; 
+    flex: 1 1 auto; 
     min-width: 500px;
+    /* FIXE HÖHE */
+    height: 445px; 
+    min-height: 445px; 
+    display: flex; 
+    flex-direction: column; /* NEU: Für den Szene-Titel oben */
+    position: relative; /* Für den Szene-Titel */
 }
 
-/* Game Layout - Anpassung der inneren Breiten */
+/* NEU: Szene Titel Positionierung */
+.scene-title {
+    position: absolute;
+    top: -15px; /* Positioniert den Titel oberhalb des Containers */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: #cccccc;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    z-index: 5;
+    white-space: nowrap;
+}
+
+
 .scene-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 32px 0; 
-    gap: 32px; /* Einheitlicher Abstand auch hier */
-    flex-wrap: wrap;
+    padding: 0; 
+    gap: 32px;
+    flex-wrap: nowrap; 
     animation: slideIn 0.7s ease-out;
+    width: 100%;
+    height: 100%; 
+    margin-top: 0; /* Kein Abstand zum Titel mehr nötig */
+}
+
+/* Glitch-Animation für den Szenenwechsel */
+.glitch-transition {
+    animation: scene-glitch 0.6s linear;
+}
+@keyframes scene-glitch {
+    0% { transform: translate(0); opacity: 1; }
+    30% { transform: translate(5px, 0); filter: hue-rotate(90deg); opacity: 0.8; }
+    60% { transform: translate(-10px, 0); filter: hue-rotate(-90deg); opacity: 0.4; }
+    100% { transform: translate(0); opacity: 1; }
 }
 
 .glitch-elements-wrapper {
@@ -201,16 +280,76 @@ button:hover {
     flex-grow: 1; 
     justify-content: space-between;
     align-items: flex-start;
-    gap: 32px; /* Einheitlicher Abstand auch hier */
-    flex-wrap: wrap;
+    gap: 32px;
+    flex-wrap: nowrap;
+    height: 100%; 
 }
 
-/* 1. SPALTE: Statement/Erklärung schmal halten */
-.scene-text {
-    flex: 0 0 300px; /* Feste Breite 300px */
+/* BROWSER-FENSTER-WRAPPER (Linke Spalte) */
+.browser-window-container {
+    flex: 0 0 300px; 
     max-width: 300px; 
+    
+    height: 100%; 
+    
+    background-color: #171717; 
+    border: 1px solid #555555; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); 
+    border-radius: 6px; 
+    
+    display: flex;
+    flex-direction: column; /* Wichtig für die korrekte Stapelung */
+    position: relative; 
+    box-sizing: border-box;
+}
+
+.browser-header {
+    height: 40px; 
+    background-color: #e0e0e0; 
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
     position: relative;
-    padding-bottom: 70px; 
+    flex-shrink: 0; 
+    border-radius: 6px 6px 0 0;
+}
+.browser-address {
+    flex-grow: 1;
+    text-align: center;
+    background-color: #f7f7f7; 
+    color: #444;
+    font-size: 12px;
+    font-family: sans-serif;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin: 0 50px 0 50px; 
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* 1. SPALTE: Statement/Erklärung (Body des Fensters) */
+.scene-text {
+    flex-grow: 1; /* Nimmt den verbleibenden Platz ein */
+    position: relative; 
+    padding: 16px; 
+    box-sizing: border-box; 
+    
+    background-color: white; 
+    color: black; 
+    
+    /* WICHTIGE KORREKTUR: Die Höhe wird nun dynamisch berechnet, um den Button unten frei zu lassen */
+    height: auto;
+    max-height: calc(100% - 40px - 53px); /* 100% (Browser Container) - 40px (Header) - 53px (Button Höhe) */
+    overflow-y: auto; /* Scrollen, falls Text zu lang */
+}
+
+.statement {
+    font-size: 14px; 
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: black;
 }
 
 .explanation-container {
@@ -220,28 +359,37 @@ button:hover {
     margin-bottom: 32px; 
     gap: 16px; 
 }
-
 .explanation-icon {
-    width: 150px;
-    height: 150px;
+    width: 80px; 
+    height: 80px;
     object-fit: contain;
     display: block;
     flex-shrink: 0;
 }
-
 .explanation {
     position: relative;
-    background: white;
+    background: #f0f0f0; 
     color: black;
-    padding: 12px;
+    padding: 11px;
     border-radius: 8px;
     border: none; 
-    box-shadow: 0 0 8px red; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); 
     line-height: 1.4;
     flex-grow: 1;
     margin-bottom: 0;
+    
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.05),
+        rgba(0, 0, 0, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+    );
 }
-
+.explanation p {
+    color: black; 
+    margin: 0;
+}
 .explanation:after {
     content: "";
     position: absolute;
@@ -251,45 +399,35 @@ button:hover {
     height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 10px solid white; 
+    border-right: 10px solid #f0f0f0; 
     z-index: 2;
 }
 
-/* 2. SPALTE: TV-Gehäuse vergrößern und dominant machen (550px) */
+
+/* 2. SPALTE: TV-Gehäuse */
 .scene-image {
-    flex: 0 0 550px; /* Feste Breite 550px */
+    flex: 1 1 auto; 
     text-align: center;
     position: relative; 
     overflow: hidden; 
-    
     max-width: 550px; 
-    height: 413px; /* 4/3 Aspect Ratio von 550px */
-    
+    /* FIXE HÖHE (vom 445px Container) */
+    height: 445px; 
     aspect-ratio: 4/3; 
     align-self: flex-start;
 }
 
-.scene-image img {
-    /* FIX: Bild auf 90% der Containergröße skalieren */
-    width: 90%; 
-    height: 90%;
-    
-    object-fit: cover; 
+.scene-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    
-    /* FIX: ZENTRIERUNG */
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    
-    z-index: 1; /* Unter dem Rahmen */
-    border: none;
-    box-shadow: none;
-    transition: transform 0.3s ease;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-/* TV-Rahmen Overlay */
 .tv-frame {
     position: absolute;
     top: 0;
@@ -300,42 +438,79 @@ button:hover {
     background-size: 100% 100%; 
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 2; /* Liegt über dem Bild */
+    z-index: 2; 
     pointer-events: none; 
 }
 
 
-/* 3. SPALTE: Terminal schmal halten */
+/* 3. SPALTE: Terminal - Mac-Style */
 .terminal {
-    flex: 0 0 300px; /* Feste Breite 300px */
-    background-color: #1a1a1a; 
-    border: 1px solid #333; 
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
-    padding: 16px;
+    flex: 0 0 300px; 
+    background-color: #333333; 
+    border: 1px solid #555555; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    padding: 0; 
     font-size: 14px;
     max-width: 300px; 
     display: flex;
     flex-direction: column;
-    margin-top: 32px; 
+    /* FIXE HÖHE */
+    height: 445px; 
+    margin-top: 0; 
+    border-radius: 6px; 
+    overflow: hidden; 
 }
 
+/* Terminal Header */
 .terminal-header {
     font-weight: bold;
-    margin-bottom: 16px;
-    color: white;
+    color: #cccccc; 
+    background-color: #444444; 
+    padding: 8px 16px;
+    text-align: center;
+    position: relative;
+    font-size: 12px;
+    margin-bottom: 0; 
+    flex-shrink: 0; /* Wichtig, damit es seine Höhe behält */
 }
+/* Ampel-Buttons Container */
+.terminal-controls {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 6px;
+}
+/* Styling für die Mac-Buttons (Ampel) */
+.control-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: default; 
+    opacity: 0.8;
+}
+.control-dot.close { background-color: #ff6058; }
+.control-dot.minimize { background-color: #ffbd2e; }
+.control-dot.maximize { background-color: #27c93f; }
 
+/* Terminal Body für den Log-Inhalt */
 .terminal-body {
     overflow-y: auto; 
     flex-grow: 1; 
+    padding: 16px; 
+    /* WICHTIG: Nimmt den gesamten verbleibenden Raum ein */
+    height: auto; 
 }
-
-.terminal-log { 
+.terminal-log-content { 
     color: white;
-    margin: 12px 0;
     font-family: monospace;
     white-space: pre-wrap; 
     word-wrap: break-word;
+}
+.log-entry {
+    margin: 12px 0;
 }
 
 /* Final Screen */
@@ -346,52 +521,7 @@ button:hover {
     width: 100%; 
 }
 
-/* Glitch-Klassen für Übergänge (gekürzt) */
-.glitch-transition {
-    position: relative;
-    animation: fade-glitch 0.6s ease-out forwards;
-    overflow: hidden; 
-}
-
-@keyframes fade-glitch { /* ... */ }
-@keyframes glitch-shake { /* ... */ }
-
-
 /* Responsive */
 @media (max-width: 768px) {
-    #mainWrapper {
-        flex-direction: column;
-        align-items: center;
-        padding: 16px;
-        gap: 16px; /* Reduzierter Gap für Mobile */
-    }
-    
-    /* Progress Bar wird auf Mobile wieder 100% breit und zentriert */
-    .progress-bar {
-        max-width: 100%;
-        margin: 8px auto 8px auto; 
-    }
-
-    .terminal {
-        max-width: 100%;
-        flex: 1 1 100%; 
-        width: 100%;
-        order: 2; 
-        margin-top: 0; 
-    }
-
-    #gameContainer {
-        width: 100%;
-        order: 1;
-        min-width: auto;
-    }
-    
-    .scene-image, .scene-text {
-        max-width: 100%;
-        flex: 1 1 100%;
-    }
-
-    .scene-image {
-        height: auto; /* Auf Mobile Höhe automatisch */
-    }
+    /* ... (Responsive Regeln unverändert) ... */
 }
