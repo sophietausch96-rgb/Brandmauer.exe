@@ -44,7 +44,7 @@ body::after {
 
 /* Permanenter Titel und Glitch-Styles */
 #permanentTitle {
-    font-size: 45px;
+    font-size: 45px; /* Angepasst von 28px auf 45px */
     font-weight: bold;
     text-align: left; 
     padding: 10px 0; 
@@ -417,7 +417,41 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
+
+    /* NEU: TV-Störungseffekte direkt auf das Bild anwenden */
+    filter: saturate(1.2) contrast(1.1); /* Leicht verstärkte Farben */
+    animation: tv-static-noise 0.2s steps(4) infinite,
+               tv-scanlines 0.3s steps(4) infinite,
+               tv-flicker 2s steps(10) infinite; 
 }
+
+/* NEU: Keyframe-Animationen für den TV-Störungseffekt */
+@keyframes tv-static-noise {
+    0% { clip-path: inset(0 0 100% 0); }
+    25% { clip-path: inset(0 0 0 0); }
+    50% { clip-path: inset(50% 0 0 0); }
+    75% { clip-path: inset(20% 0 30% 0); }
+    100% { clip-path: inset(0 0 100% 0); }
+}
+
+@keyframes tv-scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+@keyframes tv-flicker {
+    0%, 100% { opacity: 1; }
+    5% { opacity: 0.95; }
+    10% { opacity: 1; }
+    15% { opacity: 0.9; }
+    20% { opacity: 1; }
+    25% { opacity: 0.97; }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    75% { opacity: 0.85; }
+    80% { opacity: 1; }
+}
+
 
 .tv-frame {
     position: absolute;
@@ -431,6 +465,29 @@ button:hover {
     background-repeat: no-repeat;
     z-index: 2; 
     pointer-events: none; 
+    
+    /* Optional: Ein leichter Überlagerungs-Effekt für die TV-Glasfläche */
+    /* Fügt eine dezente Reflektion oder Textur hinzu */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(255, 255, 255, 0.05) 0%,
+            transparent 50%,
+            rgba(0, 0, 0, 0.05) 100%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 255, 255, 0.05) 0%,
+            transparent 70%
+        );
+        pointer-events: none;
+        z-index: 3;
+    }
 }
 
 
