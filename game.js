@@ -148,14 +148,18 @@ function typeWriterEffect(element, text, speed) {
 }
 
 
-// Event-Listener für den Startbutton
+// Event-Listener für den Startbutton (KORRIGIERT)
 document.addEventListener("DOMContentLoaded", function() {
     if (DOM.startBtn) {
         DOM.startBtn.addEventListener("click", function () {
+            // Verstecke den Startbildschirm
             DOM.startScreen.style.display = "none";
+            
+            // Zeige die Hauptstrukturen an (wichtig: display: flex für das Hauptlayout)
             DOM.mainWrapper.style.display = "flex"; 
             DOM.permanentTitle.style.display = "flex";
 
+            // Starte das Spiel (setzt currentScene = 0 und ruft showScene(0) auf)
             startGame(); 
         });
     }
@@ -317,9 +321,12 @@ function showFinalScreen() {
     const restartBtn = document.getElementById("restartBtn");
     if (restartBtn) {
         restartBtn.addEventListener("click", () => {
-            DOM.startScreen.style.display = "flex";
+            // Wichtig: Startscreen muss wieder flex sein, um zentriert zu werden
+            DOM.startScreen.style.display = "flex"; 
             DOM.mainWrapper.style.display = "none";
             DOM.permanentTitle.style.display = "none";
+            // Seite neu laden (optional, aber sauberste Lösung)
+            window.location.reload(); 
         });
     }
 }

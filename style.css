@@ -418,32 +418,33 @@ button:hover {
     left: 50%;
     transform: translate(-50%, -50%); 
 
-    /* NEU: TV-Störungseffekte direkt auf das Bild anwenden */
+    /* TV-Störungseffekte direkt auf das Bild anwenden */
     filter: saturate(1.2) contrast(1.1); /* Leicht verstärkte Farben */
-    animation: tv-static-noise 0.2s steps(4) infinite,
-               tv-flicker 3s steps(10) infinite; /* Flackern langsamer und dezenter */
+    
+    /* NUR NOISE UND SCANLINES, KEIN FLACKERN MEHR */
+    animation: tv-static-noise 0.2s steps(4) infinite; 
 }
 
-/* NEU: Keyframe-Animationen für den TV-Störungseffekt */
-/* 1. Subtiles Flackern (Opazität) */
-@keyframes tv-flicker {
-    0%, 100% { opacity: 1; }
-    30% { opacity: 0.99; } /* Sehr dezente Opazitätsänderung */
-    70% { opacity: 1.01; }
-    80% { opacity: 0.98; }
-}
+/* --- NEUE KEYFRAME-ANIMATIONEN FÜR DEN TV-STÖRUNGSEFFEKT --- */
 
-/* 2. Statisches Rauschen/Verzerrung (Clip-Path) */
+/* Statisches Rauschen/Verzerrung (Clip-Path) - etwas dezenter */
 @keyframes tv-static-noise {
-    0% { clip-path: inset(0 0 100% 0); } /* Start: Oben verdeckt */
-    25% { clip-path: inset(5% 0 5% 0); } /* Leichte Verschiebung */
-    50% { clip-path: inset(10% 0 10% 0); } /* Stärkere, aber kurzzeitige Verzerrung */
-    75% { clip-path: inset(2% 0 2% 0); }
-    100% { clip-path: inset(0 0 0 0); } /* Volles Bild */
+    0% { clip-path: inset(0 0 0 0); } /* Volles Bild */
+    10% { clip-path: inset(1% 0 1% 0); transform: translate(-0.5px); } /* Leichte Verzerrung */
+    20% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    30% { clip-path: inset(2% 0 2% 0); transform: translate(0.5px); }
+    40% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    50% { clip-path: inset(1.5% 0 1.5% 0); transform: translate(-0.5px); }
+    60% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    70% { clip-path: inset(0.5% 0 0.5% 0); transform: translate(0.25px); }
+    80% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    90% { clip-path: inset(1% 0 1% 0); transform: translate(-0.25px); }
+    100% { clip-path: inset(0 0 0 0); transform: translate(0); }
 }
 
-/* 3. Scanlines (Hinzufügen des Scanline-Hintergrunds im Pseudo-Element) */
-.scene-image::before {
+
+/* Scanlines (Hinzufügen des Scanline-Hintergrunds im Pseudo-Element) */
+.scene-img::before {
     content: '';
     position: absolute;
     top: 0;
@@ -467,6 +468,30 @@ button:hover {
 @keyframes scanlines-move {
     0% { background-position: 0 0; }
     100% { background-position: 0 -4px; } /* Bewegt die Linien um 4px (Linienhöhe) nach oben */
+}
+
+/* --- NEU: Kriseleffekt (als zweites Pseudo-Element) --- */
+.scene-img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4; /* Über Scanlines legen */
+    
+    /* Kriseleffekt: Zufällig erscheinende Pixel */
+    /* Data URI für ein kleines Rauschmuster. Dies simuliert "Krieseln" */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADsElEQVR4nO2by08iSBjHx9kMCoKIBgQzGgwkGJMQjYEYDDAeDIaQoIAgGBDMhBiME4wHCYyPgmDEcEAwJgbjAyKIIBgMhmRkMMhgz/7aN+663l33tS8aIe7O6VXVvO6v6t7rK092b3+o+u2C1V4M2rN/h2v/hT8vN2L8s+nL5y/cvHL9wvhv82v//vXr2J9vX2T+eP927P8vHz48/nL07+dXzz9+/wL+2/zN75+v/e7N/f/Gf3/++P/P25eP+X9+/uD+/P7t6x//GqD+fvrF/e2+P24c+/v97t2b+v2b/Z/z/+2+P24d+/v92dOfvPz5x28C1b/t/l/w/9X/p/u//Nf+83aCj8X28n+W/l/v/mD4/827N/d/wf4/27fB/j/GgB6hM321O+P/z4R2D5N//v8VAD8HwB0hA/2f+n9Q9H+R+8eA36A/F8A0BEd2v7f4ftn/174/g7+GQC6RkR2D11//F/+O+D/+dAP9H8C6B0ReR1vP/z+uP/2e/B/z/0f/v9F5HW8/vj/8v8P/2+/B/z/p/s/4f8/t//x/m2D/X+m+3+c/3+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/f/n+j+/+c/3+9/f/');
+    background-repeat: repeat;
+    opacity: 0.15; /* Dezente Deckkraft für das Rauschen */
+    animation: noise-move 0.1s steps(2) infinite; /* Schnelle, ruckartige Bewegung des Rauschens */
+}
+
+@keyframes noise-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; } /* Bewegt das Rauschmuster */
 }
 
 
